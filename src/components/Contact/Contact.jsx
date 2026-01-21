@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-  // const form=useRef();
+  const form=useRef();
   const [isSent, setIsSent]=useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -73,7 +73,7 @@ const Contact = () => {
           Connect With Me <span className="ml-1"></span>
         </h3>
 
-        <form onSubmit={sendEmail} className="mt-6 flex flex-col space-y-4">
+        <form ref={form} onSubmit={sendEmail}className="mt-6 flex flex-col space-y-4">
           {/* Email */}
           <label htmlFor="email" className="sr-only">Your Email</label>
           <div className="relative">
@@ -84,7 +84,6 @@ const Contact = () => {
               name="user_email"
               placeholder="Your Email"
               required
-              autoFocus
               className="w-full pl-10 p-3 rounded-md bg-[#131025] text-white border border-gray-600 focus:outline-none focus:border-purple-500 transition"
             />
           </div>
