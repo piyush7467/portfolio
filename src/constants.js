@@ -32,6 +32,8 @@ import netlifyLogo from './assets/tech_logo/netlify.png';
 import vercelLogo from './assets/tech_logo/vercel.png';
 import postgreLogo from './assets/tech_logo/postgre.png';
 import csharpLogo from './assets/tech_logo/csharp.png';
+import kotlinLogo from './assets/tech_logo/kotlin.jpg'
+import androidStudioLogo from './assets/tech_logo/android_studio.png'
 
 // Experience Section Logo's
 import webverseLogo from './assets/company_logo/webverse_logo.png';
@@ -63,6 +65,7 @@ import pharmacyLogo from './assets/work_logo/pharmacy-website.png';
 import eduNeocodeLogo from './assets/work_logo/edu-neocode.png';
 import courseCloudLogo from './assets/work_logo/coursecloud.png';
 import expenseTrackerLogo from './assets/work_logo/expense_tracker.png';
+
 
 export const SkillsInfo = [
   {
@@ -103,6 +106,7 @@ export const SkillsInfo = [
       // { name: 'Python', logo: pythonLogo },
       // { name: 'C-Sharp', logo: csharpLogo },
       { name: 'JavaScript', logo: javascriptLogo },
+      { name: 'Kotlin', logo: kotlinLogo },
       // { name: 'TypeScript', logo: typescriptLogo },
     ],
   },
@@ -115,6 +119,7 @@ export const SkillsInfo = [
       { name: 'Postman', logo: postmanLogo },
       { name: 'Compass', logo: mcLogo },
       { name: 'Vercel', logo: vercelLogo },
+      { name: 'Android Studio', logo: androidStudioLogo },
       // { name: 'Netlify', logo: netlifyLogo },
       { name: 'Figma', logo: figmaLogo },
     ],
