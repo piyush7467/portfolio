@@ -181,7 +181,7 @@ const Skills = () => {
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                {/* <Menu className="w-5 h-5 text-[#8245ec]" /> */}
+                <Menu className="w-5 h-5 text-[#8245ec]" />
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-300 ${showMobileCategories ? 'rotate-180' : ''}`} />
               </div>
             </button>
@@ -231,7 +231,7 @@ const Skills = () => {
             variants={containerVariants}
             initial="hidden"
             animate={controls}
-            className="hidden md:flex flex-wrap  justify-center items-center gap-3 lg:gap-6 mb-8 lg:mb-12 px-2"
+            className="hidden md:flex flex-wrap justify-center gap-3 lg:gap-6 mb-8 lg:mb-12 px-2"
           >
             {SkillsInfo.map((category, index) => (
               <motion.button
@@ -294,7 +294,7 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="space-y-8 md:space-y-0 md:grid md:grid-cols-1 lg:grid-cols-2 md:gap-6  lg:gap-8"
+          className="space-y-8 md:space-y-0 md:grid md:grid-cols-1 lg:grid-cols-2 md:gap-6 lg:gap-8"
         >
           {SkillsInfo.map((category, categoryIndex) => (
             <motion.div
