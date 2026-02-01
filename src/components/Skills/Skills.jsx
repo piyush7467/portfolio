@@ -9,12 +9,15 @@ import {
   Globe, 
   Layers,
   Sparkles,
-  ChevronRight
+  ChevronRight,
+  ArrowUpRight,
+  Zap
 } from "lucide-react";
 
 const Skills = () => {
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const [activeCategory, setActiveCategory] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
@@ -40,6 +43,15 @@ const Skills = () => {
     'Tools': '#ff6b6b'
   };
 
+  const skillLevels = {
+    'HTML': 95, 'CSS': 90, 'JavaScript': 92, 'React JS': 94,
+    'Redux': 85, 'Tailwind CSS': 93, 'Bootstrap': 88,
+    'Node JS': 90, 'Express JS': 88, 'MySQL': 87, 'MongoDB': 85,
+    'C': 82, 'C++': 85, 'Java': 88, 'JavaScript': 92, 'Kotlin': 80,
+    'Git': 92, 'GitHub': 94, 'VS Code': 96, 'Postman': 88,
+    'Compass': 85, 'Vercel': 87, 'Android Studio': 82, 'Figma': 84
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -61,6 +73,12 @@ const Skills = () => {
         ease: [0.22, 1, 0.36, 1]
       }
     }
+  };
+
+  const handleScroll = (e, index) => {
+    const container = e.currentTarget;
+    const scrollPercentage = (container.scrollTop / (container.scrollHeight - container.clientHeight)) * 100;
+    setScrollPosition(scrollPercentage);
   };
 
   return (
@@ -97,36 +115,36 @@ const Skills = () => {
           
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white">
-              Skills & 
+              Technical
             </span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] via-purple-400 to-[#8245ec]">
-              Technologies
+              Mastery
             </span>
           </h2>
           
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className="h-px w-20 bg-gradient-to-r from-transparent via-[#8245ec] to-transparent"></div>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              A comprehensive showcase of my technical stack, refined through real-world projects and continuous learning
+              A deep dive into my technical arsenal—tools and technologies I've mastered through extensive practice
             </p>
             <div className="h-px w-20 bg-gradient-to-l from-transparent via-[#8245ec] to-transparent"></div>
           </div>
         </motion.div>
 
-        {/* Category Tabs */}
+        {/* Category Tabs with Stats */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="flex flex-wrap justify-center gap-4 mb-12"
+          className="flex flex-wrap justify-center gap-6 mb-12"
         >
           {SkillsInfo.map((category, index) => (
             <motion.button
               key={category.title}
               variants={itemVariants}
               onClick={() => setActiveCategory(index)}
-              className={`group relative px-6 py-3 rounded-full flex items-center gap-3 transition-all duration-300 ${
+              className={`group relative px-8 py-4 rounded-xl flex items-center gap-4 transition-all duration-500 ${
                 activeCategory === index
                   ? 'text-white'
                   : 'text-gray-400 hover:text-white'
@@ -134,145 +152,207 @@ const Skills = () => {
               style={{
                 background: activeCategory === index 
                   ? `linear-gradient(135deg, ${categoryColors[category.title] || '#8245ec'}20, transparent)`
-                  : 'transparent'
+                  : 'transparent',
+                border: activeCategory === index 
+                  ? `1px solid ${categoryColors[category.title] || '#8245ec'}40`
+                  : '1px solid rgba(255,255,255,0.1)'
               }}
             >
-              <div className={`p-2 rounded-lg transition-all duration-300 ${
+              {/* Category Icon */}
+              <div className={`p-3 rounded-lg transition-all duration-500 ${
                 activeCategory === index ? 'scale-110' : ''
               }`} style={{
                 backgroundColor: activeCategory === index 
                   ? `${categoryColors[category.title] || '#8245ec'}20`
-                  : 'rgba(255,255,255,0.05)'
+                  : 'rgba(255,255,255,0.05)',
+                border: `1px solid ${activeCategory === index ? categoryColors[category.title] || '#8245ec' : 'transparent'}30`
               }}>
                 <div style={{ color: categoryColors[category.title] || '#8245ec' }}>
                   {categoryIcons[category.title] || <Cpu className="w-6 h-6" />}
                 </div>
               </div>
-              <span className="font-semibold">{category.title}</span>
+
+              {/* Category Info */}
+              <div className="text-left">
+                <span className="font-semibold text-lg">{category.title}</span>
+                <div className="text-sm text-gray-500">
+                  {category.skills.length} skills mastered
+                </div>
+              </div>
+
+              {/* Active Indicator */}
               {activeCategory === index && (
-                <motion.div
-                  layoutId="activeCategory"
-                  className="absolute inset-0 rounded-full border border-white/20 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-                />
+                <>
+                  <motion.div
+                    layoutId="activeCategory"
+                    className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                  />
+                  <ChevronRight className="w-5 h-5 text-[#8245ec]" />
+                </>
               )}
             </motion.button>
           ))}
         </motion.div>
 
-        {/* Skills Grid */}
+        {/* Skills Grid Container */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid lg:grid-cols-2 gap-8"
         >
           {SkillsInfo.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
               variants={itemVariants}
-              className={`relative rounded-2xl p-6 border transition-all duration-500 ${
+              className={`relative rounded-2xl border transition-all duration-500 overflow-hidden ${
                 activeCategory === categoryIndex
-                  ? 'border-[#8245ec]/50 bg-gradient-to-br from-gray-900/50 to-gray-900/30 shadow-2xl shadow-[#8245ec]/10'
+                  ? 'border-[#8245ec]/50 bg-gradient-to-br from-gray-900/60 to-gray-900/40 shadow-2xl shadow-[#8245ec]/20'
                   : 'border-white/10 bg-gray-900/30 hover:border-[#8245ec]/30'
               }`}
               style={{
-                opacity: activeCategory === categoryIndex ? 1 : 0.6,
-                transform: activeCategory === categoryIndex ? 'translateY(-8px)' : 'none'
+                opacity: activeCategory === categoryIndex ? 1 : 0.7,
+                transform: activeCategory === categoryIndex ? 'translateY(-4px)' : 'none'
               }}
             >
               {/* Category Header */}
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-3">
-                  <div className="p-3 rounded-xl" style={{
-                    backgroundColor: `${categoryColors[category.title] || '#8245ec'}20`,
-                    border: `1px solid ${categoryColors[category.title] || '#8245ec'}30`
-                  }}>
-                    <div style={{ color: categoryColors[category.title] || '#8245ec' }}>
-                      {categoryIcons[category.title] || <Code2 className="w-6 h-6" />}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white">{category.title}</h3>
-                    <div className="h-px w-12 bg-gradient-to-r from-[#8245ec] to-transparent mt-2"></div>
-                  </div>
-                </div>
-                <div className="text-sm text-gray-400">
-                  {category.skills.length} skills
-                </div>
-              </div>
-
-              {/* Skills Grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {category.skills.map((skill) => (
-                  <motion.div
-                    key={skill.name}
-                    className="group relative"
-                    onMouseEnter={() => setHoveredSkill(skill.name)}
-                    onMouseLeave={() => setHoveredSkill(null)}
-                    whileHover={{ y: -4 }}
-                  >
-                    <div className={`relative p-4 rounded-xl border backdrop-blur-sm transition-all duration-300 ${
-                      hoveredSkill === skill.name
-                        ? 'border-[#8245ec]/50 bg-gradient-to-br from-gray-800 to-gray-900 shadow-lg shadow-[#8245ec]/20'
-                        : 'border-white/10 bg-gray-800/30'
-                    }`}>
-                      {/* Skill Icon */}
-                      <div className="flex items-center justify-center mb-3">
-                        <div className={`p-2 rounded-lg transition-all duration-300 ${
-                          hoveredSkill === skill.name ? 'scale-110' : ''
-                        }`} style={{
-                          backgroundColor: hoveredSkill === skill.name 
-                            ? `${categoryColors[category.title] || '#8245ec'}20`
-                            : 'rgba(255,255,255,0.05)'
-                        }}>
-                          <img
-                            src={skill.logo}
-                            alt={`${skill.name} logo`}
-                            className="w-8 h-8 object-contain"
-                          />
-                        </div>
+              <div className="p-6 border-b border-white/10 bg-gradient-to-r from-gray-900/50 to-transparent">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div className="p-3 rounded-xl" style={{
+                      backgroundColor: `${categoryColors[category.title] || '#8245ec'}20`,
+                      border: `1px solid ${categoryColors[category.title] || '#8245ec'}30`
+                    }}>
+                      <div style={{ color: categoryColors[category.title] || '#8245ec' }}>
+                        {categoryIcons[category.title] || <Code2 className="w-6 h-6" />}
                       </div>
-                      
-                      {/* Skill Name */}
-                      <div className="text-center">
-                        <span className={`font-medium transition-colors duration-300 ${
-                          hoveredSkill === skill.name ? 'text-white' : 'text-gray-300'
-                        }`}>
-                          {skill.name}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-white">{category.title}</h3>
+                      <div className="flex items-center gap-3 mt-2">
+                        <div className="h-px w-12 bg-gradient-to-r from-[#8245ec] to-transparent"></div>
+                        <span className="text-sm text-gray-400">
+                          {category.skills.length} technologies
                         </span>
                       </div>
-                      
-                      {/* Hover Indicator */}
-                      {hoveredSkill === skill.name && (
-                        <motion.div
-                          layoutId="skillHover"
-                          className="absolute inset-0 rounded-xl border-2 border-[#8245ec]/30"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.2 }}
-                        />
-                      )}
                     </div>
-                  </motion.div>
-                ))}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-5 h-5 text-[#8245ec]" />
+                    <span className="text-sm font-semibold text-[#8245ec]">
+                      {Math.max(...category.skills.map(s => skillLevels[s.name] || 85))}% mastery
+                    </span>
+                  </div>
+                </div>
               </div>
 
-              {/* Category Footer */}
-              <div className="mt-6 pt-6 border-t border-white/10">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-400">Proficiency Level</span>
+              {/* Scrollable Skills Container */}
+              <div 
+                className="p-6 max-h-96 overflow-y-auto custom-scrollbar"
+                onScroll={(e) => handleScroll(e, categoryIndex)}
+                style={{
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: `${categoryColors[category.title] || '#8245ec'} transparent`
+                }}
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  {category.skills.map((skill, skillIndex) => {
+                    const proficiency = skillLevels[skill.name] || 85;
+                    return (
+                      <motion.div
+                        key={skill.name}
+                        className="group relative"
+                        onMouseEnter={() => setHoveredSkill(skill.name)}
+                        onMouseLeave={() => setHoveredSkill(null)}
+                        whileHover={{ scale: 1.02 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: skillIndex * 0.05 }}
+                      >
+                        <div className={`relative p-4 rounded-xl border backdrop-blur-sm transition-all duration-300 ${
+                          hoveredSkill === skill.name
+                            ? 'border-[#8245ec]/50 bg-gradient-to-br from-gray-800 to-gray-900 shadow-lg shadow-[#8245ec]/20'
+                            : 'border-white/10 bg-gray-800/30'
+                        }`}>
+                          {/* Skill Content */}
+                          <div className="flex items-center gap-4">
+                            {/* Skill Icon */}
+                            <div className={`p-3 rounded-lg transition-all duration-300 ${
+                              hoveredSkill === skill.name ? 'scale-110' : ''
+                            }`} style={{
+                              backgroundColor: hoveredSkill === skill.name 
+                                ? `${categoryColors[category.title] || '#8245ec'}20`
+                                : 'rgba(255,255,255,0.05)'
+                            }}>
+                              <img
+                                src={skill.logo}
+                                alt={`${skill.name} logo`}
+                                className="w-8 h-8 object-contain"
+                              />
+                            </div>
+                            
+                            {/* Skill Info */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className={`font-semibold truncate transition-colors duration-300 ${
+                                  hoveredSkill === skill.name ? 'text-white' : 'text-gray-300'
+                                }`}>
+                                  {skill.name}
+                                </span>
+                                {hoveredSkill === skill.name && (
+                                  <ArrowUpRight className="w-4 h-4 text-[#8245ec]" />
+                                )}
+                              </div>
+                              
+                              {/* Proficiency Bar */}
+                              <div className="space-y-2">
+                                <div className="flex items-center justify-between text-xs">
+                                  <span className="text-gray-500">Proficiency</span>
+                                  <span className="font-semibold text-[#8245ec]">{proficiency}%</span>
+                                </div>
+                                <div className="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                  <motion.div
+                                    className="h-full rounded-full"
+                                    style={{ 
+                                      background: `linear-gradient(90deg, ${categoryColors[category.title] || '#8245ec'}, ${categoryColors[category.title] || '#8245ec'}80)`
+                                    }}
+                                    initial={{ width: 0 }}
+                                    animate={{ width: `${proficiency}%` }}
+                                    transition={{ duration: 1, delay: skillIndex * 0.1 }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Hover Glow Effect */}
+                          {hoveredSkill === skill.name && (
+                            <motion.div
+                              className="absolute inset-0 rounded-xl bg-gradient-to-r from-[#8245ec]/10 to-transparent"
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              transition={{ duration: 0.2 }}
+                            />
+                          )}
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Scroll Indicator */}
+              <div className="p-4 border-t border-white/10 bg-gradient-to-r from-gray-900/50 to-transparent">
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span>Scroll to explore all skills</span>
                   <div className="flex items-center gap-2">
-                    <div className="flex gap-1">
-                      {[1, 2, 3, 4, 5].map((i) => (
-                        <div
-                          key={i}
-                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                            i <= 4 ? 'bg-[#8245ec]' : 'bg-gray-700'
-                          }`}
-                        />
-                      ))}
+                    <div className="w-24 h-1 bg-gray-800 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-full"
+                        style={{ width: `${scrollPosition}%` }}
+                      />
                     </div>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                    <span>{Math.round(scrollPosition)}%</span>
                   </div>
                 </div>
               </div>
@@ -280,25 +360,70 @@ const Skills = () => {
           ))}
         </motion.div>
 
-        {/* Tech Journey Indicator */}
+        {/* Skills Summary */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-20 text-center"
+          className="mt-16"
         >
-          <div className="inline-flex items-center gap-4 px-6 py-4 rounded-xl bg-gradient-to-r from-gray-900/50 to-gray-800/50 border border-white/10 backdrop-blur-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-gray-300">Always expanding my tech stack</span>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-white/10 backdrop-blur-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
+                  <Sparkles className="w-5 h-5 text-[#8245ec]" />
+                </div>
+                <h4 className="text-lg font-semibold text-white">Core Expertise</h4>
+              </div>
+              <p className="text-gray-400 text-sm">
+                Specialized in MERN stack with deep understanding of modern web architecture and scalable solutions.
+              </p>
             </div>
-            <div className="h-6 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-            <div className="text-sm text-gray-400">
-              Currently exploring: <span className="text-[#8245ec]">Next.js, TypeScript, GraphQL</span>
+            
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-white/10 backdrop-blur-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
+                  <Zap className="w-5 h-5 text-blue-400" />
+                </div>
+                <h4 className="text-lg font-semibold text-white">Continuous Learning</h4>
+              </div>
+              <p className="text-gray-400 text-sm">
+                Actively exploring: <span className="text-[#8245ec]">Next.js, TypeScript, GraphQL, Docker</span>
+              </p>
+            </div>
+            
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/50 border border-white/10 backdrop-blur-sm">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20">
+                  <Code2 className="w-5 h-5 text-green-400" />
+                </div>
+                <h4 className="text-lg font-semibold text-white">Problem Solving</h4>
+              </div>
+              <p className="text-gray-400 text-sm">
+                Strong foundation in algorithms, data structures, and system design principles.
+              </p>
             </div>
           </div>
         </motion.div>
       </div>
+
+      {/* Custom Scrollbar Styles */}
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(to bottom, #8245ec, #a855f7);
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(to bottom, #a855f7, #c084fc);
+        }
+      `}</style>
     </section>
   );
 };
