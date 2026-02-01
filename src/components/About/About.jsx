@@ -3,7 +3,7 @@ import { Typewriter } from "react-simple-typewriter";
 import Tilt from 'react-parallax-tilt';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { ArrowDown, Zap, ChevronDown } from 'lucide-react';
-import profileImage from './assets/piyush.jpg'
+import profileImage from '../../assets/piyush.jpg'
 
 const About = () => {
   const ref = useRef(null);
