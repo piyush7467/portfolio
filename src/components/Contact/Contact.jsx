@@ -108,7 +108,7 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
+    <div id="contact" className="relative w-full max-w-4xl mx-auto">
       <ToastContainer />
       
       {/* Background Elements */}
