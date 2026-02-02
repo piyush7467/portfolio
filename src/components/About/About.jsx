@@ -226,7 +226,7 @@ const About = () => {
           </motion.div>
 
           {/* 6. CTA Buttons - Mobile Sixth */}
-          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:mb-0 mb-5">
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:mb-0 mb-16">
             <a
               href="https://drive.google.com/file/d/1E3ieL3g0VFqNdTk6WvlFjkNlrgHgjS3E/view?usp=drive_link"
               target="_blank"
@@ -447,7 +447,7 @@ const About = () => {
       {/* Stats Bar - Responsive */}
       <motion.div
         variants={itemVariants}
-        className="absolute bottom-4 mt-8 md:mt-8 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-0  sm:bottom-2 md:bottom-4 left-1/2 transform -translate-x-1/2"
       >
         <div className="flex items-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm text-gray-500">
           <div className="text-center">

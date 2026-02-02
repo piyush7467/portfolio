@@ -159,7 +159,7 @@ const ContactForm = () => {
                   name="user_name"
                   value={formData.user_name}
                   onChange={handleInputChange}
-                  placeholder="John Doe"
+                  placeholder="Enter your name"
                   required
                   className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 focus:border-transparent transition-all hover:border-gray-600"
                 />
@@ -179,7 +179,7 @@ const ContactForm = () => {
                   name="user_email"
                   value={formData.user_email}
                   onChange={handleInputChange}
-                  placeholder="john@example.com"
+                  placeholder="Enter your email"
                   required
                   className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 focus:border-transparent transition-all hover:border-gray-600"
                 />
