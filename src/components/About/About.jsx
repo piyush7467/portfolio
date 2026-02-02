@@ -61,8 +61,8 @@ const About = () => {
     <section
       id='about'
       ref={ref}
-      className='relative py-10 sm:py-110 md:py-10 lg:py-12 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 2xl:px-40 min-h-screen flex items-center justify-center bg-gray-950 font-sans overflow-hidden'
-    >
+      className='relative py-2 sm:py-2 md:py-2 lg:py-4 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 2xl:px-40 min-h-screen flex items-center justify-center bg-gray-950 font-sans overflow-hidden'
+    >/
       {/* Advanced Background - Responsive */}
       <div className="absolute inset-0">
         {/* Mesh Gradient - Responsive */}
