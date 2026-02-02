@@ -1,47 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { 
   FaFacebook, 
   FaTwitter, 
   FaLinkedin, 
   FaInstagram, 
   FaGithub,
-  FaArrowUp,
   FaHeart 
 } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const Footer = () => {
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 500);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
-  const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const offset = 80; // Offset for fixed header
-      const sectionTop = section.offsetTop - offset;
-      window.scrollTo({
-        top: sectionTop,
-        behavior: 'smooth'
-      });
-    }
-  };
+  const [currentYear] = useState(new Date().getFullYear());
 
   const socialLinks = [
     { 
@@ -68,18 +38,18 @@ const Footer = () => {
       label: "Instagram Profile",
       color: "hover:text-[#E4405F]"
     },
-    { 
-      icon: <FaFacebook />, 
-      link: "https://www.facebook.com/piyush.shakya.7311",
-      label: "Facebook Profile",
-      color: "hover:text-[#1877F2]"
-    },
-    { 
-      icon: <FiMail />, 
-      link: "mailto:shakyapiyush610@gmail.com",
-      label: "Send Email",
-      color: "hover:text-[#EA4335]"
-    }
+    // { 
+    //   icon: <FaFacebook />, 
+    //   link: "https://www.facebook.com/piyush.shakya.7311",
+    //   label: "Facebook Profile",
+    //   color: "hover:text-[#1877F2]"
+    // },
+    // { 
+    //   icon: <FiMail />, 
+    //   link: "mailto:shakyapiyush610@gmail.com",
+    //   label: "Send Email",
+    //   color: "hover:text-[#EA4335]"
+    // }
   ];
 
   const navigationLinks = [
@@ -123,20 +93,6 @@ const Footer = () => {
         <div className="absolute top-0 right-1/4 w-64 h-64 bg-blue-900/10 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <motion.button
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.5 }}
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-[#8245ec] to-purple-600 text-white flex items-center justify-center shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:scale-110"
-          aria-label="Scroll to top"
-        >
-          <FaArrowUp className="text-lg" />
-        </motion.button>
-      )}
-
       <div className="relative z-10 max-w-7xl mx-auto">
         <motion.div
           variants={containerVariants}
@@ -160,18 +116,14 @@ const Footer = () => {
             </p>
           </motion.div>
 
-          {/* Navigation */}
+          {/* Navigation - No scroll functionality */}
           <motion.nav variants={itemVariants} className="mb-8">
             <ul className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
               {navigationLinks.map((item, index) => (
                 <li key={index}>
-                  <button
-                    onClick={() => scrollToSection(item.id)}
-                    className="text-gray-300 hover:text-[#8245ec] text-sm sm:text-base font-medium transition-all duration-300 hover:scale-105 px-2 py-1 rounded-lg hover:bg-white/5"
-                    aria-label={`Scroll to ${item.name} section`}
-                  >
+                  <span className="text-gray-300 text-sm sm:text-base font-medium px-2 py-1 rounded-lg">
                     {item.name}
-                  </button>
+                  </span>
                 </li>
               ))}
             </ul>
@@ -216,7 +168,7 @@ const Footer = () => {
           </motion.div>
 
           {/* Quick Contact */}
-          <motion.div variants={itemVariants} className="mt-8">
+          {/* <motion.div variants={itemVariants} className="mt-8">
             <a
               href="mailto:shakyapiyush610@gmail.com"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 border border-white/10 text-gray-300 hover:text-white hover:border-[#8245ec]/50 transition-all group"
@@ -224,7 +176,7 @@ const Footer = () => {
               <FiMail className="text-[#8245ec] group-hover:scale-110 transition-transform" />
               <span>shakyapiyush610@gmail.com</span>
             </a>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
 
         {/* Additional Info */}
@@ -237,7 +189,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs text-gray-500">
             <div>
               <p className="font-medium text-gray-400 mb-2">Location</p>
-              <p>Based in Lucknow, India</p>
+              <p>Based in Punjab, India</p>
             </div>
             <div>
               <p className="font-medium text-gray-400 mb-2">Availability</p>
@@ -258,8 +210,6 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
 
 
 
