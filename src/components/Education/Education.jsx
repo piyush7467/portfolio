@@ -7,109 +7,103 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="relative py-20 md:py-32 px-4 md:px-8 lg:px-16 xl:px-32 overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
+      className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-purple-600/10 rounded-full blur-xl md:blur-3xl"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-600/10 rounded-full blur-xl md:blur-3xl"></div>
         
-        {/* Grid Pattern */}
+        {/* Grid Pattern - Responsive */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
+          backgroundSize: 'clamp(30px, 5vw, 50px) clamp(30px, 5vw, 50px)'
         }}></div>
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        {/* Section Header */}
+        {/* Section Header - Responsive */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16 md:mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-6">
-            <GraduationCap className="w-4 h-4 text-[#8245ec]" />
-            <span className="text-sm font-medium text-gray-300">Academic Journey</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-4 sm:mb-6">
+            <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
+            <span className="text-xs sm:text-sm font-medium text-gray-300">Academic Journey</span>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 px-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white">
-              Education &
+              Education
             </span>
             <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] via-purple-400 to-[#8245ec]">
-              Learning Path
+              Timeline
             </span>
           </h2>
           
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent via-[#8245ec] to-transparent"></div>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-              My academic foundation that shaped my technical expertise and problem-solving approach
+          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 px-2">
+            <div className="hidden sm:block h-px w-8 md:w-12 lg:w-20 bg-gradient-to-r from-transparent via-[#8245ec] to-transparent"></div>
+            <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-lg sm:max-w-xl md:max-w-2xl mx-auto">
+              My academic foundation shaping technical expertise and problem-solving approach
             </p>
-            <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent via-[#8245ec] to-transparent"></div>
+            <div className="hidden sm:block h-px w-8 md:w-12 lg:w-20 bg-gradient-to-l from-transparent via-[#8245ec] to-transparent"></div>
           </div>
         </motion.div>
 
-        {/* Education Timeline - Modern Design */}
+        {/* Education Timeline - Fully Responsive */}
         <div className="relative">
-          {/* Decorative Timeline Line */}
-          <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#8245ec]/30 to-transparent"></div>
+          {/* Timeline Line - Responsive */}
+          <div className="absolute left-6 sm:left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#8245ec]/30 to-transparent"></div>
 
           {/* Education Cards */}
-          <div className="space-y-12">
+          <div className="space-y-8 sm:space-y-12">
             {education.map((edu, index) => (
               <motion.div
                 key={edu.id}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true, amount: 0.3 }}
-                className={`relative flex flex-col md:flex-row items-start ${index % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}
+                transition={{ duration: 0.6, delay: index * 0.15 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="relative"
               >
-                {/* Timeline Indicator - Modern Design */}
-                <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 z-10">
+                {/* Timeline Indicator - Responsive */}
+                <div className="absolute left-0 sm:left-2 md:left-1/2 md:-translate-x-1/2 z-10">
                   <div className="relative">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-[#8245ec] flex items-center justify-center">
-                      <GraduationCap className="w-5 h-5 text-[#8245ec]" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-[#8245ec] flex items-center justify-center">
+                      <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
                     </div>
                     <div className="absolute inset-0 rounded-full bg-[#8245ec] animate-ping opacity-20"></div>
                     
-                    {/* Year Badge */}
+                    {/* Year Badge - Desktop Only */}
                     <div className={`absolute top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2 ${
-                      index % 2 === 0 ? "left-16" : "right-16"
+                      index % 2 === 0 ? "left-14 lg:left-16" : "right-14 lg:right-16"
                     }`}>
-                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 border border-white/10">
+                      <div className="flex items-center gap-2 px-2 py-1 lg:px-3 lg:py-1.5 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 border border-white/10">
                         <Calendar className="w-3 h-3 text-[#8245ec]" />
                         <span className="text-xs text-gray-300">{edu.date}</span>
                       </div>
-                      <ChevronRight className="w-4 h-4 text-[#8245ec]" />
+                      <ChevronRight className="w-3 h-3 lg:w-4 lg:h-4 text-[#8245ec]" />
                     </div>
                   </div>
                 </div>
 
-                {/* Education Card */}
-                <div className={`w-full md:w-[calc(50%-3rem)] ml-16 md:ml-0 ${
-                  index % 2 === 0 ? "md:pr-12" : "md:pl-12"
+                {/* Education Card - Mobile First Design */}
+                <div className={`ml-14 sm:ml-16 md:ml-0 md:w-[calc(50%-1.5rem)] lg:w-[calc(50%-2rem)] ${
+                  index % 2 === 0 
+                    ? "md:pr-4 lg:pr-8 xl:pr-12" 
+                    : "md:pl-4 lg:pl-8 xl:pl-12 md:ml-auto"
                 }`}>
-                  <div className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-[#8245ec]/30 transition-all duration-300 overflow-hidden">
-                    {/* Card Background Pattern */}
-                    <div className="absolute inset-0 opacity-5">
-                      <div className="absolute inset-0" style={{
-                        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)`,
-                        backgroundSize: '20px 20px'
-                      }}></div>
-                    </div>
-
-                    <div className="relative p-6 md:p-8">
-                      {/* Card Header */}
-                      <div className="flex flex-col md:flex-row md:items-start gap-6 mb-6">
-                        {/* School Logo */}
+                  <div className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm md:backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 hover:border-[#8245ec]/30 transition-all duration-300 overflow-hidden">
+                    <div className="relative p-4 sm:p-5 md:p-6 lg:p-8">
+                      {/* Card Header - Stacked on Mobile */}
+                      <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
+                        {/* School Logo - Responsive */}
                         <div className="flex-shrink-0">
-                          <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-white/10 bg-gradient-to-br from-gray-800 to-gray-900">
+                          <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-lg md:rounded-xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-800 to-gray-900">
                             <img
                               src={edu.img}
                               alt={edu.school}
@@ -119,29 +113,36 @@ const Education = () => {
                           </div>
                         </div>
 
-                        {/* School Info */}
-                        <div className="flex-1">
-                          <div className="space-y-2">
-                            <h3 className="text-xl md:text-2xl font-bold text-white">
+                        {/* School Info - Responsive */}
+                        <div className="flex-1 min-w-0">
+                          <div className="space-y-1 sm:space-y-2">
+                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight">
                               {edu.degree}
                             </h3>
                             <div className="flex items-center gap-2">
                               <div className="p-1 rounded bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
-                                <BookOpen className="w-4 h-4 text-[#8245ec]" />
+                                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
                               </div>
-                              <span className="text-gray-300">{edu.school}</span>
+                              <span className="text-sm sm:text-base text-gray-300 truncate">{edu.school}</span>
                             </div>
                             
-                            {/* Mobile Date */}
-                            <div className="flex items-center gap-2 md:hidden">
-                              <Calendar className="w-4 h-4 text-[#8245ec]" />
-                              <span className="text-sm text-gray-400">{edu.date}</span>
+                            {/* Mobile Date & Grade */}
+                            <div className="flex flex-wrap items-center gap-3 md:hidden">
+                              <div className="flex items-center gap-1">
+                                <Calendar className="w-3 h-3 text-[#8245ec]" />
+                                <span className="text-xs text-gray-400">{edu.date}</span>
+                              </div>
+                              <div className="h-3 w-px bg-gray-700"></div>
+                              <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
+                                <Award className="w-3 h-3 text-green-400" />
+                                <span className="text-xs font-semibold text-green-300">{edu.grade}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
 
-                        {/* Grade Badge */}
-                        <div className="self-start">
+                        {/* Grade Badge - Desktop Only */}
+                        <div className="hidden md:block self-start">
                           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
                             <Award className="w-4 h-4 text-green-400" />
                             <span className="text-sm font-semibold text-green-300">{edu.grade}</span>
@@ -149,25 +150,25 @@ const Education = () => {
                         </div>
                       </div>
 
-                      {/* Description */}
-                      <div className="mb-6">
+                      {/* Description - Responsive */}
+                      <div className="mb-4 sm:mb-5 md:mb-6">
                         <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#8245ec] to-transparent"></div>
-                        <p className="text-gray-400 pl-4 leading-relaxed">
+                        <p className="text-xs sm:text-sm md:text-base text-gray-400 pl-3 sm:pl-4 leading-relaxed">
                           {edu.desc}
                         </p>
                       </div>
 
-                      {/* Key Learnings */}
-                      <div className="space-y-3">
+                      {/* Key Learnings - Responsive */}
+                      <div className="space-y-2 sm:space-y-3">
                         <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-[#8245ec]" />
-                          <span className="font-medium text-white">Key Focus Areas</span>
+                          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
+                          <span className="text-sm sm:text-base font-medium text-white">Key Focus</span>
                         </div>
-                        <div className="flex flex-wrap gap-2">
-                          {getFocusAreas(edu.degree).map((area, idx) => (
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                          {getFocusAreas(edu.degree).slice(0, window.innerWidth < 640 ? 2 : 3).map((area, idx) => (
                             <span
                               key={idx}
-                              className="px-3 py-1.5 rounded-lg text-xs font-medium bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 border border-white/10"
+                              className="px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs font-medium bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 border border-white/10"
                             >
                               {area}
                             </span>
@@ -175,13 +176,13 @@ const Education = () => {
                         </div>
                       </div>
 
-                      {/* Progress Indicator */}
+                      {/* Progress Indicator - Desktop Only */}
                       {index === 0 && (
-                        <div className="mt-6 pt-6 border-t border-white/10">
+                        <div className="hidden md:block mt-4 lg:mt-6 pt-4 lg:pt-6 border-t border-white/10">
                           <div className="flex items-center justify-between text-sm">
                             <span className="text-gray-400">Currently Pursuing</span>
                             <div className="flex items-center gap-2">
-                              <div className="w-24 h-1 bg-gray-800 rounded-full overflow-hidden">
+                              <div className="w-16 lg:w-24 h-1 bg-gray-800 rounded-full overflow-hidden">
                                 <div 
                                   className="h-full bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-full"
                                   style={{ width: '85%' }}
@@ -200,48 +201,48 @@ const Education = () => {
           </div>
         </div>
 
-        {/* Education Summary */}
+        {/* Education Summary - Responsive */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
-          className="mt-16"
+          className="mt-12 sm:mt-16"
         >
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
-                  <Award className="w-5 h-5 text-[#8245ec]" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
+                  <Award className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
                 </div>
-                <h4 className="text-lg font-semibold text-white">Academic Excellence</h4>
+                <h4 className="text-base sm:text-lg font-semibold text-white">Excellence</h4>
               </div>
-              <p className="text-gray-400 text-sm">
-                Consistent academic performance with focus on practical implementation of concepts
+              <p className="text-xs sm:text-sm text-gray-400">
+                Consistent academic performance with practical implementation focus
               </p>
             </div>
             
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
-                  <BookOpen className="w-5 h-5 text-blue-400" />
+            <div className="p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
+                  <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400" />
                 </div>
-                <h4 className="text-lg font-semibold text-white">Continuous Learning</h4>
+                <h4 className="text-base sm:text-lg font-semibold text-white">Learning</h4>
               </div>
-              <p className="text-gray-400 text-sm">
-                Beyond curriculum exploration of modern technologies and development practices
+              <p className="text-xs sm:text-sm text-gray-400">
+                Beyond curriculum exploration of modern technologies and practices
               </p>
             </div>
             
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20">
-                  <GraduationCap className="w-5 h-5 text-green-400" />
+            <div className="p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 col-span-full sm:col-span-1 lg:col-span-1">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20">
+                  <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                 </div>
-                <h4 className="text-lg font-semibold text-white">Future Focus</h4>
+                <h4 className="text-base sm:text-lg font-semibold text-white">Future Focus</h4>
               </div>
-              <p className="text-gray-400 text-sm">
-                Combining academic knowledge with real-world experience to build innovative solutions
+              <p className="text-xs sm:text-sm text-gray-400">
+                Combining academic knowledge with real-world experience
               </p>
             </div>
           </div>
@@ -254,12 +255,12 @@ const Education = () => {
 // Helper function to get focus areas based on degree
 const getFocusAreas = (degree) => {
   if (degree.includes("Computer Science")) {
-    return ["Data Structures", "Algorithms", "Web Development", "Database Systems", "Software Engineering"];
+    return ["Data Structures", "Algorithms", "Web Dev", "Database", "Software"];
   }
   if (degree.includes("PCM") || degree.includes("Science")) {
-    return ["Mathematics", "Physics", "Chemistry", "Problem Solving", "Logical Thinking"];
+    return ["Mathematics", "Physics", "Chemistry", "Problem Solving"];
   }
-  return ["Core Subjects", "Practical Skills", "Theoretical Knowledge", "Research"];
+  return ["Core Subjects", "Practical Skills", "Theoretical"];
 };
 
 export default Education;
