@@ -298,26 +298,26 @@ export const projects = [
     github: "https://github.com/piyush11234/Expense-Tracker",
     webapp: "https://expense-tracker-daily.vercel.app/",
   },
-  // {
-  //   id: 4,
-  //   title: "College Exam Prep",
-  //   description:
-  //     "A full-stack quiz-based platform designed for College students to practice previous year questions and practice MCQs questions. The platform offers every question detailed explanation, helping students to understand their preparation journey effectively.",
-  //   image: eduNeocodeLogo,
-  //   tags: ["HTML", "CSS", "JavaScript"],
-  //   // github: "https://github.com/codingmastr/CSPrep",
-  //   webapp: "https://neocode.in/",
-  // },
-  // {
-  //   id: 5,
-  //   title: "Pharmacy Website",
-  //   description:
-  //     "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
-  //   image: pharmacyLogo,
-  //   tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS"],
-  //   // github: "https://github.com/codingmastr/cmtk-email-validator",
-  //   webapp: "https://arnavhealthcare.neocode.in/",
-  // },
+  {
+    id: 4,
+    title: "College Exam Prep",
+    description:
+      "A full-stack quiz-based platform designed for College students to practice previous year questions and practice MCQs questions. The platform offers every question detailed explanation, helping students to understand their preparation journey effectively.",
+    image: eduNeocodeLogo,
+    tags: ["HTML", "CSS", "JavaScript"],
+    // github: "https://github.com/codingmastr/CSPrep",
+    webapp: "https://neocode.infinityfreeapp.com/",
+  },
+  {
+    id: 5,
+    title: "Pharmacy Website",
+    description:
+      "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
+    image: pharmacyLogo,
+    tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS"],
+    // github: "https://github.com/codingmastr/cmtk-email-validator",
+    webapp: "https://arnavhealthcare.infinityfreeapp.com/",
+  },
 
 
 
