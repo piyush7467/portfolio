@@ -266,18 +266,9 @@ export const projects = [
   //   github: "https://github.com/codingmastr/GitHub-Profile-Search-App-Using-React-JS",
   //   webapp: "https://githubprofiledetective.netlify.app/",
   // },
+
   {
     id: 1,
-    title: "College Exam Prep",
-    description:
-      "A full-stack quiz-based platform designed for College students to practice previous year questions and practice MCQs questions. The platform offers every question detailed explanation, helping students to understand their preparation journey effectively.",
-    image: eduNeocodeLogo,
-    tags: ["HTML", "CSS", "JavaScript"],
-    // github: "https://github.com/codingmastr/CSPrep",
-    webapp: "https://neocode.in/",
-  },
-  {
-    id: 2,
     title: "A Blog Website",
     description:
       "A Full Stack web application in which user will post blogs, see other's blogs, do comment and likes. The intuitive design and smooth experience make it a go-to app for posting blogs.",
@@ -286,18 +277,9 @@ export const projects = [
     github: "https://github.com/piyush11234/blog",
     webapp: "https://blog-dqxu.onrender.com",
   },
+
   {
-    id: 3,
-    title: "Pharmacy Website",
-    description:
-      "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
-    image: pharmacyLogo,
-    tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS"],
-    // github: "https://github.com/codingmastr/cmtk-email-validator",
-    webapp: "https://arnavhealthcare.neocode.in/",
-  },
-  {
-    id: 4,
+    id: 2,
     title: "Course Selling Website",
     description:
       "A full-stack course selling platform where instructors can create, manage, and publish courses with lectures, while students can enroll, access learning materials, and track their progress.",
@@ -307,7 +289,7 @@ export const projects = [
     webapp: "https://coursecloud.onrender.com/",
   },
   {
-    id: 5,
+    id: 3,
     title: "Expense Tracker Website",
     description:
       "A full-stack expense management application that allows users to securely sign up, log in, and manage their daily expenses. Users can add, view, and delete expenses, categorize them, and track spending trends with a clean and responsive UI.",
@@ -315,7 +297,28 @@ export const projects = [
     tags: ["React JS", "API", "HTML", "CSS", "Tailwind CSS", "JavaScript", "Node.js", "Express", "MongoDB"],
     github: "https://github.com/piyush11234/Expense-Tracker",
     webapp: "https://expense-tracker-daily.vercel.app/",
-  }
+  },
+  // {
+  //   id: 4,
+  //   title: "College Exam Prep",
+  //   description:
+  //     "A full-stack quiz-based platform designed for College students to practice previous year questions and practice MCQs questions. The platform offers every question detailed explanation, helping students to understand their preparation journey effectively.",
+  //   image: eduNeocodeLogo,
+  //   tags: ["HTML", "CSS", "JavaScript"],
+  //   // github: "https://github.com/codingmastr/CSPrep",
+  //   webapp: "https://neocode.in/",
+  // },
+  // {
+  //   id: 5,
+  //   title: "Pharmacy Website",
+  //   description:
+  //     "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
+  //   image: pharmacyLogo,
+  //   tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS"],
+  //   // github: "https://github.com/codingmastr/cmtk-email-validator",
+  //   webapp: "https://arnavhealthcare.neocode.in/",
+  // },
+
 
 
   // {
