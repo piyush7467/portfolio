@@ -1,8 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { 
-  FiMail, FiUser, FiEdit3, FiMessageSquare, FiSend, FiCheck,
-  FiMapPin, FiPhone, FiClock, FiGithub, FiLinkedin, FiTwitter,
-  FiArrowLeft, FiArrowRight
+   FiUser, FiEdit3, FiMessageSquare, FiSend, FiCheck,
+   FiClock, FiGithub, FiLinkedin, FiTwitter,
+  FiArrowLeft, FiArrowRight,
+  FiPhoneCall,
+  FiMail,
+  FiMapPin
 } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { ToastContainer, toast } from 'react-toastify';
@@ -146,39 +149,39 @@ const ContactForm = () => {
     {
       icon: <FiMail className="w-5 h-5" />,
       label: "Email",
-      value: "hello@example.com",
-      link: "mailto:hello@example.com",
+      value: "piyushshakya7467@gmail.com",
+      link: "mailto:piyushshakya7467@gmail.com",
       color: "from-blue-500 to-cyan-500",
       bg: "bg-blue-500/10"
     },
     {
-      icon: <FiPhone className="w-5 h-5" />,
+      icon: <FiPhoneCall className="w-5 h-5" />,
       label: "Phone",
-      value: "+1 (234) 567-890",
-      link: "tel:+1234567890",
+      value: "+91 6398667467",
+      link: "tel:+916398667467",
       color: "from-green-500 to-emerald-500",
       bg: "bg-green-500/10"
     },
     {
       icon: <FiMapPin className="w-5 h-5" />,
       label: "Location",
-      value: "San Francisco, CA",
+      value: "Jalandhar, Punjab, India",
       color: "from-red-500 to-pink-500",
       bg: "bg-red-500/10"
     },
-    {
-      icon: <FiClock className="w-5 h-5" />,
-      label: "Working Hours",
-      value: "Mon-Fri, 9AM-6PM PST",
-      color: "from-purple-500 to-indigo-500",
-      bg: "bg-purple-500/10"
-    }
+    // {
+    //   icon: <FiClock className="w-5 h-5" />,
+    //   label: "Working Hours",
+    //   value: "Mon-Fri, 9AM-6PM PST",
+    //   color: "from-purple-500 to-indigo-500",
+    //   bg: "bg-purple-500/10"
+    // }
   ];
 
   const socialLinks = [
-    { icon: <FiGithub className="w-5 h-5" />, href: "https://github.com", label: "GitHub", color: "hover:bg-gray-700" },
-    { icon: <FiLinkedin className="w-5 h-5" />, href: "https://linkedin.com", label: "LinkedIn", color: "hover:bg-blue-600" },
-    { icon: <FiTwitter className="w-5 h-5" />, href: "https://twitter.com", label: "Twitter", color: "hover:bg-sky-500" }
+    { icon: <FiGithub className="w-5 h-5" />, href: "https://github.com/PiyushShakya7467", label: "GitHub", color: "hover:bg-gray-700" },
+    { icon: <FiLinkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/piyush7467", label: "LinkedIn", color: "hover:bg-blue-600" },
+    { icon: <FiTwitter className="w-5 h-5" />, href: "https://x.com/shakya_piyush", label: "Twitter", color: "hover:bg-sky-500" }
   ];
 
   return (
