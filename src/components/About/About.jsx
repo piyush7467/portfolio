@@ -228,7 +228,7 @@ const About = () => {
           {/* 6. CTA Buttons - Mobile Sixth */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:mb-0 mb-16">
             <a
-              href="https://drive.google.com/file/d/1E3ieL3g0VFqNdTk6WvlFjkNlrgHgjS3E/view?usp=drive_link"
+              href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className=" group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-5 py-3 sm:px-6 sm:py-4 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 w-full sm:w-auto"
@@ -327,7 +327,7 @@ const About = () => {
             {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-8">
               <motion.a
-                href="https://drive.google.com/file/d/1E3ieL3g0VFqNdTk6WvlFjkNlrgHgjS3E/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300"
@@ -551,7 +551,7 @@ export default About
 //           </p>
 //            {/* Resume Button */}
 //           <a
-//             href="https://drive.google.com/file/d/1E3ieL3g0VFqNdTk6WvlFjkNlrgHgjS3E/view?usp=drive_link"
+//             href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
 //             target="_blank"
 //             rel="noopener noreferrer"
 //             className="inline-block text-white py-3 px-8 rounded-full mt-5 text-lg font-bold transition duration-300 transform hover:scale-105"

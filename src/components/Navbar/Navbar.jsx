@@ -201,7 +201,7 @@ const Navbar = () => {
               
               {/* Resume Button */}
               <motion.a
-                href="https://drive.google.com/file/d/1E3ieL3g0VFqNdTk6WvlFjkNlrgHgjS3E/view?usp=drive_link"
+                href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden"
@@ -298,7 +298,7 @@ const Navbar = () => {
                         <FaLinkedin size={22} />
                       </motion.a>
                       <motion.a
-                        href="https://drive.google.com/file/d/1E3ieL3g0VFqNdTk6WvlFjkNlrgHgjS3E/view?usp=drive_link"
+                        href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-5 py-3 rounded-lg bg-gradient-to-r from-[#8245ec] to-blue-600 text-white font-medium text-sm flex items-center gap-2"
