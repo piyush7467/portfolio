@@ -1,20 +1,54 @@
-import React, { useRef, useState } from "react";
-import { FiMail, FiUser, FiEdit3, FiMessageSquare, FiSend, FiCheck } from "react-icons/fi";
-import { motion } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { 
+  FiMail, FiUser, FiEdit3, FiMessageSquare, FiSend, FiCheck,
+  FiMapPin, FiPhone, FiClock, FiGithub, FiLinkedin, FiTwitter,
+  FiArrowLeft, FiArrowRight
+} from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
   const form = useRef();
+  const scrollContainerRef = useRef(null);
   const [isSent, setIsSent] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [activeSection, setActiveSection] = useState(0); // 0 for form, 1 for info
   const [formData, setFormData] = useState({
     user_email: '',
     user_name: '',
     subject: '',
     message: ''
   });
+
+  // Handle scroll arrows visibility
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftArrow(scrollLeft > 20);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 20);
+    }
+  };
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener('resize', checkScroll);
+    return () => window.removeEventListener('resize', checkScroll);
+  }, []);
+
+  const scroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -400 : 400;
+      scrollContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+      setTimeout(checkScroll, 300);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -107,181 +141,373 @@ const ContactForm = () => {
     }
   };
 
+  // Contact information data
+  const contactInfo = [
+    {
+      icon: <FiMail className="w-5 h-5" />,
+      label: "Email",
+      value: "hello@example.com",
+      link: "mailto:hello@example.com",
+      color: "from-blue-500 to-cyan-500",
+      bg: "bg-blue-500/10"
+    },
+    {
+      icon: <FiPhone className="w-5 h-5" />,
+      label: "Phone",
+      value: "+1 (234) 567-890",
+      link: "tel:+1234567890",
+      color: "from-green-500 to-emerald-500",
+      bg: "bg-green-500/10"
+    },
+    {
+      icon: <FiMapPin className="w-5 h-5" />,
+      label: "Location",
+      value: "San Francisco, CA",
+      color: "from-red-500 to-pink-500",
+      bg: "bg-red-500/10"
+    },
+    {
+      icon: <FiClock className="w-5 h-5" />,
+      label: "Working Hours",
+      value: "Mon-Fri, 9AM-6PM PST",
+      color: "from-purple-500 to-indigo-500",
+      bg: "bg-purple-500/10"
+    }
+  ];
+
+  const socialLinks = [
+    { icon: <FiGithub className="w-5 h-5" />, href: "https://github.com", label: "GitHub", color: "hover:bg-gray-700" },
+    { icon: <FiLinkedin className="w-5 h-5" />, href: "https://linkedin.com", label: "LinkedIn", color: "hover:bg-blue-600" },
+    { icon: <FiTwitter className="w-5 h-5" />, href: "https://twitter.com", label: "Twitter", color: "hover:bg-sky-500" }
+  ];
+
   return (
-    <div id="contact" className="relative w-full max-w-4xl mx-auto">
+    <div id="contact" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <ToastContainer />
       
       {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 bg-purple-600/5 rounded-full blur-xl"></div>
         <div className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 bg-pink-600/5 rounded-full blur-xl"></div>
       </div>
 
-      {/* Form Container */}
+      {/* Section Header */}
       <motion.div
-        variants={containerVariants}
+        variants={itemVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 md:p-10 overflow-hidden"
+        className="text-center mb-10"
       >
-        {/* Decorative Elements */}
-        <div className="absolute -top-20 -right-20 w-40 h-40 bg-[#8245ec]/5 rounded-full blur-2xl"></div>
-        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-pink-500/5 rounded-full blur-2xl"></div>
-
-        {/* Form Header */}
-        <motion.div variants={itemVariants} className="mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-4">
-            <FiSend className="w-4 h-4 text-[#8245ec]" />
-            <span className="text-sm font-medium text-gray-300">Get In Touch</span>
-          </div>
-          
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-            Send a Message
-          </h3>
-          <div className="w-16 h-0.5 bg-gradient-to-r from-[#8245ec] to-transparent"></div>
-        </motion.div>
-
-        {/* Contact Form */}
-        <form ref={form} onSubmit={sendEmail} className="space-y-6">
-          {/* Name & Email Row */}
-          <div className="grid sm:grid-cols-2 gap-6">
-            <motion.div variants={itemVariants} className="space-y-2">
-              <label className="block text-sm font-medium text-gray-400">
-                Your Name <span className="text-[#8245ec]">*</span>
-              </label>
-              <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                  <FiUser className="text-gray-500 group-focus-within:text-[#8245ec] transition-colors" />
-                </div>
-                <input
-                  type="text"
-                  name="user_name"
-                  value={formData.user_name}
-                  onChange={handleInputChange}
-                  placeholder="Enter your name"
-                  required
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 focus:border-transparent transition-all hover:border-gray-600"
-                />
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="space-y-2">
-              <label className="block text-sm font-medium text-gray-400">
-                Your Email <span className="text-[#8245ec]">*</span>
-              </label>
-              <div className="relative group">
-                <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                  <FiMail className="text-gray-500 group-focus-within:text-[#8245ec] transition-colors" />
-                </div>
-                <input
-                  type="email"
-                  name="user_email"
-                  value={formData.user_email}
-                  onChange={handleInputChange}
-                  placeholder="Enter your email"
-                  required
-                  className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 focus:border-transparent transition-all hover:border-gray-600"
-                />
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Subject */}
-          <motion.div variants={itemVariants} className="space-y-2">
-            <label className="block text-sm font-medium text-gray-400">
-              Subject
-            </label>
-            <div className="relative group">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                <FiEdit3 className="text-gray-500 group-focus-within:text-[#8245ec] transition-colors" />
-              </div>
-              <input
-                type="text"
-                name="subject"
-                value={formData.subject}
-                onChange={handleInputChange}
-                placeholder="Project Inquiry"
-                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 focus:border-transparent transition-all hover:border-gray-600"
-              />
-            </div>
-          </motion.div>
-
-          {/* Message */}
-          <motion.div variants={itemVariants} className="space-y-2">
-            <label className="block text-sm font-medium text-gray-400">
-              Message <span className="text-[#8245ec]">*</span>
-            </label>
-            <div className="relative group">
-              <div className="absolute left-4 top-4">
-                <FiMessageSquare className="text-gray-500 group-focus-within:text-[#8245ec] transition-colors" />
-              </div>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleInputChange}
-                placeholder="Tell me about your project, timeline, and requirements..."
-                rows="5"
-                required
-                className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 focus:border-transparent transition-all hover:border-gray-600 resize-none"
-              />
-              <div className="absolute bottom-3 right-3">
-                <span className={`text-xs ${formData.message.length > 450 ? 'text-red-400' : 'text-gray-500'}`}>
-                  {formData.message.length}/500
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Submit Button */}
-          <motion.div variants={itemVariants}>
-            <motion.button
-              type="submit"
-              disabled={loading || isSent}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className={`w-full py-4 rounded-xl font-semibold text-white transition-all duration-300 flex items-center justify-center gap-3 ${
-                isSent 
-                  ? 'bg-gradient-to-r from-emerald-600 to-green-500 cursor-default' 
-                  : loading
-                  ? 'bg-gradient-to-r from-[#8245ec]/70 to-purple-500/70'
-                  : 'bg-gradient-to-r from-[#8245ec] to-purple-500 hover:shadow-lg hover:shadow-[#8245ec]/20'
-              }`}
-            >
-              {loading ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  <span>Sending...</span>
-                </>
-              ) : isSent ? (
-                <>
-                  <FiCheck className="text-xl" />
-                  <span>Message Sent!</span>
-                </>
-              ) : (
-                <>
-                  <FiSend />
-                  <span>Send Message</span>
-                </>
-              )}
-            </motion.button>
-            
-            <p className="text-xs text-gray-500 text-center mt-4">
-              I'll respond within 24 hours. All information is kept confidential.
-            </p>
-          </motion.div>
-        </form>
-
-        
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] to-purple-400">Touch</span>
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto">
+          Have a project in mind? Let's work together to create something amazing.
+        </p>
       </motion.div>
+
+      {/* Mobile View Toggle (for small screens) */}
+      <div className="flex sm:hidden justify-center gap-4 mb-6">
+        <button
+          onClick={() => setActiveSection(0)}
+          className={`px-4 py-2 rounded-lg font-medium transition-all ${
+            activeSection === 0 
+              ? 'bg-gradient-to-r from-[#8245ec] to-purple-500 text-white' 
+              : 'bg-gray-800 text-gray-400'
+          }`}
+        >
+          Contact Form
+        </button>
+        <button
+          onClick={() => setActiveSection(1)}
+          className={`px-4 py-2 rounded-lg font-medium transition-all ${
+            activeSection === 1 
+              ? 'bg-gradient-to-r from-[#8245ec] to-purple-500 text-white' 
+              : 'bg-gray-800 text-gray-400'
+          }`}
+        >
+          Information
+        </button>
+      </div>
+
+      {/* Main Container with Horizontal Scroll for Desktop */}
+      <div className="relative">
+        {/* Scroll Arrows - Hidden on mobile, shown on sm and up */}
+        <div className="hidden sm:block">
+          <AnimatePresence>
+            {showLeftArrow && (
+              <motion.button
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -10 }}
+                onClick={() => scroll('left')}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-[#8245ec] transition-all shadow-lg"
+              >
+                <FiArrowLeft />
+              </motion.button>
+            )}
+          </AnimatePresence>
+          
+          <AnimatePresence>
+            {showRightArrow && (
+              <motion.button
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                onClick={() => scroll('right')}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-gray-800/80 backdrop-blur-sm border border-white/10 flex items-center justify-center text-white hover:bg-[#8245ec] transition-all shadow-lg"
+              >
+                <FiArrowRight />
+              </motion.button>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Horizontal Scroll Container */}
+        <div
+          ref={scrollContainerRef}
+          onScroll={checkScroll}
+          className="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-4 sm:pb-0"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {/* Contact Form Section */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className={`flex-shrink-0 w-full sm:w-[calc(100%-2rem)] md:w-[600px] snap-start ${
+              activeSection === 0 ? 'block' : 'hidden sm:block'
+            }`}
+          >
+            <div className="relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 overflow-hidden">
+              {/* Form Header */}
+              <motion.div variants={itemVariants} className="mb-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-4">
+                  <FiSend className="w-4 h-4 text-[#8245ec]" />
+                  <span className="text-sm font-medium text-gray-300">Send Message</span>
+                </div>
+                
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                  Let's Start a Conversation
+                </h3>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-[#8245ec] to-transparent"></div>
+              </motion.div>
+
+              {/* Form */}
+              <form ref={form} onSubmit={sendEmail} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <motion.div variants={itemVariants}>
+                    <div className="relative group">
+                      <FiUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#8245ec]" />
+                      <input
+                        type="text"
+                        name="user_name"
+                        value={formData.user_name}
+                        onChange={handleInputChange}
+                        placeholder="Your Name *"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 text-sm"
+                      />
+                    </div>
+                  </motion.div>
+
+                  <motion.div variants={itemVariants}>
+                    <div className="relative group">
+                      <FiMail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#8245ec]" />
+                      <input
+                        type="email"
+                        name="user_email"
+                        value={formData.user_email}
+                        onChange={handleInputChange}
+                        placeholder="Your Email *"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 text-sm"
+                      />
+                    </div>
+                  </motion.div>
+                </div>
+
+                <motion.div variants={itemVariants}>
+                  <div className="relative group">
+                    <FiEdit3 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-[#8245ec]" />
+                    <input
+                      type="text"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      placeholder="Subject"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 text-sm"
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <div className="relative group">
+                    <FiMessageSquare className="absolute left-3 top-3 text-gray-500 group-focus-within:text-[#8245ec]" />
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      placeholder="Your Message *"
+                      rows="4"
+                      className="w-full pl-10 pr-4 py-3 rounded-xl bg-gray-900/50 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#8245ec]/50 text-sm resize-none"
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants}>
+                  <button
+                    type="submit"
+                    disabled={loading || isSent}
+                    className={`w-full py-3 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2 text-sm ${
+                      isSent 
+                        ? 'bg-gradient-to-r from-emerald-600 to-green-500' 
+                        : loading
+                        ? 'bg-gradient-to-r from-[#8245ec]/70 to-purple-500/70'
+                        : 'bg-gradient-to-r from-[#8245ec] to-purple-500 hover:shadow-lg hover:shadow-[#8245ec]/20'
+                    }`}
+                  >
+                    {loading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>Sending...</span>
+                      </>
+                    ) : isSent ? (
+                      <>
+                        <FiCheck />
+                        <span>Sent!</span>
+                      </>
+                    ) : (
+                      <>
+                        <FiSend />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+                </motion.div>
+              </form>
+            </div>
+          </motion.div>
+
+          {/* Contact Information Section */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className={`flex-shrink-0 w-full sm:w-[400px] snap-start ${
+              activeSection === 1 ? 'block' : 'hidden sm:block'
+            }`}
+          >
+            <div className="bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 h-full">
+              <motion.div variants={itemVariants} className="mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">
+                  Contact Information
+                </h3>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-[#8245ec] to-transparent"></div>
+              </motion.div>
+
+              {/* Contact Info Grid */}
+              <div className="space-y-4 mb-6">
+                {contactInfo.map((info, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="group"
+                  >
+                    {info.link ? (
+                      <a
+                        href={info.link}
+                        className="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-[#8245ec]/30 transition-all"
+                      >
+                        <div className={`p-2 rounded-lg ${info.bg} group-hover:scale-110 transition-transform`}>
+                          <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
+                            {info.icon}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">{info.label}</p>
+                          <p className="text-sm text-white">{info.value}</p>
+                        </div>
+                      </a>
+                    ) : (
+                      <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30 border border-gray-700/50">
+                        <div className={`p-2 rounded-lg ${info.bg}`}>
+                          <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
+                            {info.icon}
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500">{info.label}</p>
+                          <p className="text-sm text-white">{info.value}</p>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Social Links */}
+              <motion.div variants={itemVariants}>
+                <h4 className="text-sm font-medium text-gray-400 mb-3">Connect on Social Media</h4>
+                <div className="flex gap-3">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-3 rounded-xl bg-gray-800/30 border border-gray-700/50 text-gray-400 ${social.color} transition-all hover:scale-110 hover:text-white`}
+                      aria-label={social.label}
+                    >
+                      {social.icon}
+                    </a>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Response Time Badge */}
+              <motion.div
+                variants={itemVariants}
+                className="mt-6 p-4 rounded-xl bg-gradient-to-r from-[#8245ec]/10 to-purple-500/10 border border-[#8245ec]/20"
+              >
+                <p className="text-sm text-gray-300 flex items-center gap-2">
+                  <FiClock className="text-[#8245ec]" />
+                  <span>Typically responds within 24 hours</span>
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator Dots - Visible on mobile */}
+        <div className="flex sm:hidden justify-center gap-2 mt-6">
+          <button
+            onClick={() => setActiveSection(0)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              activeSection === 0 ? 'w-6 bg-[#8245ec]' : 'bg-gray-600'
+            }`}
+          />
+          <button
+            onClick={() => setActiveSection(1)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              activeSection === 1 ? 'w-6 bg-[#8245ec]' : 'bg-gray-600'
+            }`}
+          />
+        </div>
+      </div>
+
+      {/* Custom CSS for hiding scrollbar */}
+      <style jsx>{`
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 };
 
 export default ContactForm;
-
-
-
 
 
 // import React, { useRef, useState } from "react";
