@@ -207,7 +207,7 @@ const Navbar = () => {
                 href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-1.5 xl:gap-2 px-4 xl:px-6 py-2 xl:py-3 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden"
+                className="group relative inline-flex items-center gap-1.5 xl:gap-2 px-4 xl:px-6 py-2 xl:py-3 mr-5 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
