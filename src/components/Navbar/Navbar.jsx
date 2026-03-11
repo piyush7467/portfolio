@@ -4,7 +4,6 @@ import { FiMenu, FiX, FiArrowUp } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
 import { Code2, Sparkles } from "lucide-react";
 
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -78,15 +77,6 @@ const Navbar = () => {
     { id: "contact", label: "Contact", icon: "✉️" }
   ];
 
-  // const menuItems = [
-  //   { id: "about", label: "About", icon: "👤" },
-  //   { id: "skills", label: "Skills", icon: "⚡" },
-  //   { id: "experience", label: "Experience", icon: "💼" },
-  //   { id: "work", label: "Projects", icon: "🚀" },
-  //   { id: "education", label: "Education", icon: "🎓" },
-  //   { id: "contact", label: "Contact", icon: "📧" },
-  // ];
-
   return (
     <>
       {/* Main Navbar */}
@@ -94,10 +84,11 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
+          isScrolled
             ? "bg-gray-950/90 backdrop-blur-xl shadow-2xl border-b border-white/5"
             : "bg-transparent"
-          }`}
+        }`}
         style={{
           background: isScrolled
             ? `linear-gradient(135deg, rgba(5, 4, 20, 0.95) 0%, rgba(15, 10, 40, 0.95) 100%)`
@@ -118,71 +109,74 @@ const Navbar = () => {
           backgroundSize: '40px 40px'
         }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
-          <div className="flex justify-between items-center py-4 md:py-5">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="flex justify-between items-center py-3 sm:py-4 lg:py-5">
             {/* Enhanced Logo with Gradient */}
             <motion.div
-              className="cursor-pointer group"
+              className="cursor-pointer group flex-shrink-0"
               onClick={() => handleMenuItemClick("about")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="flex items-center gap-2 mr-5 ">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-[#8245ec]/20 to-blue-500/20 border border-white/10">
-                  <Code2 className="w-5 h-5 text-[#8245ec]" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-[#8245ec]/20 to-blue-500/20 border border-white/10">
+                  <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex items-center gap-1">
-                    <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white">
+                  <div className="flex items-center gap-1 flex-wrap">
+                    <span className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white">
                       Piyush
                     </span>
-                    <span className="text-[#8245ec] font-bold">/</span>
-                    <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] via-purple-400 to-[#8245ec]">
+                    <span className="text-[#8245ec] font-bold text-lg sm:text-xl">/</span>
+                    <span className="text-lg sm:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] via-purple-400 to-[#8245ec]">
                       Shakya
                     </span>
                   </div>
-                  <div className="h-px w-0 group-hover:w-full bg-gradient-to-r from-transparent via-[#8245ec] to-transparent transition-all duration-500 mt-1"></div>
+                  <div className="h-px w-0 group-hover:w-full bg-gradient-to-r from-transparent via-[#8245ec] to-transparent transition-all duration-500 mt-0.5 sm:mt-1"></div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-1 ml-5">
-              {menuItems.map((item) => (
-                <motion.div
-                  key={item.id}
-                  className="relative"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <button
-                    onClick={() => handleMenuItemClick(item.id)}
-                    className="relative py-2 px-4 text-gray-300 hover:text-white transition-all duration-300 group"
+            {/* Desktop Menu - Centered with flex grow */}
+            <div className="hidden lg:flex items-center justify-center flex-1 mx-4 xl:mx-8">
+              <div className="flex items-center space-x-1 xl:space-x-2">
+                {menuItems.map((item) => (
+                  <motion.div
+                    key={item.id}
+                    className="relative"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm opacity-70">{item.icon}</span>
-                      <span className={`font-medium relative z-10 ${activeSection === item.id ? "text-[#8245ec]" : ""}`}>
-                        {item.label}
-                      </span>
-                    </div>
+                    <button
+                      onClick={() => handleMenuItemClick(item.id)}
+                      className="relative py-2 px-2 xl:px-4 text-gray-300 hover:text-white transition-all duration-300 group whitespace-nowrap"
+                    >
+                      <div className="flex items-center gap-1 xl:gap-2">
+                        <span className="text-xs xl:text-sm opacity-70">{item.icon}</span>
+                        <span className={`text-sm xl:text-base font-medium relative z-10 ${activeSection === item.id ? "text-[#8245ec]" : ""}`}>
+                          {item.label}
+                        </span>
+                      </div>
 
-                    {/* Animated background */}
-                    <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${activeSection === item.id
-                        ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 border border-[#8245ec]/30"
-                        : "bg-transparent group-hover:bg-white/5"
+                      {/* Animated background */}
+                      <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
+                        activeSection === item.id
+                          ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 border border-[#8245ec]/30"
+                          : "bg-transparent group-hover:bg-white/5"
                       }`}></div>
 
-                    {/* Glow effect */}
-                    {activeSection === item.id && (
-                      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#8245ec]/10 to-blue-500/10 blur-md"></div>
-                    )}
-                  </button>
-                </motion.div>
-              ))}
+                      {/* Glow effect */}
+                      {activeSection === item.id && (
+                        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#8245ec]/10 to-blue-500/10 blur-md"></div>
+                      )}
+                    </button>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
             {/* Desktop Right Section */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-2 xl:space-x-4 flex-shrink-0">
               {/* Social Icons */}
               <motion.a
                 href="https://github.com/piyush7467"
@@ -193,7 +187,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.9 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8245ec]/0 via-[#8245ec]/10 to-[#8245ec]/0 opacity-0 group-hover:opacity-100 rounded-full transition-opacity duration-300"></div>
-                <FaGithub size={20} className="relative z-10" />
+                <FaGithub size={18} className="relative z-10 sm:w-5 sm:h-5" />
               </motion.a>
 
               <motion.a
@@ -205,7 +199,7 @@ const Navbar = () => {
                 whileTap={{ scale: 0.9 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8245ec]/0 via-[#8245ec]/10 to-[#8245ec]/0 opacity-0 group-hover:opacity-100 rounded-full transition-opacity duration-300"></div>
-                <FaLinkedin size={20} className="relative z-10" />
+                <FaLinkedin size={18} className="relative z-10 sm:w-5 sm:h-5" />
               </motion.a>
 
               {/* Resume Button */}
@@ -213,30 +207,54 @@ const Navbar = () => {
                 href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden"
+                className="group relative inline-flex items-center gap-1.5 xl:gap-2 px-4 xl:px-6 py-2 xl:py-3 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <FaFileDownload className="w-4 h-4 text-[#8245ec] relative" />
-                <span className="relative text-white font-semibold text-sm">Resume</span>
+                <FaFileDownload className="w-3 h-3 xl:w-4 xl:h-4 text-[#8245ec] relative" />
+                <span className="relative text-white font-semibold text-xs xl:text-sm whitespace-nowrap">Resume</span>
               </motion.a>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Visible on smaller screens */}
             <motion.button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden relative p-3 text-[#8245ec] hover:text-white transition-colors duration-300"
+              className="lg:hidden relative p-2 sm:p-3 text-[#8245ec] hover:text-white transition-colors duration-300"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#8245ec]/10 to-blue-500/10 rounded-lg"></div>
               {isOpen ? (
-                <FiX size={24} className="relative z-10" />
+                <FiX size={20} className="relative z-10 sm:w-6 sm:h-6" />
               ) : (
-                <FiMenu size={24} className="relative z-10" />
+                <FiMenu size={20} className="relative z-10 sm:w-6 sm:h-6" />
               )}
             </motion.button>
+          </div>
+        </div>
+
+        {/* Tablet Menu - Shows between mobile and desktop */}
+        <div className="hidden md:flex lg:hidden relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-2">
+          <div className="flex items-center justify-center space-x-1 overflow-x-auto scrollbar-hide">
+            {menuItems.map((item) => (
+              <motion.button
+                key={item.id}
+                onClick={() => handleMenuItemClick(item.id)}
+                className={`py-2 px-3 text-sm text-gray-300 hover:text-white transition-all duration-300 whitespace-nowrap rounded-lg ${
+                  activeSection === item.id
+                    ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 text-[#8245ec]"
+                    : "hover:bg-white/5"
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <div className="flex items-center gap-1">
+                  <span className="text-xs">{item.icon}</span>
+                  <span>{item.label}</span>
+                </div>
+              </motion.button>
+            ))}
           </div>
         </div>
 
@@ -250,7 +268,7 @@ const Navbar = () => {
               transition={{ duration: 0.3 }}
               className="absolute top-full left-0 right-0 bg-gray-950/98 backdrop-blur-2xl border-t border-white/10 shadow-2xl md:hidden"
             >
-              <div className="max-w-7xl mx-auto px-4 py-6">
+              <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
                 <div className="space-y-2">
                   {menuItems.map((item, index) => (
                     <motion.div
@@ -261,17 +279,18 @@ const Navbar = () => {
                     >
                       <button
                         onClick={() => handleMenuItemClick(item.id)}
-                        className={`w-full text-left py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-between ${activeSection === item.id
+                        className={`w-full text-left py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all duration-300 flex items-center justify-between ${
+                          activeSection === item.id
                             ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 text-[#8245ec] border border-[#8245ec]/30"
                             : "text-gray-300 hover:text-white hover:bg-white/5"
-                          }`}
+                        }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-lg">{item.icon}</span>
-                          <span className="font-medium">{item.label}</span>
+                          <span className="text-base sm:text-lg">{item.icon}</span>
+                          <span className="font-medium text-sm sm:text-base">{item.label}</span>
                         </div>
                         {activeSection === item.id && (
-                          <Sparkles className="w-4 h-4 text-[#8245ec]" />
+                          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
                         )}
                       </button>
                     </motion.div>
@@ -282,38 +301,38 @@ const Navbar = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.6 }}
-                    className="pt-6 border-t border-white/10"
+                    className="pt-4 sm:pt-6 border-t border-white/10"
                   >
-                    <div className="flex items-center justify-center space-x-6">
+                    <div className="flex items-center justify-center space-x-4 sm:space-x-6">
                       <motion.a
                         href="https://github.com/piyush7467"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
+                        className="p-2 sm:p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        <FaGithub size={22} />
+                        <FaGithub size={20} className="sm:w-6 sm:h-6" />
                       </motion.a>
                       <motion.a
                         href="https://www.linkedin.com/in/piyush7467"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
+                        className="p-2 sm:p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                       >
-                        <FaLinkedin size={22} />
+                        <FaLinkedin size={20} className="sm:w-6 sm:h-6" />
                       </motion.a>
                       <motion.a
                         href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-5 py-3 rounded-lg bg-gradient-to-r from-[#8245ec] to-blue-600 text-white font-medium text-sm flex items-center gap-2"
+                        className="px-4 sm:px-5 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-[#8245ec] to-blue-600 text-white font-medium text-xs sm:text-sm flex items-center gap-2"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <FaFileDownload size={16} />
+                        <FaFileDownload size={14} className="sm:w-4 sm:h-4" />
                         Resume
                       </motion.a>
                     </div>
@@ -333,13 +352,13 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-40 p-4 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 text-white rounded-full shadow-2xl hover:shadow-[#8245ec]/50 transition-all duration-300 group overflow-hidden"
+            className="fixed bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 z-40 p-3 sm:p-4 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 text-white rounded-full shadow-2xl hover:shadow-[#8245ec]/50 transition-all duration-300 group overflow-hidden"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Scroll to top"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <FiArrowUp size={20} className="relative z-10" />
+            <FiArrowUp size={16} className="relative z-10 sm:w-5 sm:h-5" />
             <div className="absolute -inset-1 bg-gradient-to-r from-[#8245ec] to-blue-600 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
           </motion.button>
         )}
@@ -349,10 +368,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-
-
 
 
 
