@@ -4,6 +4,7 @@ import { FiMenu, FiX, FiArrowUp } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
 import { Code2, Sparkles } from "lucide-react";
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -69,12 +70,22 @@ const Navbar = () => {
 
   const menuItems = [
     { id: "about", label: "About", icon: "👤" },
-    { id: "skills", label: "Skills", icon: "⚡" },
-    { id: "experience", label: "Experience", icon: "💼" },
-    { id: "work", label: "Projects", icon: "🚀" },
     { id: "education", label: "Education", icon: "🎓" },
-    { id: "contact", label: "Contact", icon: "📧" },
+    { id: "skills", label: "Skills", icon: "🛠️" },
+    { id: "work", label: "Projects", icon: "💻" },
+    { id: "certificates", label: "Certificates", icon: "🏆" },
+    { id: "experience", label: "Experience", icon: "💼" },
+    { id: "contact", label: "Contact", icon: "✉️" }
   ];
+
+  // const menuItems = [
+  //   { id: "about", label: "About", icon: "👤" },
+  //   { id: "skills", label: "Skills", icon: "⚡" },
+  //   { id: "experience", label: "Experience", icon: "💼" },
+  //   { id: "work", label: "Projects", icon: "🚀" },
+  //   { id: "education", label: "Education", icon: "🎓" },
+  //   { id: "contact", label: "Contact", icon: "📧" },
+  // ];
 
   return (
     <>
@@ -83,25 +94,24 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          isScrolled 
-            ? "bg-gray-950/90 backdrop-blur-xl shadow-2xl border-b border-white/5" 
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
+            ? "bg-gray-950/90 backdrop-blur-xl shadow-2xl border-b border-white/5"
             : "bg-transparent"
-        }`}
+          }`}
         style={{
-          background: isScrolled 
+          background: isScrolled
             ? `linear-gradient(135deg, rgba(5, 4, 20, 0.95) 0%, rgba(15, 10, 40, 0.95) 100%)`
             : 'transparent'
         }}
       >
         {/* Interactive Background Glow */}
-        <div 
+        <div
           className="absolute inset-0 opacity-30"
           style={{
             background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(130, 69, 236, 0.2), transparent 50%)`
           }}
         />
-        
+
         {/* Grid Pattern Overlay */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
@@ -111,7 +121,7 @@ const Navbar = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 lg:px-16 xl:px-32">
           <div className="flex justify-between items-center py-4 md:py-5">
             {/* Enhanced Logo with Gradient */}
-            <motion.div 
+            <motion.div
               className="cursor-pointer group"
               onClick={() => handleMenuItemClick("about")}
               whileHover={{ scale: 1.05 }}
@@ -155,14 +165,13 @@ const Navbar = () => {
                         {item.label}
                       </span>
                     </div>
-                    
+
                     {/* Animated background */}
-                    <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${
-                      activeSection === item.id 
-                        ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 border border-[#8245ec]/30" 
+                    <div className={`absolute inset-0 rounded-lg transition-all duration-300 ${activeSection === item.id
+                        ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 border border-[#8245ec]/30"
                         : "bg-transparent group-hover:bg-white/5"
-                    }`}></div>
-                    
+                      }`}></div>
+
                     {/* Glow effect */}
                     {activeSection === item.id && (
                       <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#8245ec]/10 to-blue-500/10 blur-md"></div>
@@ -186,7 +195,7 @@ const Navbar = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8245ec]/0 via-[#8245ec]/10 to-[#8245ec]/0 opacity-0 group-hover:opacity-100 rounded-full transition-opacity duration-300"></div>
                 <FaGithub size={20} className="relative z-10" />
               </motion.a>
-              
+
               <motion.a
                 href="https://www.linkedin.com/in/piyush7467"
                 target="_blank"
@@ -198,7 +207,7 @@ const Navbar = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#8245ec]/0 via-[#8245ec]/10 to-[#8245ec]/0 opacity-0 group-hover:opacity-100 rounded-full transition-opacity duration-300"></div>
                 <FaLinkedin size={20} className="relative z-10" />
               </motion.a>
-              
+
               {/* Resume Button */}
               <motion.a
                 href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
@@ -252,11 +261,10 @@ const Navbar = () => {
                     >
                       <button
                         onClick={() => handleMenuItemClick(item.id)}
-                        className={`w-full text-left py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-between ${
-                          activeSection === item.id
+                        className={`w-full text-left py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-between ${activeSection === item.id
                             ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 text-[#8245ec] border border-[#8245ec]/30"
                             : "text-gray-300 hover:text-white hover:bg-white/5"
-                        }`}
+                          }`}
                       >
                         <div className="flex items-center gap-3">
                           <span className="text-lg">{item.icon}</span>
@@ -268,7 +276,7 @@ const Navbar = () => {
                       </button>
                     </motion.div>
                   ))}
-                  
+
                   {/* Mobile Social Links */}
                   <motion.div
                     initial={{ opacity: 0 }}

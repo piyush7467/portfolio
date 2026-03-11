@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 import Skills from './components/Skills/Skills'
 import Work from './components/Work/Work'
 import BlurBlob from './BlurBlob'
+import Certificates from './components/Certificates/Certificates'
 
 function App() {
 
@@ -22,12 +23,24 @@ function App() {
       <div className="relative pt-20">
         <Navbar />
         <About />
+        <Education />
+        <Skills /> 
+        <Work />
+        <Certificates/>
+        <Experience />
+        <Contact />
+        <Footer />
+
+
+
+        {/* <Navbar />
+        <About />
         <Skills />
         <Experience />
         <Work />
         <Education />
         <Contact />
-        <Footer />
+        <Footer /> */}
       </div>
 
     </div>
