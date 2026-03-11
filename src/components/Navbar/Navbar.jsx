@@ -36,7 +36,7 @@ const Navbar = () => {
   // Auto-active section detection
   useEffect(() => {
     const handleScrollActive = () => {
-      const sections = ["about", "skills", "experience", "work", "education", "contact"];
+      const sections = ["about","education","skills", "work", "certificates","experience", "contact"];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {

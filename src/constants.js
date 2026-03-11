@@ -67,6 +67,15 @@ import courseCloudLogo from './assets/work_logo/coursecloud.png';
 import expenseTrackerLogo from './assets/work_logo/expense_tracker.png';
 
 
+// certificates
+import reactCertificate from './assets/certificates/reactCertificate.jpg';
+import cloudComputingCertificate from './assets/certificates/cloudComputingCertificate.jpg';
+import javaCertificate from './assets/certificates/javaCertificate.jpg';
+import cppCertificate from './assets/certificates/cppCertificate.jpg';
+import cProgrammingCertificate from './assets/certificates/cProgrammingCertificate.jpg';
+
+
+
 export const SkillsInfo = [
   {
     title: 'Frontend',
@@ -372,3 +381,58 @@ export const projects = [
   //   webapp: "https://removeyourbg.netlify.app/",
   // },
 ];  
+
+
+
+export const certificates = [
+  {
+    id: 1,
+    title: "React Developer Certificate",
+    issuer: "Coursera",
+    date: "November 2025",
+    image: reactCertificate,
+    description: "Completed React course including hooks, components, and modern frontend development practices.",
+    skills: ["React", "JavaScript", "Frontend"],
+    certificateLink: "https://drive.google.com/file/d/1gUFXgrjqF-TBsSI4MjI71SG0SvNX87EN/view?usp=sharing"
+  },
+  {
+    id: 2,
+    title: "Cloud Computing Certificate",
+    issuer: "NPTEL",
+    date: "October 2025",
+    image: cloudComputingCertificate,
+    description: "Learned cloud fundamentals including virtualization, distributed systems, and cloud service models.",
+    skills: ["Cloud Computing", "AWS Basics", "Distributed Systems"],
+    certificateLink: "https://drive.google.com/file/d/1iN804RDKrz0TY28dwrwDR344qFIO0Llj/view?usp=sharing"
+  },
+  {
+    id: 3,
+    title: "Java Programming Certificate",
+    issuer: "IamNeo",
+    date: "May 2025",
+    image: javaCertificate,
+    description: "Covered object-oriented programming concepts, Java syntax, and application development.",
+    skills: ["Java", "OOP", "Programming"],
+    certificateLink: "https://drive.google.com/file/d/17NZ_L4c_RwcOPH7DsbbdVWzRPUOiUO5_/view?usp=sharing"
+  },
+  {
+    id: 4,
+    title: "C++ Programming Certificate",
+    issuer: "IamNeo",
+    date: "December 2024",
+    image: cppCertificate,
+    description: "Learned C++ fundamentals including memory management, OOP, and problem-solving techniques.",
+    skills: ["C++", "DSA", "Problem Solving"],
+    certificateLink: "https://drive.google.com/file/d/1jRBYYdqOUp5zGjb2nPALLIJ6pcP6Ak1A/view?usp=sharing"
+  },
+  {
+    id: 5,
+    title: "C Programming Certificate",
+    issuer: "IamNeo",
+    date: "May 2024",
+    image: cProgrammingCertificate,
+    description: "Studied core programming concepts including pointers, memory management, and algorithms.",
+    skills: ["C", "Programming Fundamentals", "Algorithms"],
+    certificateLink: "https://drive.google.com/file/d/1K74bWnOBBS0jqRu0TQsFTLGi2erGXNlj/view?usp=sharing"
+  }
+];
