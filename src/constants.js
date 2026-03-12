@@ -65,6 +65,7 @@ import pharmacyLogo from './assets/work_logo/pharmacy-website.png';
 import eduNeocodeLogo from './assets/work_logo/edu-neocode.png';
 import courseCloudLogo from './assets/work_logo/coursecloud.png';
 import expenseTrackerLogo from './assets/work_logo/expense_tracker.png';
+import smartSchoolLogo from './assets/work_logo/smartAchool.png';
 
 
 // certificates
@@ -265,16 +266,16 @@ export const education = [
 ];
 
 export const projects = [
-  // {
-  //   id: 0,
-  //   title: "GitHub Profile Detective",
-  //   description:
-  //     "A powerful and user-friendly React.js application designed to uncover and showcase detailed GitHub profile information. Simply enter a GitHub username, and the app fetches comprehensive data, including profile stats, repositories, followers, and contributions. The intuitive interface ensures a seamless experience, making it a must-visit tool for developers and recruiters.",
-  //   image: githubdetLogo,
-  //   tags: ["HTML", "CSS", "JavaScript", "React JS", "API"],
-  //   github: "https://github.com/codingmastr/GitHub-Profile-Search-App-Using-React-JS",
-  //   webapp: "https://githubprofiledetective.netlify.app/",
-  // },
+  {
+    id: 0,
+    title: "Smart School Management System",
+    description:
+      "A full-stack School Management System built using the MERN stack that streamlines academic and administrative operations for educational institutions. The platform provides role-based dashboards for Admins, Teachers, and Students, enabling features such as attendance management, class and subject management, transport tracking, examinations, announcements, and complaint handling. It also integrates Firebase Cloud Messaging for real-time notifications and ensures secure authentication using JWT, making school operations more efficient and digitally organized.",
+    image: smartSchoolLogo,
+    tags: ["React JS", "Node.js", "Express.js", "MongoDB", "JWT", "Firebase FCM", "Tailwind CSS", "REST API"],
+    github: "https://github.com/piyush7467/school-management-system",
+    webapp: "https://smartschool-zyth.onrender.com",
+  },
 
   {
     id: 1,
@@ -380,7 +381,7 @@ export const projects = [
   //   github: "https://github.com/codingmastr/Image-Background-Remover",
   //   webapp: "https://removeyourbg.netlify.app/",
   // },
-];  
+];
 
 
 
