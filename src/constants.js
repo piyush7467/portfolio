@@ -267,7 +267,7 @@ export const education = [
 
 export const projects = [
   {
-    id: 0,
+    id: 1,
     title: "Smart School Management System",
     description:
       "A full-stack School Management System built using the MERN stack that streamlines academic and administrative operations for educational institutions. The platform provides role-based dashboards for Admins, Teachers, and Students, enabling features such as attendance management, class and subject management, transport tracking, examinations, announcements, and complaint handling. It also integrates Firebase Cloud Messaging for real-time notifications and ensures secure authentication using JWT, making school operations more efficient and digitally organized.",
@@ -278,7 +278,7 @@ export const projects = [
   },
 
   {
-    id: 1,
+    id: 2,
     title: "A Blog Website",
     description:
       "A Full Stack web application in which user will post blogs, see other's blogs, do comment and likes. The intuitive design and smooth experience make it a go-to app for posting blogs.",
@@ -289,7 +289,7 @@ export const projects = [
   },
 
   {
-    id: 2,
+    id: 3,
     title: "Course Selling Website",
     description:
       "A full-stack course selling platform where instructors can create, manage, and publish courses with lectures, while students can enroll, access learning materials, and track their progress.",
@@ -299,7 +299,7 @@ export const projects = [
     webapp: "https://coursecloud.onrender.com/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Expense Tracker Website",
     description:
       "A full-stack expense management application that allows users to securely sign up, log in, and manage their daily expenses. Users can add, view, and delete expenses, categorize them, and track spending trends with a clean and responsive UI.",
@@ -309,7 +309,7 @@ export const projects = [
     webapp: "https://expense-tracker-daily.vercel.app/",
   },
   {
-    id: 4,
+    id: 5,
     title: "College Exam Prep",
     description:
       "A full-stack quiz-based platform designed for College students to practice previous year questions and practice MCQs questions. The platform offers every question detailed explanation, helping students to understand their preparation journey effectively.",
@@ -319,7 +319,7 @@ export const projects = [
     webapp: "https://neocode.infinityfreeapp.com/",
   },
   {
-    id: 5,
+    id: 6,
     title: "Pharmacy Website",
     description:
       "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
