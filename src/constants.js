@@ -65,7 +65,7 @@ import pharmacyLogo from './assets/work_logo/pharmacy-website.png';
 import eduNeocodeLogo from './assets/work_logo/edu-neocode.png';
 import courseCloudLogo from './assets/work_logo/coursecloud.png';
 import expenseTrackerLogo from './assets/work_logo/expense_tracker.png';
-import smartSchoolLogo from './assets/work_logo/smartAchool.png';
+import smartSchoolLogo from './assets/work_logo/smartSchool.png';
 
 
 // certificates
