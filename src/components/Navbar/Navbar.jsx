@@ -109,7 +109,7 @@ const Navbar = () => {
           backgroundSize: '40px 40px'
         }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-1">
           <div className="flex justify-between items-center py-3 sm:py-4 lg:py-5">
             {/* Enhanced Logo with Gradient */}
             <motion.div
@@ -138,7 +138,7 @@ const Navbar = () => {
             </motion.div>
 
             {/* Desktop Menu - Centered with flex grow */}
-            <div className="hidden lg:flex items-center justify-center flex-1 mx-4 xl:mx-8">
+            <div className="hidden lg:flex items-center justify-center flex-1 mx-4 xl:mx-4">
               <div className="flex items-center space-x-1 xl:space-x-2">
                 {menuItems.map((item) => (
                   <motion.div
