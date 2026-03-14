@@ -55,12 +55,20 @@ const Footer = () => {
   const navigationLinks = [
     { name: "Home", id: "home" },
     { name: "About", id: "about" },
+    { name: "Education", id: "education" },
     { name: "Skills", id: "skills" },
     { name: "Projects", id: "work" },
+    {name:"Certificates", id: "certificates"},
     { name: "Experience", id: "experience" },
-    { name: "Education", id: "education" },
     { name: "Contact", id: "contact" }
   ];
+
+  const handleScroll = (sectionId) => {
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -117,7 +125,7 @@ const Footer = () => {
           </motion.div>
 
           {/* Navigation - No scroll functionality */}
-          <motion.nav variants={itemVariants} className="mb-8">
+          {/* <motion.nav variants={itemVariants} className="mb-8">
             <ul className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
               {navigationLinks.map((item, index) => (
                 <li key={index}>
@@ -127,7 +135,23 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </motion.nav>
+          </motion.nav> */}
+
+
+          <motion.nav variants={itemVariants} className="mb-8">
+          <ul className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+            {navigationLinks.map((item, index) => (
+            <li key={index}>
+            <button
+              onClick={() => handleScroll(item.id)}
+              className="text-gray-300 hover:text-[#8245ec] text-sm sm:text-base font-medium px-2 py-1 rounded-lg transition"
+              >
+              {item.name}
+              </button>
+            </li>
+             ))}
+           </ul>
+            </motion.nav>
 
           {/* Social Links */}
           <motion.div variants={itemVariants} className="mb-8">
