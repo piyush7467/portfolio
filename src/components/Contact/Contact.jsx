@@ -424,7 +424,10 @@ const ContactForm = () => {
                         className="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-[#8245ec]/30 transition-all"
                       >
                         <div className={`p-2 rounded-lg ${info.bg} group-hover:scale-110 transition-transform`}>
-                          <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
+                          {/* <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
+                            {info.icon}
+                          </div> */}
+                          <div className={`bg-clip-text bg-gradient-to-r ${info.color} text-white`}>
                             {info.icon}
                           </div>
                         </div>
@@ -436,7 +439,10 @@ const ContactForm = () => {
                     ) : (
                       <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30 border border-gray-700/50">
                         <div className={`p-2 rounded-lg ${info.bg}`}>
-                          <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
+                          {/* <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
+                            {info.icon}
+                          </div> */}
+                          <div className={`bg-clip-text bg-gradient-to-r ${info.color} text-white`}>
                             {info.icon}
                           </div>
                         </div>
