@@ -294,7 +294,7 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="space-y-8 md:space-y-0 md:grid md:grid-cols-1 lg:grid-cols-2 md:gap-6 lg:gap-8"
+          className="space-y-8 md:space-y-0 md:grid md:grid-cols-1 justify-center md:gap-6 lg:gap-8"
         >
           {SkillsInfo.map((category, categoryIndex) => (
             <motion.div
