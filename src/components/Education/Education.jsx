@@ -89,8 +89,9 @@ const Education = () => {
                       <ChevronRight className="w-3 h-3 lg:w-4 lg:h-4 text-[#8245ec]" />
                     </div> */}
 
-                    <div className={`hidden md:flex absolute top-4 items-center gap-2 ${index % 2 === 0 ? "left-[calc(50%+3rem)]" : "right-[calc(50%+3rem)]"
-                      }`}>
+                    <div className={`absolute top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2 ${
+                      index % 2 === 0 ? "left-[calc(50%+3rem)]" : "right-[calc(50%+3rem)]"
+                    }`}>
                       <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-sm border border-white/10">
                         <Calendar className="w-4 h-4 text-[#8245ec]" />
                         <span className="text-sm text-gray-300">{edu.date}</span>
