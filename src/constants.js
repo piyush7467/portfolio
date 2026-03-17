@@ -43,6 +43,7 @@ import mernLogo from './assets/company_logo/blog-website.png';
 import FullstackLogo from './assets/company_logo/pharmacy-website.png';
 import eduLogo from './assets/company_logo/edu-neocode.png';
 import hackathonLogo from './assets/company_logo/hackathon.png';
+import proctorLogo from './assets/company_logo/proctoring.png';
 
 // Education Section Logo's
 import hpaLogo from './assets/education_logo/hpaLogo.png';
@@ -139,6 +140,15 @@ export const SkillsInfo = [
 export const experiences = [
   {
     id: 0,
+    img: proctorLogo, 
+    role: "Online Exam Proctor",
+    company: "Lovely Professional University",
+    date: "2025 - 2026",
+    desc: "Monitored students during online competitive examinations to ensure fair conduct, prevented malpractice, and assisted candidates with technical or procedural issues in real time.",
+    skills: ["Monitoring", "Responsibility", "Attention to Detail", "Problem Solving", "Communication"],
+  },
+  {
+    id: 1,
     img: mernLogo,
     role: "Fullstack Developer",
     company: "MERN Projects",
@@ -147,7 +157,7 @@ export const experiences = [
     skills: ["React JS", "Node JS", "Express", "MongoDB", "Redux", "Tailwind CSS"],
   },
   {
-    id: 1,
+    id: 2,
     img: eduLogo,
     role: "Frontend Developer",
     company: "Education Website",
@@ -155,15 +165,7 @@ export const experiences = [
     desc: "Developed an educational platform providing college study materials, MCQs, and notes using HTML, CSS, and JavaScript.",
     skills: ["HTML", "CSS", "JavaScript", "PHP", "Bootstrap"],
   },
-  {
-    id: 2,
-    img: FullstackLogo,
-    role: "Fullstack Developer",
-    company: "Pharmacy Website",
-    date: "2025",
-    desc: "Designed and implemented a pharmacy e-commerce platform with cart and order features using PHP, MySQL, Tailwind CSS, and JavaScript.",
-    skills: ["PHP", "MySQL", "JavaScript", "Tailwind CSS"],
-  },
+ 
   {
     id: 3,
     img: hackathonLogo,
