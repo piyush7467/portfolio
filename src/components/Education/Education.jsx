@@ -13,7 +13,7 @@ const Education = () => {
       <div className="absolute inset-0">
         <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-purple-600/10 rounded-full blur-xl md:blur-3xl"></div>
         <div className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-600/10 rounded-full blur-xl md:blur-3xl"></div>
-        
+
         {/* Grid Pattern - Responsive */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
@@ -34,7 +34,7 @@ const Education = () => {
             <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
             <span className="text-xs sm:text-sm font-medium text-gray-300">Academic Journey</span>
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 px-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white">
               Education
@@ -44,7 +44,7 @@ const Education = () => {
               Timeline
             </span>
           </h2>
-          
+
           <div className="flex items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 px-2">
             <div className="hidden sm:block h-px w-8 md:w-12 lg:w-20 bg-gradient-to-r from-transparent via-[#8245ec] to-transparent"></div>
             <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-lg sm:max-w-xl md:max-w-2xl mx-auto">
@@ -77,9 +77,9 @@ const Education = () => {
                       <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
                     </div>
                     <div className="absolute inset-0 rounded-full bg-[#8245ec] animate-ping opacity-20"></div>
-                    
+
                     {/* Year Badge - Desktop Only */}
-                    <div className={`absolute top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2 ${
+                    {/* <div className={`absolute top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2 ${
                       index % 2 === 0 ? "left-14 lg:left-16" : "right-14 lg:right-16"
                     }`}>
                       <div className="flex items-center gap-2 px-2 py-1 lg:px-3 lg:py-1.5 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 border border-white/10">
@@ -87,16 +87,25 @@ const Education = () => {
                         <span className="text-xs text-gray-300">{edu.date}</span>
                       </div>
                       <ChevronRight className="w-3 h-3 lg:w-4 lg:h-4 text-[#8245ec]" />
+                    </div> */}
+
+                    <div className={`hidden md:flex absolute top-4 items-center gap-2 ${index % 2 === 0 ? "left-[calc(50%+3rem)]" : "right-[calc(50%+3rem)]"
+                      }`}>
+                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-sm border border-white/10">
+                        <Calendar className="w-4 h-4 text-[#8245ec]" />
+                        <span className="text-sm text-gray-300">{edu.date}</span>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-[#8245ec]" />
                     </div>
+
                   </div>
                 </div>
 
                 {/* Education Card - Mobile First Design */}
-                <div className={`ml-14 sm:ml-16 md:ml-0 md:w-[calc(50%-1.5rem)] lg:w-[calc(50%-2rem)] ${
-                  index % 2 === 0 
-                    ? "md:pr-4 lg:pr-8 xl:pr-12" 
+                <div className={`ml-14 sm:ml-16 md:ml-0 md:w-[calc(50%-1.5rem)] lg:w-[calc(50%-2rem)] ${index % 2 === 0
+                    ? "md:pr-4 lg:pr-8 xl:pr-12"
                     : "md:pl-4 lg:pl-8 xl:pl-12 md:ml-auto"
-                }`}>
+                  }`}>
                   <div className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm md:backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 hover:border-[#8245ec]/30 transition-all duration-300 overflow-hidden">
                     <div className="relative p-4 sm:p-5 md:p-6 lg:p-8">
                       {/* Card Header - Stacked on Mobile */}
@@ -125,7 +134,7 @@ const Education = () => {
                               </div>
                               <span className="text-sm sm:text-base text-gray-300 truncate">{edu.school}</span>
                             </div>
-                            
+
                             {/* Mobile Date & Grade */}
                             <div className="flex flex-wrap items-center gap-3 md:hidden">
                               <div className="flex items-center gap-1">
@@ -183,7 +192,7 @@ const Education = () => {
                             <span className="text-gray-400">Currently Pursuing</span>
                             <div className="flex items-center gap-2">
                               <div className="w-16 lg:w-24 h-1 bg-gray-800 rounded-full overflow-hidden">
-                                <div 
+                                <div
                                   className="h-full bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-full"
                                   style={{ width: '85%' }}
                                 />
@@ -221,7 +230,7 @@ const Education = () => {
                 Consistent academic performance with practical implementation focus
               </p>
             </div>
-            
+
             <div className="p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10">
               <div className="flex items-center gap-3 mb-3 sm:mb-4">
                 <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-blue-500/20 to-cyan-500/20">
@@ -233,7 +242,7 @@ const Education = () => {
                 Beyond curriculum exploration of modern technologies and practices
               </p>
             </div>
-            
+
             <div className="p-4 sm:p-5 md:p-6 rounded-xl md:rounded-2xl bg-gradient-to-br from-gray-900/50 to-gray-800/30 backdrop-blur-sm border border-white/10 col-span-full sm:col-span-1 lg:col-span-1">
               <div className="flex items-center gap-3 mb-3 sm:mb-4">
                 <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-green-500/20 to-emerald-500/20">
