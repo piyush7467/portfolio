@@ -90,16 +90,25 @@ const Education = () => {
                     </div> */}
 
                     <div
-                      className={`hidden md:flex absolute top-4 items-center gap-2 ${index % 2 === 0
-                          ? "left-[calc(50%+4rem)]"
-                          : "right-[calc(50%+4rem)]"
+                      className={`hidden md:flex absolute top-6 items-center ${index % 2 === 0
+                          ? "left-[calc(50%+2rem)]"
+                          : "right-[calc(50%+2rem)] flex-row-reverse"
                         }`}
                     >
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-sm border border-white/10">
-                        <Calendar className="w-4 h-4 text-[#8245ec]" />
-                        <span className="text-sm text-gray-300">{edu.date}</span>
+                      <div className="flex items-center gap-3">
+
+                        {/* Line */}
+                        <div className="h-[2px] w-24 lg:w-32 bg-gradient-to-r from-[#8245ec] via-purple-400 to-transparent"></div>
+
+                        {/* Year Box */}
+                        <div className="px-4 py-1.5 rounded-md bg-white/5 backdrop-blur-md border border-white/10 text-sm text-gray-300">
+                          {edu.date}
+                        </div>
+
+                        {/* Arrow */}
+                        <ChevronRight className={`w-4 h-4 text-[#8245ec] ${index % 2 === 0 ? "" : "rotate-180"
+                          }`} />
                       </div>
-                      <ChevronRight className="w-4 h-4 text-[#8245ec]" />
                     </div>
 
                   </div>
