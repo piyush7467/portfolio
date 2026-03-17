@@ -101,7 +101,7 @@ const Education = () => {
                         <div className="h-[2px] w-24 lg:w-32 bg-gradient-to-r from-[#8245ec] via-purple-400 to-transparent"></div>
 
                         {/* Year Box */}
-                        <div className="px-4 py-1.5 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 text-sm text-gray-300">
+                        <div className="px-4 py-1.5 rounded-md bg-white/5 backdrop-blur-md border border-white/10 text-sm text-gray-300">
                           {edu.date}
                         </div>
 
