@@ -67,7 +67,8 @@ import eduNeocodeLogo from './assets/work_logo/edu-neocode.png';
 import courseCloudLogo from './assets/work_logo/coursecloud.png';
 import expenseTrackerLogo from './assets/work_logo/expense_tracker.png';
 import smartSchoolLogo from './assets/work_logo/smartSchool.png';
-import moneyMapLogo from './assets/work_logo/moneyMapLogo.png';
+// import moneyMapLogo from './assets/work_logo/moneyMapLogo.png';
+import moneyMapLogo from './assets/work_logo/homeMoneyMap.jpeg';
 
 
 // certificates
@@ -286,8 +287,8 @@ export const projects = [
     "Gemini API",
     "Android"
   ],
-  github: "https://github.com/piyush7467/",
-  webapp: "Android App (APK)"
+  github: "https://github.com/piyush7467/MoneyMap",
+  webapp: "https://drive.google.com/file/d/1Ya84_G70qvvKaC7yj772GvWFuqXd8n8L/view?usp=drive_link"
 },
   {
     id: 2,
