@@ -322,16 +322,16 @@ export const projects = [
     github: "https://github.com/piyush11234/coursecloud",
     webapp: "https://coursecloud.onrender.com/",
   },
-  {
-    id: 5,
-    title: "Expense Tracker Website",
-    description:
-      "A full-stack expense management application that allows users to securely sign up, log in, and manage their daily expenses. Users can add, view, and delete expenses, categorize them, and track spending trends with a clean and responsive UI.",
-    image: expenseTrackerLogo,
-    tags: ["React JS", "API", "HTML", "CSS", "Tailwind CSS", "JavaScript", "Node.js", "Express", "MongoDB"],
-    github: "https://github.com/piyush11234/Expense-Tracker",
-    webapp: "https://expense-tracker-daily.vercel.app/",
-  },
+  // {
+  //   id: 5,
+  //   title: "Expense Tracker Website",
+  //   description:
+  //     "A full-stack expense management application that allows users to securely sign up, log in, and manage their daily expenses. Users can add, view, and delete expenses, categorize them, and track spending trends with a clean and responsive UI.",
+  //   image: expenseTrackerLogo,
+  //   tags: ["React JS", "API", "HTML", "CSS", "Tailwind CSS", "JavaScript", "Node.js", "Express", "MongoDB"],
+  //   github: "https://github.com/piyush11234/Expense-Tracker",
+  //   webapp: "https://expense-tracker-daily.vercel.app/",
+  // },
   {
     id: 6,
     title: "College Exam Prep",
