@@ -123,9 +123,12 @@ const Work = () => {
                   {/* Project Type Badge */}
                   <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-sm border border-white/10">
                     <span className="text-xs font-medium text-gray-300">
-                      {project.tags.includes('MongoDB') ? 'Full Stack' : 
-                       project.tags.includes('React or Html') ? 'Frontend' : 'App'}
-                    </span>
+                    {project.tags.includes('MongoDB')
+                      ? 'Full Stack'
+                      : project.tags.includes('React') || project.tags.includes('HTML') || project.tags.includes('CSS')
+                      ? 'Frontend'
+                      : 'App'}
+                  </span>
                   </div>
                 </div>
 
