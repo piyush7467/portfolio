@@ -77,6 +77,7 @@ import cloudComputingCertificate from './assets/certificates/cloudComputingCerti
 import javaCertificate from './assets/certificates/javaCertificate.jpg';
 import cppCertificate from './assets/certificates/cppCertificate.jpg';
 import cProgrammingCertificate from './assets/certificates/cProgrammingCertificate.jpg';
+import devOpsCertificate from './assets/certificates/devOpsCertificate.jpeg';
 
 
 
@@ -410,6 +411,16 @@ export const projects = [
 
 
 export const certificates = [
+  {
+    id: 0,
+    title: "Dev Ops Certificate",
+    issuer: "Coursera",
+    date: "April 2026",
+    image: devOpsCertificate,
+    description: "Completed Dev Ops course including CI/CD, containerization, and cloud deployment practices.",
+    skills: ["Dev Ops", "CI/CD", "Containerization"],
+    certificateLink: "https://drive.google.com/file/d/1Ah60WJ3bE3tXuBH7ml5dX9bL1gxlAZrs/view?usp=sharing"
+  },
   {
     id: 1,
     title: "React Developer Certificate",
