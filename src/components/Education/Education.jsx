@@ -7,7 +7,7 @@ const Education = () => {
   return (
     <section
       id="education"
-      className="relative py-12 sm:py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
+      className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 overflow-hidden bg-gray-950"
     >
       {/* Background Elements */}
       <div className="absolute inset-0">
@@ -28,7 +28,7 @@ const Education = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16 md:mb-20"
+          className="text-center mb-8 sm:mb-12"
         >
           <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-4 sm:mb-6">
             <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />

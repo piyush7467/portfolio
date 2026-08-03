@@ -7,7 +7,7 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 font-sans overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
+      className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 font-sans overflow-hidden bg-gray-950"
     >
       {/* Animated Background */}
       <div className="absolute inset-0">
@@ -28,7 +28,7 @@ const Experience = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-12 md:mb-16 lg:mb-20"
+          className="text-center mb-8 sm:mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-4">
             <Sparkles className="w-4 h-4 text-[#8245ec]" />

@@ -63,7 +63,7 @@ const Skills = () => {
     'HTML': 95, 'CSS': 90, 'JavaScript': 92, 'React JS': 94,
     'Redux': 85, 'Tailwind CSS': 93, 'Bootstrap': 88,
     'Node JS': 90, 'Express JS': 88, 'MySQL': 87, 'MongoDB': 85,
-    'C': 82, 'C++': 85, 'Java': 88, 'JavaScript': 92, 'Kotlin': 80,
+    'C': 82, 'C++': 85, 'Java': 88, 'Kotlin': 80,
     'Git': 92, 'GitHub': 94, 'VS Code': 96, 'Postman': 88,
     'Compass': 85, 'Vercel': 87, 'Android Studio': 82, 'Figma': 84
   };
@@ -114,7 +114,7 @@ const Skills = () => {
     <section
       id="skills"
       ref={ref}
-      className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 font-sans overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
+      className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-32 font-sans overflow-hidden bg-gray-950"
     >
       {/* Background Effects - Responsive */}
       <div className="absolute inset-0">
@@ -135,7 +135,7 @@ const Skills = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-8 sm:mb-10"
         >
           <div className="inline-flex items-center gap-2 px-3 py-2 md:px-5 md:py-3 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 mb-4 md:mb-6">
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-[#8245ec]" />

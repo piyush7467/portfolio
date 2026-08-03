@@ -36,12 +36,19 @@ const Certificates = () => {
     e.stopPropagation();
   };
 
-  // Cleanup on unmount
+  // Escape key handler & modal body scroll lock cleanup
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedCertificate) {
+        handleCloseModal();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
+      window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [selectedCertificate]);
 
   const handleImageLoad = (id) => {
     setImageLoaded(prev => ({ ...prev, [id]: true }));
@@ -57,7 +64,7 @@ const Certificates = () => {
   return (
     <section
       id="certificates"
-      className="relative py-24 px-4 sm:px-6 lg:px-8 xl:px-16 font-sans overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950"
+      className="relative py-10 sm:py-14 md:py-16 px-4 sm:px-6 lg:px-8 xl:px-16 font-sans overflow-hidden bg-gray-950"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
@@ -81,7 +88,7 @@ const Certificates = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12"
         >
           <motion.div
             initial={{ scale: 0.9 }}

@@ -5,7 +5,8 @@ import {
   FiArrowLeft, FiArrowRight,
   FiPhoneCall,
   FiMail,
-  FiMapPin
+  FiMapPin,
+  FiCopy
 } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { ToastContainer, toast } from 'react-toastify';
@@ -26,6 +27,17 @@ const ContactForm = () => {
     subject: '',
     message: ''
   });
+
+  const handleCopyText = (e, text, label) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(text);
+    toast.success(`${label} copied to clipboard! 📋`, {
+      position: "top-right",
+      autoClose: 2000,
+      theme: "dark"
+    });
+  };
 
   // Handle scroll arrows visibility
   const checkScroll = () => {
@@ -185,7 +197,7 @@ const ContactForm = () => {
   ];
 
   return (
-    <div id="contact" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div id="contact" className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <ToastContainer />
       
       {/* Background Elements */}
@@ -419,23 +431,29 @@ const ContactForm = () => {
                     className="group"
                   >
                     {info.link ? (
-                      <a
-                        href={info.link}
-                        className="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-[#8245ec]/30 transition-all"
-                      >
-                        <div className={`p-2 rounded-lg ${info.bg} group-hover:scale-110 transition-transform`}>
-                          {/* <div className={`text-transparent bg-clip-text bg-gradient-to-r ${info.color}`}>
-                            {info.icon}
-                          </div> */}
-                          <div className={`bg-clip-text bg-gradient-to-r ${info.color} text-white`}>
-                            {info.icon}
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-gray-800/30 border border-gray-700/50 hover:border-[#8245ec]/30 transition-all">
+                        <a
+                          href={info.link}
+                          className="flex items-center gap-3 flex-1"
+                        >
+                          <div className={`p-2 rounded-lg ${info.bg} group-hover:scale-110 transition-transform`}>
+                            <div className={`bg-clip-text bg-gradient-to-r ${info.color} text-white`}>
+                              {info.icon}
+                            </div>
                           </div>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500">{info.label}</p>
-                          <p className="text-sm text-white">{info.value}</p>
-                        </div>
-                      </a>
+                          <div>
+                            <p className="text-xs text-gray-500">{info.label}</p>
+                            <p className="text-sm text-white">{info.value}</p>
+                          </div>
+                        </a>
+                        <button
+                          onClick={(e) => handleCopyText(e, info.value, info.label)}
+                          title={`Copy ${info.label}`}
+                          className="p-2 rounded-lg bg-gray-800/60 hover:bg-[#8245ec]/20 text-gray-400 hover:text-purple-300 transition-all"
+                        >
+                          <FiCopy className="w-4 h-4" />
+                        </button>
+                      </div>
                     ) : (
                       <div className="flex items-center gap-3 p-3 rounded-xl bg-gray-800/30 border border-gray-700/50">
                         <div className={`p-2 rounded-lg ${info.bg}`}>
