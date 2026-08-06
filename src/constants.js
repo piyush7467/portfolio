@@ -69,6 +69,7 @@ import expenseTrackerLogo from './assets/work_logo/expense_tracker.png';
 import smartSchoolLogo from './assets/work_logo/smartSchool.png';
 // import moneyMapLogo from './assets/work_logo/moneyMapLogo.png';
 import moneyMapLogo from './assets/work_logo/homeMoneyMap.jpeg';
+import codifyxLogo from './assets/work_logo/codifyxLogo.png';
 
 
 // certificates
@@ -143,7 +144,7 @@ export const SkillsInfo = [
 export const experiences = [
   {
     id: 0,
-    img: proctorLogo, 
+    img: proctorLogo,
     role: "Online Exam Proctor",
     company: "Lovely Professional University",
     date: "2025 - 2026",
@@ -168,7 +169,7 @@ export const experiences = [
     desc: "Developed an educational platform providing college study materials, MCQs, and notes using HTML, CSS, and JavaScript.",
     skills: ["HTML", "CSS", "JavaScript", "PHP", "Bootstrap"],
   },
- 
+
   {
     id: 3,
     img: hackathonLogo,
@@ -273,26 +274,53 @@ export const education = [
 export const projects = [
 
   {
-  id: 1,
-  title: "MoneyMap – Smart Expense Tracker",
-  description:
-    "MoneyMap is a modern Android-based expense tracking and budget management application designed to simplify personal and group financial management. Built using Kotlin and MVVM architecture, the app enables users to track daily expenses, manage shared costs similar to Splitwise, and set flexible budgets with custom date ranges. It integrates Room Database for efficient local data storage and WorkManager for background processing. The system provides real-time budget alerts and leverages AI (Gemini API) to generate intelligent financial insights, spending analysis, and personalized recommendations, helping users make smarter financial decisions.",
-  image: moneyMapLogo,
-  tags: [
-    "Kotlin",
-    "Jetpack Compose",
-    "MVVM",
-    "Room Database",
-    "WorkManager",
-    "StateFlow",
-    "Gemini API",
-    "Android"
-  ],
-  github: "https://github.com/piyush7467/MoneyMap",
-  webapp: "https://drive.google.com/file/d/1Ya84_G70qvvKaC7yj772GvWFuqXd8n8L/view?usp=drive_link"
-},
+    id: 1,
+    title: "CodifyX AI – Intelligent Online Code Compiler",
+    description:
+      "A full-stack AI-powered online code compiler built using a Spring Boot microservices architecture. The platform enables users to write, compile, execute, debug, and share code in multiple programming languages with real-time output. It features secure JWT authentication, AI-powered code explanation, optimization, debugging, custom test case execution, code sharing, submission history, and a Monaco Editor-based IDE. The application integrates Judge0 API for online code execution, Gemini AI and Groq API for intelligent coding assistance, PostgreSQL for data management, and is deployed using Vercel, Railway, and Render for a scalable cloud-native experience.",
+    image: codifyxLogo,
+    tags: [
+      "React JS",
+      "Spring Boot",
+      "Microservices",
+      "Spring Security",
+      "JWT",
+      "PostgreSQL",
+      "Judge0 API",
+      "Gemini API",
+      "Groq API",
+      "Monaco Editor",
+      "Bootstrap",
+      "REST API",
+      "Railway",
+      "Render",
+      "Vercel"
+    ],
+    github: "https://github.com/piyush7467/codifyx-ai",
+    // webapp: "https://codifyx-compiler.vercel.app/",
+  },
+
   {
     id: 2,
+    title: "MoneyMap – Smart Expense Tracker",
+    description:
+      "MoneyMap is a modern Android-based expense tracking and budget management application designed to simplify personal and group financial management. Built using Kotlin and MVVM architecture, the app enables users to track daily expenses, manage shared costs similar to Splitwise, and set flexible budgets with custom date ranges. It integrates Room Database for efficient local data storage and WorkManager for background processing. The system provides real-time budget alerts and leverages AI (Gemini API) to generate intelligent financial insights, spending analysis, and personalized recommendations, helping users make smarter financial decisions.",
+    image: moneyMapLogo,
+    tags: [
+      "Kotlin",
+      "Jetpack Compose",
+      "MVVM",
+      "Room Database",
+      "WorkManager",
+      "StateFlow",
+      "Gemini API",
+      "Android"
+    ],
+    github: "https://github.com/piyush7467/MoneyMap",
+    webapp: "https://drive.google.com/file/d/1Ya84_G70qvvKaC7yj772GvWFuqXd8n8L/view?usp=drive_link"
+  },
+  {
+    id: 3,
     title: "Smart School Management System",
     description:
       "A full-stack School Management System built using the MERN stack that streamlines academic and administrative operations for educational institutions. The platform provides role-based dashboards for Admins, Teachers, and Students, enabling features such as attendance management, class and subject management, transport tracking, examinations, announcements, and complaint handling. It also integrates Firebase Cloud Messaging for real-time notifications and ensures secure authentication using JWT, making school operations more efficient and digitally organized.",
@@ -303,7 +331,7 @@ export const projects = [
   },
 
   {
-    id: 3,
+    id: 4,
     title: "A Blog Website",
     description:
       "A Full Stack web application in which user will post blogs, see other's blogs, do comment and likes. The intuitive design and smooth experience make it a go-to app for posting blogs.",
@@ -314,7 +342,7 @@ export const projects = [
   },
 
   {
-    id: 4,
+    id: 5,
     title: "Course Selling Website",
     description:
       "A full-stack course selling platform where instructors can create, manage, and publish courses with lectures, while students can enroll, access learning materials, and track their progress.",
@@ -343,16 +371,16 @@ export const projects = [
     // github: "https://github.com/codingmastr/CSPrep",
     webapp: "https://neocode.infinityfreeapp.com/",
   },
-  {
-    id: 7,
-    title: "Pharmacy Website",
-    description:
-      "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
-    image: pharmacyLogo,
-    tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS"],
-    // github: "https://github.com/codingmastr/cmtk-email-validator",
-    webapp: "https://arnavhealthcare.infinityfreeapp.com/",
-  },
+  // {
+  //   id: 7,
+  //   title: "Pharmacy Website",
+  //   description:
+  //     "An efficient and customizable pharmacy webbsite that offers user to book services related to body checkup. ",
+  //   image: pharmacyLogo,
+  //   tags: ["HTML", "CSS", "JavaScript", "PHP", "MySQL", "Tailwind CSS"],
+  //   // github: "https://github.com/codingmastr/cmtk-email-validator",
+  //   webapp: "https://arnavhealthcare.infinityfreeapp.com/",
+  // },
 
 
 
