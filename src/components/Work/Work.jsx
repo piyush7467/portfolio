@@ -123,7 +123,7 @@ const Work = () => {
           </div>
 
           {/* Interactive Category Filters */}
-          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mt-8">
+          <div className="flex flex-wrap sm:flex-wrap justify-start sm:justify-center items-center gap-2 sm:gap-3 mt-8 overflow-x-auto max-w-full pb-2 scrollbar-hide px-2">
             {categories.map((category) => {
               const isActive = activeFilter === category;
               return (

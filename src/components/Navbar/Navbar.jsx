@@ -275,7 +275,7 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="absolute top-full left-0 right-0 bg-gray-950/98 backdrop-blur-2xl border-t border-white/10 shadow-2xl md:hidden"
+              className="absolute top-full left-0 right-0 max-h-[calc(100vh-70px)] overflow-y-auto bg-gray-950/98 backdrop-blur-2xl border-t border-white/10 shadow-2xl md:hidden scrollbar-hide"
             >
               <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
                 <div className="space-y-2">

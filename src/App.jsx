@@ -20,7 +20,7 @@ function App() {
   });
 
   return (
-    <div className="bg-[#050414] min-h-screen text-white selection:bg-[#8245ec] selection:text-white">
+    <div className="bg-[#050414] min-h-screen text-white selection:bg-[#8245ec] selection:text-white overflow-x-hidden w-full max-w-[100vw]">
       {/* Top Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#8245ec] via-purple-400 to-blue-500 origin-left z-50 shadow-md shadow-[#8245ec]/50"
