@@ -296,8 +296,8 @@ export const projects = [
       "Render",
       "Vercel"
     ],
-    github: "https://github.com/piyush7467/codifyx-ai",
-    // webapp: "https://codifyx-compiler.vercel.app/",
+    // github: "https://github.com/piyush7467/codifyx-ai",
+    webapp: "https://codifyx-compiler.vercel.app/",
   },
 
   {
