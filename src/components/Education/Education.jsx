@@ -298,7 +298,6 @@ export default Education;
 // import { education } from "../../constants"; // Import the education data
 
 // const Education = () => {
-  const { education } = usePortfolio();
 //   return (
 //     <section
 //       id="education"

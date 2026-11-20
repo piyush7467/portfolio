@@ -8,7 +8,23 @@ import {
   SkillsInfo as defaultSkills
 } from '../constants';
 
-const PortfolioContext = createContext(null);
+const defaultPortfolioContextValue = {
+  profile: {
+    fullName: 'Piyush Shakya',
+    headline: 'Full Stack Engineer & Android Developer',
+    bio: 'I build production-grade web applications, microservices, and mobile platforms with clean architecture and modern user experience.',
+    resumeUrl: '',
+    openToWork: true,
+  },
+  projects: defaultProjects,
+  experiences: defaultExperiences,
+  education: defaultEducation,
+  certificates: defaultCertificates,
+  skills: defaultSkills,
+  isLive: false,
+};
+
+const PortfolioContext = createContext(defaultPortfolioContextValue);
 
 export function PortfolioProvider({ children }) {
   const [profile, setProfile] = useState({
@@ -117,9 +133,6 @@ export function PortfolioProvider({ children }) {
 
 export function usePortfolio() {
   const ctx = useContext(PortfolioContext);
-  if (!ctx) {
-    throw new Error('usePortfolio must be used within a PortfolioProvider');
-  }
-  return ctx;
+  return ctx || defaultPortfolioContextValue;
 }
 
