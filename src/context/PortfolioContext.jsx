@@ -12,35 +12,35 @@ const fallbackProfile = {
   fullName: 'Piyush Shakya',
   headline: 'Full Stack Engineer & Android Developer',
   bio: 'I build production-grade web applications, microservices, and mobile platforms with clean architecture and modern user experience.',
-  resumeUrl: '',
+  resumeUrl: 'https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link',
   openToWork: true,
 };
 
 const defaultPortfolioContextValue = {
   profile: fallbackProfile,
-  projects: [],
-  experiences: [],
-  education: [],
-  certificates: [],
+  projects: fallbackProjects,
+  experiences: fallbackExperiences,
+  education: fallbackEducation,
+  certificates: fallbackCertificates,
   skills: fallbackSkills,
   isLive: false,
   isLoading: true,
+  usingFallback: true,
 };
 
 const PortfolioContext = createContext(defaultPortfolioContextValue);
 
 export function PortfolioProvider({ children }) {
-  // Start empty so backend has 1st priority
-  const [profile, setProfile] = useState(null);
-  const [projects, setProjects] = useState([]);
-  const [experiences, setExperiences] = useState([]);
-  const [education, setEducation] = useState([]);
-  const [certificates, setCertificates] = useState([]);
-  const [skills, setSkills] = useState([]);
+  const [profile, setProfile] = useState(fallbackProfile);
+  const [projects, setProjects] = useState(fallbackProjects);
+  const [experiences, setExperiences] = useState(fallbackExperiences);
+  const [education, setEducation] = useState(fallbackEducation);
+  const [certificates, setCertificates] = useState(fallbackCertificates);
+  const [skills, setSkills] = useState(fallbackSkills);
   
   const [isLoading, setIsLoading] = useState(true);
   const [isLive, setIsLive] = useState(false);
-  const [usingFallback, setUsingFallback] = useState(false);
+  const [usingFallback, setUsingFallback] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -48,36 +48,46 @@ export function PortfolioProvider({ children }) {
     async function loadPriorityData() {
       setIsLoading(true);
 
-      // 1. ATTEMPT LIVE BACKEND FETCH FIRST (Priority 1)
+      // PRIORITY 1: Fetch live data from MongoDB Atlas via Spring Boot API
       const data = await fetchPortfolioOverview();
 
       if (!isMounted) return;
 
       if (data) {
-        // Backend Success: Use Live Database Data
-        if (data.profile) {
-          setProfile(data.profile);
-        } else {
-          setProfile(fallbackProfile);
+        console.log('[Portfolio Context] Applying live database state:', data);
+
+        // 1. Bio Profile
+        if (data.profile && (data.profile.fullName || data.profile.bio)) {
+          setProfile({
+            fullName: data.profile.fullName || fallbackProfile.fullName,
+            headline: data.profile.headline || fallbackProfile.headline,
+            bio: data.profile.bio || fallbackProfile.bio,
+            resumeUrl: data.profile.resumeUrl || fallbackProfile.resumeUrl,
+            openToWork: data.profile.openToWork ?? true,
+          });
         }
 
-        if (Array.isArray(data.projects)) {
+        // 2. Projects (from Studio Applications + Websites marked showOnPortfolio)
+        if (Array.isArray(data.projects) && data.projects.length > 0) {
           const mapped = data.projects.map((p, idx) => ({
             id: p.id || idx + 1,
             title: p.title,
             description: p.description,
             image: p.image,
             tags: p.tags || [],
-            github: p.isSourcePublic ? p.githubUrl : null,
+            github: (p.isSourcePublic || p.sourcePublic) ? p.githubUrl : null,
             webapp: p.webappUrl,
             studioShowcaseUrl: p.studioShowcaseUrl,
             highlight: p.highlight,
             type: p.type,
           }));
           setProjects(mapped);
+        } else {
+          setProjects(fallbackProjects);
         }
 
-        if (Array.isArray(data.experiences)) {
+        // 3. Work Experience (use DB if populated, otherwise constants.js fallback)
+        if (Array.isArray(data.experiences) && data.experiences.length > 0) {
           const mappedExp = data.experiences.map((exp, idx) => ({
             id: exp.id || idx,
             img: exp.companyLogoUrl || null,
@@ -88,9 +98,12 @@ export function PortfolioProvider({ children }) {
             skills: exp.skills || [],
           }));
           setExperiences(mappedExp);
+        } else {
+          setExperiences(fallbackExperiences);
         }
 
-        if (Array.isArray(data.education)) {
+        // 4. Education (use DB if populated, otherwise constants.js fallback)
+        if (Array.isArray(data.education) && data.education.length > 0) {
           const mappedEdu = data.education.map((edu, idx) => ({
             id: edu.id || idx,
             img: edu.logoUrl || null,
@@ -101,9 +114,12 @@ export function PortfolioProvider({ children }) {
             desc: edu.description,
           }));
           setEducation(mappedEdu);
+        } else {
+          setEducation(fallbackEducation);
         }
 
-        if (Array.isArray(data.certificates)) {
+        // 5. Certificates (use DB if populated, otherwise constants.js fallback)
+        if (Array.isArray(data.certificates) && data.certificates.length > 0) {
           const mappedCert = data.certificates.map((cert, idx) => ({
             id: cert.id || idx,
             title: cert.title,
@@ -115,14 +131,16 @@ export function PortfolioProvider({ children }) {
             certificateLink: cert.certificateLink,
           }));
           setCertificates(mappedCert);
+        } else {
+          setCertificates(fallbackCertificates);
         }
 
         setSkills(fallbackSkills);
         setIsLive(true);
         setUsingFallback(false);
       } else {
-        // Priority 2: NETWORK ERROR / BACKEND OFFLINE -> Use constants.js fallback
-        console.info('Backend unreachable or returned null. Serving data from constants.js fallback.');
+        // PRIORITY 2: Network Error or Backend Offline -> Use constants.js
+        console.info('[Portfolio Context] Backend unreachable or timed out. Serving offline constants.js fallback.');
         setProfile(fallbackProfile);
         setProjects(fallbackProjects);
         setExperiences(fallbackExperiences);
@@ -146,12 +164,12 @@ export function PortfolioProvider({ children }) {
   return (
     <PortfolioContext.Provider
       value={{
-        profile: profile || fallbackProfile,
-        projects: projects.length > 0 || !usingFallback ? projects : fallbackProjects,
-        experiences: experiences.length > 0 || !usingFallback ? experiences : fallbackExperiences,
-        education: education.length > 0 || !usingFallback ? education : fallbackEducation,
-        certificates: certificates.length > 0 || !usingFallback ? certificates : fallbackCertificates,
-        skills: skills.length > 0 ? skills : fallbackSkills,
+        profile,
+        projects,
+        experiences,
+        education,
+        certificates,
+        skills,
         isLive,
         isLoading,
         usingFallback,
@@ -166,5 +184,3 @@ export function usePortfolio() {
   const ctx = useContext(PortfolioContext);
   return ctx || defaultPortfolioContextValue;
 }
-
-
