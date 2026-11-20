@@ -2,530 +2,259 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiMenu, FiX, FiArrowUp } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaFileDownload } from "react-icons/fa";
-import { Code2, Sparkles } from "lucide-react";
+import { Code2, Terminal as TerminalIcon, Sparkles } from "lucide-react";
+import { usePortfolio } from "../../context/PortfolioContext";
 
-const Navbar = () => {
+const MENU_ITEMS = [
+  { id: "about", label: "About" },
+  { id: "education", label: "Education" },
+  { id: "skills", label: "Skills" },
+  { id: "work", label: "Projects" },
+  { id: "certificates", label: "Certificates" },
+  { id: "experience", label: "Experience" },
+  { id: "contact", label: "Contact" },
+];
+
+export default function Navbar() {
+  const { profile } = usePortfolio();
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("about");
   const [isScrolled, setIsScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Mouse move effect for interactive background
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const resumeUrl =
+    profile?.resumeUrl ||
+    "https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link";
 
-  // Detect scroll for effects
+  // Scroll detection
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      setShowScrollTop(window.scrollY > 300);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      setIsScrolled(window.scrollY > 40);
+      setShowScrollTop(window.scrollY > 400);
 
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [isOpen]);
+      // Active section detection
+      const sectionIds = MENU_ITEMS.map((item) => item.id);
+      const scrollPos = window.scrollY + 140;
 
-  // Auto-active section detection
-  useEffect(() => {
-    const handleScrollActive = () => {
-      const sections = ["about","education","skills", "work", "certificates","experience", "contact"];
-      const scrollPosition = window.scrollY + 100;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSection(id);
             break;
           }
         }
       }
     };
-    window.addEventListener("scroll", handleScrollActive);
-    return () => window.removeEventListener("scroll", handleScrollActive);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleMenuItemClick = (sectionId) => {
-    setActiveSection(sectionId);
+  // Lock body scroll on mobile open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
+  const scrollToSection = (id) => {
     setIsOpen(false);
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const openTerminal = () => {
+    window.dispatchEvent(new CustomEvent("open-terminal"));
   };
-
-  const menuItems = [
-    { id: "about", label: "About", icon: "👤" },
-    { id: "education", label: "Education", icon: "🎓" },
-    { id: "skills", label: "Skills", icon: "🛠️" },
-    { id: "work", label: "Projects", icon: "💻" },
-    { id: "certificates", label: "Certificates", icon: "🏆" },
-    { id: "experience", label: "Experience", icon: "💼" },
-    { id: "contact", label: "Contact", icon: "✉️" }
-  ];
 
   return (
     <>
-      {/* Main Navbar */}
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${
-          isScrolled
-            ? "bg-gray-950/90 backdrop-blur-xl shadow-2xl"
-            : "bg-transparent"
-        }`}
-        style={{
-          background: isScrolled
-            ? `linear-gradient(135deg, rgba(5, 4, 20, 0.95) 0%, rgba(15, 10, 40, 0.95) 100%)`
-            : 'transparent'
-        }}
+      {/* Floating Glass Dock Header */}
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed top-0 inset-x-0 z-50 py-3 sm:py-4 px-4 sm:px-6 pointer-events-none"
       >
-        {/* Interactive Background Glow */}
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(130, 69, 236, 0.2), transparent 50%)`
-          }}
-        />
+        <div className="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
+          {/* Logo Badge */}
+          <button
+            type="button"
+            onClick={() => scrollToSection("about")}
+            className="group flex items-center gap-2.5 px-3.5 py-2 rounded-full bg-gray-950/80 backdrop-blur-xl border border-white/10 shadow-lg hover:border-purple-500/40 transition-all cursor-pointer select-none"
+          >
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#8245ec]/30 to-blue-500/20 border border-purple-500/30 flex items-center justify-center">
+              <Code2 className="w-4 h-4 text-[#8245ec]" />
+            </div>
+            <div className="flex items-center gap-1 font-bold text-sm sm:text-base tracking-tight">
+              <span className="text-white">Piyush</span>
+              <span className="text-[#8245ec]">/</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-[#8245ec]">
+                Shakya
+              </span>
+            </div>
+          </button>
 
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
-        }} />
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-1">
-          <div className="flex justify-between items-center py-3 sm:py-4 lg:py-5">
-            {/* Enhanced Logo with Gradient */}
-            <motion.div
-              className="cursor-pointer group flex-shrink-0"
-              onClick={() => handleMenuItemClick("about")}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <div className="flex items-center gap-2 sm:gap-3">
-                <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-[#8245ec]/20 to-blue-500/20">
-                  <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
-                </div>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-1 flex-wrap">
-                    <span className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white">
-                      Piyush
-                    </span>
-                    <span className="text-[#8245ec] font-bold text-lg sm:text-xl">/</span>
-                    <span className="text-lg sm:text-xl lg:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] via-purple-400 to-[#8245ec]">
-                      Shakya
-                    </span>
-                  </div>
-                  <div className="h-px w-0 group-hover:w-full bg-gradient-to-r from-transparent via-[#8245ec] to-transparent transition-all duration-500 mt-0.5 sm:mt-1"></div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Desktop Menu - Centered Floating Glass Pill Bar */}
-            <div className="hidden lg:flex items-center justify-center flex-1 mx-2 xl:mx-4">
-              <div className="flex items-center space-x-0.5 xl:space-x-1 px-3 py-1.5 rounded-full bg-gray-900/80 backdrop-blur-xl shadow-xl shadow-purple-950/20">
-                {menuItems.map((item) => {
-                  const isActive = activeSection === item.id;
-                  return (
+          {/* Centered Floating Nav Dock (Desktop) */}
+          <nav className="hidden lg:flex items-center gap-1 p-1.5 rounded-full bg-gray-950/80 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/80">
+            {MENU_ITEMS.map((item) => {
+              const isActive = activeSection === item.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => scrollToSection(item.id)}
+                  className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition-colors cursor-pointer ${
+                    isActive ? "text-white" : "text-gray-400 hover:text-gray-200"
+                  }`}
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  {isActive && (
                     <motion.div
-                      key={item.id}
-                      className="relative"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <button
-                        onClick={() => handleMenuItemClick(item.id)}
-                        className={`relative px-2.5 xl:px-3.5 py-1.5 rounded-full text-xs xl:text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
-                          isActive
-                            ? "text-white font-semibold"
-                            : "text-gray-400 hover:text-white hover:bg-white/5"
-                        }`}
-                      >
-                        <span className="relative z-10">{item.label}</span>
-                        {isActive && (
-                          <motion.div
-                            layoutId="activeNavPill"
-                            className="absolute inset-0 rounded-full bg-gradient-to-r from-[#8245ec] to-blue-600 shadow-md shadow-[#8245ec]/30"
-                            transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                          />
-                        )}
-                      </button>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </div>
+                      layoutId="activeNavPill"
+                      className="absolute inset-0 rounded-full bg-gradient-to-r from-[#8245ec] to-blue-600 shadow-md shadow-[#8245ec]/40"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </nav>
 
-            {/* Desktop Right Section */}
-            <div className="hidden lg:flex items-center space-x-2 xl:space-x-3 flex-shrink-0">
-              {/* Social Icons */}
-              <motion.a
-                href="https://github.com/piyush7467"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="GitHub Profile"
-                className="relative p-2 text-gray-300 hover:text-white transition-all duration-300 group rounded-full hover:bg-white/5"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaGithub size={18} className="relative z-10" />
-              </motion.a>
+          {/* Right Action Icons & Terminal Launcher */}
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            {/* Quick Terminal Trigger [>_] */}
+            <button
+              type="button"
+              onClick={openTerminal}
+              title="Open Developer Terminal (Ctrl+K)"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-gray-950/80 backdrop-blur-xl border border-purple-500/30 text-purple-300 hover:text-white hover:border-purple-400 text-xs font-mono font-semibold shadow-lg transition-all cursor-pointer"
+            >
+              <TerminalIcon className="w-3.5 h-3.5 text-[#8245ec]" />
+              <span className="hidden sm:inline">Terminal</span>
+              <kbd className="hidden md:inline px-1.5 py-0.2 rounded bg-white/10 text-[10px] text-gray-300 font-mono">
+                ⌘K
+              </kbd>
+            </button>
 
-              <motion.a
-                href="https://www.linkedin.com/in/piyush7467"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="LinkedIn Profile"
-                className="relative p-2 text-gray-300 hover:text-white transition-all duration-300 group rounded-full hover:bg-white/5"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <FaLinkedin size={18} className="relative z-10" />
-              </motion.a>
+            {/* GitHub Link */}
+            <a
+              href="https://github.com/piyush7467"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex p-2 rounded-full bg-gray-950/80 backdrop-blur-xl border border-white/10 text-gray-300 hover:text-white hover:border-white/25 transition-all shadow-md"
+              title="GitHub Profile"
+            >
+              <FaGithub className="w-4 h-4" />
+            </a>
 
-              {/* Resume Button */}
-              <motion.a
-                href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-1.5 px-3.5 xl:px-5 py-2 rounded-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 border border-purple-500/40 hover:border-purple-400 transition-all duration-300 overflow-hidden shadow-lg shadow-purple-950/30"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <FaFileDownload className="w-3.5 h-3.5 text-[#8245ec] relative" />
-                <span className="relative text-white font-semibold text-xs xl:text-sm whitespace-nowrap">Resume</span>
-              </motion.a>
-            </div>
+            {/* Resume CTA */}
+            <a
+              href={resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-gradient-to-r from-[#8245ec] to-blue-600 hover:from-purple-600 hover:to-blue-500 text-white text-xs font-bold shadow-lg shadow-purple-950/40 transition-all cursor-pointer"
+            >
+              <FaFileDownload className="w-3.5 h-3.5" />
+              <span>Resume</span>
+            </a>
 
-            {/* Mobile Menu Button - Visible on smaller screens */}
-            <motion.button
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden relative p-2 sm:p-3 text-[#8245ec] hover:text-white transition-colors duration-300"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              className="lg:hidden p-2.5 rounded-full bg-gray-950/80 backdrop-blur-xl border border-white/10 text-gray-300 hover:text-white shadow-lg transition-all cursor-pointer"
+              aria-label="Toggle Navigation"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#8245ec]/10 to-blue-500/10 rounded-lg"></div>
-              {isOpen ? (
-                <FiX size={20} className="relative z-10 sm:w-6 sm:h-6" />
-              ) : (
-                <FiMenu size={20} className="relative z-10 sm:w-6 sm:h-6" />
-              )}
-            </motion.button>
+              {isOpen ? <FiX className="w-5 h-5 text-purple-400" /> : <FiMenu className="w-5 h-5" />}
+            </button>
           </div>
         </div>
+      </motion.header>
 
-        {/* Tablet Menu - Shows between mobile and desktop */}
-        <div className="hidden md:flex lg:hidden relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pb-2">
-          <div className="flex items-center justify-center space-x-1 overflow-x-auto scrollbar-hide">
-            {menuItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => handleMenuItemClick(item.id)}
-                className={`py-2 px-3 text-sm text-gray-300 hover:text-white transition-all duration-300 whitespace-nowrap rounded-lg ${
-                  activeSection === item.id
-                    ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 text-[#8245ec]"
-                    : "hover:bg-white/5"
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <div className="flex items-center gap-1">
-                  <span className="text-xs">{item.icon}</span>
-                  <span>{item.label}</span>
-                </div>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-
-        {/* Animated Mobile Menu */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="absolute top-full left-0 right-0 max-h-[calc(100vh-70px)] overflow-y-auto bg-gray-950/98 backdrop-blur-2xl border-t border-white/10 shadow-2xl md:hidden scrollbar-hide"
-            >
-              <div className="max-w-7xl mx-auto px-4 py-4 sm:py-6">
-                <div className="space-y-2">
-                  {menuItems.map((item, index) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <button
-                        onClick={() => handleMenuItemClick(item.id)}
-                        className={`w-full text-left py-3 sm:py-4 px-4 sm:px-6 rounded-xl transition-all duration-300 flex items-center justify-between ${
-                          activeSection === item.id
-                            ? "bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 text-[#8245ec] border border-[#8245ec]/30"
-                            : "text-gray-300 hover:text-white hover:bg-white/5"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <span className="text-base sm:text-lg">{item.icon}</span>
-                          <span className="font-medium text-sm sm:text-base">{item.label}</span>
-                        </div>
-                        {activeSection === item.id && (
-                          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
-                        )}
-                      </button>
-                    </motion.div>
-                  ))}
-
-                  {/* Mobile Social Links */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                    className="pt-4 sm:pt-6 border-t border-white/10"
+      {/* Mobile Glass Navigation Drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-x-4 top-20 z-50 rounded-3xl bg-gray-950/95 backdrop-blur-2xl border border-white/10 p-5 shadow-2xl lg:hidden"
+          >
+            <div className="space-y-1.5">
+              {MENU_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => scrollToSection(item.id)}
+                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                      isActive
+                        ? "bg-gradient-to-r from-[#8245ec]/25 to-blue-500/20 text-white border border-[#8245ec]/40 font-semibold"
+                        : "text-gray-300 hover:bg-white/5 hover:text-white"
+                    }`}
                   >
-                    <div className="flex items-center justify-center space-x-4 sm:space-x-6">
-                      <motion.a
-                        href="https://github.com/piyush7467"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 sm:p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <FaGithub size={20} className="sm:w-6 sm:h-6" />
-                      </motion.a>
-                      <motion.a
-                        href="https://www.linkedin.com/in/piyush7467"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 sm:p-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-full transition-all duration-300"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <FaLinkedin size={20} className="sm:w-6 sm:h-6" />
-                      </motion.a>
-                      <motion.a
-                        href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 sm:px-5 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-[#8245ec] to-blue-600 text-white font-medium text-xs sm:text-sm flex items-center gap-2"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <FaFileDownload size={14} className="sm:w-4 sm:h-4" />
-                        Resume
-                      </motion.a>
-                    </div>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+                    <span>{item.label}</span>
+                    {isActive && <Sparkles className="w-4 h-4 text-[#8245ec]" />}
+                  </button>
+                );
+              })}
 
-      {/* Enhanced Scroll to Top Button */}
+              <div className="pt-4 mt-3 border-t border-white/10 flex items-center justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsOpen(false);
+                    openTerminal();
+                  }}
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-white/5 border border-purple-500/30 text-purple-300 text-xs font-mono font-semibold"
+                >
+                  <TerminalIcon className="w-4 h-4" />
+                  <span>Terminal (⌘K)</span>
+                </button>
+
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-gradient-to-r from-[#8245ec] to-blue-600 text-white text-xs font-bold"
+                >
+                  <FaFileDownload className="w-3.5 h-3.5" />
+                  <span>Resume</span>
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Scroll to Top Pill */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.5 }}
-            onClick={scrollToTop}
-            className="fixed bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 z-40 p-3 sm:p-4 bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700 text-white rounded-full shadow-2xl hover:shadow-[#8245ec]/50 transition-all duration-300 group overflow-hidden"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            exit={{ opacity: 0, scale: 0.6 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-gray-950/85 backdrop-blur-xl border border-white/15 text-white shadow-2xl hover:border-purple-500/50 hover:shadow-purple-500/20 transition-all cursor-pointer"
             aria-label="Scroll to top"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <FiArrowUp size={16} className="relative z-10 sm:w-5 sm:h-5" />
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#8245ec] to-blue-600 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+            <FiArrowUp className="w-4 h-4 text-purple-300" />
           </motion.button>
         )}
       </AnimatePresence>
     </>
   );
-};
-
-export default Navbar;
-
-
-
-// import React, { useState, useEffect } from "react";
-// import { FiMenu, FiX } from "react-icons/fi";
-// import { FaGithub, FaLinkedin } from "react-icons/fa";
-
-// const Navbar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [activeSection, setActiveSection] = useState("");
-//   const [isScrolled, setIsScrolled] = useState(false);
-
-//   // Detect scroll and change navbar background
-//   useEffect(() => {
-//     const handleScroll = () => {
-//       setIsScrolled(window.scrollY > 50);
-//     };
-
-//     window.addEventListener("scroll", handleScroll);
-//     return () => window.removeEventListener("scroll", handleScroll);
-//   }, []);
-
-//   // Smooth scroll function
-//   const handleMenuItemClick = (sectionId) => {
-//     setActiveSection(sectionId);
-//     setIsOpen(false);
-
-//     const section = document.getElementById(sectionId);
-//     if (section) {
-//       section.scrollIntoView({ behavior: "smooth" });
-//     }
-//   };
-
-//   const menuItems = [
-//     { id: "about", label: "About" },
-//     { id: "skills", label: "Skills" },
-//     { id: "experience", label: "Experience" },
-//     { id: "work", label: "Projects" },
-//     { id: "education", label: "Education" },
-//     { id: "contact", label: "Contact" },
-//   ];
-
-//   return (
-//     <nav
-//       className={`fixed top-0 w-full z-50 transition duration-300 px-[7vw] md:px-[7vw] lg:px-[20vw] ${
-//         isScrolled ? "bg-[#050414] bg-opacity-50 backdrop-blur-md shadow-md" : "bg-transparent"
-//       }`}
-//     >
-//       <div className="text-white py-5 flex justify-between items-center">
-//         {/* Logo */}
-//         <div className="text-lg font-semibold cursor-pointer">
-//           <span className="text-[#8245ec]">&lt;</span>
-//           <span className="text-white">Piyush</span>
-//           <span className="text-[#8245ec]">/</span>
-//           <span className="text-white">Shakya</span>
-//           <span className="text-[#8245ec]">&gt;</span>
-//         </div>
-
-//         {/* Desktop Menu */}
-//         <ul className="hidden md:flex space-x-8 text-gray-300">
-//           {menuItems.map((item) => (
-//             <li
-//               key={item.id}
-//               className={`cursor-pointer hover:text-[#8245ec] ${
-//                 activeSection === item.id ? "text-[#8245ec]" : ""
-//               }`}
-//             >
-//               <button onClick={() => handleMenuItemClick(item.id)}>
-//                 {item.label}
-//               </button>
-//             </li>
-//           ))}
-//         </ul>
-
-//         {/* Social Icons */}
-//         <div className="hidden md:flex space-x-4">
-//           <a
-//             href="https://github.com/piyush7467"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="text-gray-300 hover:text-[#8245ec]"
-//           >
-//             <FaGithub size={24} />
-//           </a>
-//           <a
-//             href="https://www.linkedin.com/in/piyush7467"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="text-gray-300 hover:text-[#8245ec]"
-//           >
-//             <FaLinkedin size={24} />
-//           </a>
-//         </div>
-
-//         {/* Mobile Menu Icon */}
-//         <div className="md:hidden">
-//           {isOpen ? (
-//             <FiX
-//               className="text-3xl text-[#8245ec] cursor-pointer"
-//               onClick={() => setIsOpen(false)}
-//             />
-//           ) : (
-//             <FiMenu
-//               className="text-3xl text-[#8245ec] cursor-pointer"
-//               onClick={() => setIsOpen(true)}
-//             />
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Mobile Menu Items */}
-//       {isOpen && (
-//         <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-4/5 bg-[#050414] bg-opacity-50 backdrop-filter backdrop-blur-lg z-50 rounded-lg shadow-lg md:hidden">
-//           <ul className="flex flex-col items-center space-y-4 py-4 text-gray-300">
-//             {menuItems.map((item) => (
-//               <li
-//                 key={item.id}
-//                 className={`cursor-pointer hover:text-white ${
-//                   activeSection === item.id ? "text-[#8245ec]" : ""
-//                 }`}
-//               >
-//                 <button onClick={() => handleMenuItemClick(item.id)}>
-//                   {item.label}
-//                 </button>
-//               </li>
-//             ))}
-//             <div className="flex space-x-4">
-//               <a
-//                 href="https://github.com/piyush7467"
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="text-gray-300 hover:text-white"
-//               >
-//                 <FaGithub size={24} />
-//               </a>
-//               <a
-//                 href="https://www.linkedin.com/in/piyush7467"
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="text-gray-300 hover:text-white"
-//               >
-//                 <FaLinkedin size={24} />
-//               </a>
-//             </div>
-//           </ul>
-//         </div>
-//       )}
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
+}

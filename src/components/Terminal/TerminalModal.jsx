@@ -91,8 +91,11 @@ const TerminalModal = () => {
 
   const currentTheme = THEMES[themeKey] || THEMES.dark;
 
-  // Global Ctrl+K / Cmd+K listener
+  // Global Ctrl+K / Cmd+K and custom event listener
   useEffect(() => {
+    const handleOpenCustom = () => setIsOpen(true);
+    window.addEventListener("open-terminal", handleOpenCustom);
+
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
@@ -103,7 +106,10 @@ const TerminalModal = () => {
       }
     };
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("open-terminal", handleOpenCustom);
+    };
   }, [isOpen]);
 
   // Focus input when modal opens

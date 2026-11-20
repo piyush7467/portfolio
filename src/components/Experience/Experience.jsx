@@ -1,295 +1,160 @@
 import React from "react";
 import { usePortfolio } from "../../context/PortfolioContext";
 import { motion } from "framer-motion";
-import { Calendar, Briefcase, ChevronRight, Award, Sparkles, Zap } from "lucide-react";
+import { Briefcase, Calendar, Building2, Sparkles, Layers, CheckCircle2 } from "lucide-react";
+import SectionHeader from "../ui/SectionHeader";
+import SpotlightCard from "../ui/SpotlightCard";
+import SquircleLogo from "../ui/SquircleLogo";
+import GlassBadge from "../ui/GlassBadge";
 
 const Experience = () => {
   const { experiences } = usePortfolio();
+
   return (
     <section
       id="experience"
-      className="relative py-10 sm:py-14 md:py-16 px-3 sm:px-6 md:px-8 lg:px-16 xl:px-32 font-sans overflow-hidden bg-gray-950"
+      className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8 lg:px-16 xl:px-24 overflow-hidden bg-gray-950 font-sans"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }}></div>
+      {/* Background Ambience */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse delay-700" />
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)`,
+            backgroundSize: "32px 32px",
+          }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Section Header with Floating Elements */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-8 sm:mb-12"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-[#8245ec]/20 to-blue-500/20 backdrop-blur-sm border border-[#8245ec]/30 mb-4">
-            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#8245ec]" />
-            <span className="text-xs sm:text-sm font-medium text-gray-300">Career Timeline</span>
-          </div>
-          
-          <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-white">
-              Professional
-            </span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8245ec] via-purple-400 to-[#8245ec] animate-gradient">
-              Journey
-            </span>
-          </h2>
-          
-          <div className="flex items-center justify-center gap-2 sm:gap-4 mb-6 sm:mb-8">
-            <div className="h-px w-8 sm:w-12 md:w-20 bg-gradient-to-r from-transparent via-[#8245ec] to-transparent"></div>
-            <p className="text-xs sm:text-base md:text-xl text-gray-400 max-w-2xl px-2">
-              From hackathons to production projects - every step in my development journey
-            </p>
-            <div className="h-px w-8 sm:w-12 md:w-20 bg-gradient-to-l from-transparent via-[#8245ec] to-transparent"></div>
-          </div>
-        </motion.div>
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Unified Section Header */}
+        <SectionHeader
+          badge="Career Timeline"
+          badgeIcon={Briefcase}
+          titlePrefix="Production"
+          titleHighlight="Experience"
+          titleSuffix="& Roles"
+          description="Software engineering roles, scalable full-stack applications, and production contributions."
+        />
 
-        {/* Timeline Container with Floating Orbs */}
-        <div className="relative">
+        {/* Timeline Container */}
+        <div className="relative mt-12 sm:mt-16">
           {(!experiences || experiences.length === 0) ? (
-            <div className="text-center py-16 px-4 rounded-3xl bg-white/[0.02] border border-white/5 max-w-md mx-auto space-y-3">
+            <div className="text-center py-16 px-6 rounded-3xl bg-white/[0.02] border border-white/5 max-w-md mx-auto space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto text-purple-400">
                 <Briefcase className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-semibold text-white">No Experience Records Yet</h3>
+              <h3 className="text-base font-semibold text-white">No Experience Records Available</h3>
               <p className="text-xs text-gray-400">
-                Professional roles, internships, and work history will appear here once added in the admin console.
+                Professional roles and internships stream live from the admin console.
               </p>
             </div>
           ) : (
             <>
-              {/* Floating Orbs along timeline */}
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute left-4 sm:left-6 md:left-1/2 top-1/4 transform -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-gradient-to-r from-[#8245ec] to-blue-500 blur-sm"
-              ></motion.div>
-              <motion.div
-                animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute left-4 sm:left-6 md:left-1/2 top-3/4 transform -translate-x-1/2 w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-gradient-to-r from-blue-500 to-[#8245ec] blur-sm"
-              ></motion.div>
+              {/* Central / Left Laser Timeline Track */}
+              <div className="absolute left-6 sm:left-8 md:left-1/2 md:-translate-x-1/2 top-4 bottom-8 w-0.5 bg-gradient-to-b from-purple-500/40 via-purple-500/20 to-transparent pointer-events-none" />
 
-              {/* Animated Timeline Line */}
-              <div className="absolute left-4 sm:left-6 md:left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-0.5">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#8245ec]/40 to-transparent"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-[#8245ec] via-transparent to-[#8245ec] animate-pulse"></div>
-              </div>
+              {/* Experience Cards */}
+              <div className="space-y-10 sm:space-y-14">
+                {experiences.map((exp, index) => {
+                  const isEven = index % 2 === 0;
 
-              {/* Timeline Items */}
-              <div className="space-y-8 sm:space-y-12 md:space-y-16">
-                {experiences.map((experience, index) => (
-                  <motion.div
-                    key={experience.id || index}
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.12 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    className={`relative flex flex-col md:flex-row items-start md:items-center ${
-                      index % 2 === 0 ? "md:justify-start" : "md:justify-end"
-                    }`}
-                  >
-                    {/* Animated Timeline Dot */}
-                    <div className="absolute left-4 sm:left-6 md:left-1/2 transform -translate-x-1/2 z-20 top-6 md:top-auto">
-                      <div className="relative">
-                        <motion.div
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                          className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7 rounded-full bg-gradient-to-br from-[#8245ec] to-blue-500 shadow-lg shadow-[#8245ec]/40"
-                        ></motion.div>
-                        <div className="absolute inset-0 rounded-full bg-[#8245ec] animate-ping opacity-20"></div>
-                      </div>
-                    </div>
-
-                    {/* Date Indicator (Desktop) */}
-                    <div className={`hidden md:flex absolute top-4 items-center gap-2 ${
-                      index % 2 === 0 ? "left-[calc(50%+3rem)]" : "right-[calc(50%+3rem)]"
-                    }`}>
-                      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-gray-900 to-gray-800 backdrop-blur-sm border border-white/10">
-                        <Calendar className="w-4 h-4 text-[#8245ec]" />
-                        <span className="text-sm text-gray-300">{experience.date}</span>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-[#8245ec]" />
-                    </div>
-
-                    {/* Experience Card Wrapper */}
-                    <div className={`w-full md:w-[calc(50%-4rem)] ${
-                      index % 2 === 0 ? "md:pr-16" : "md:pl-16"
-                    } pl-8 sm:pl-12 md:pl-0`}>
-                      <motion.div
-                        whileHover={{ scale: 1.01, y: -4 }}
-                        className="group relative"
-                      >
-                        {/* Glow Effect */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
-                        
-                        {/* Main Card */}
-                        <div className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/60 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden">
-                          {/* Background Pattern */}
-                          <div className="absolute inset-0 opacity-5">
-                            <div className="absolute inset-0" style={{
-                              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.2) 1px, transparent 0)`,
-                              backgroundSize: '20px 20px'
-                            }}></div>
+                  return (
+                    <motion.div
+                      key={exp.id || index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      className="relative"
+                    >
+                      {/* Timeline Glowing Node */}
+                      <div className="absolute left-6 sm:left-8 md:left-1/2 -translate-x-1/2 top-7 z-20">
+                        <div className="relative flex items-center justify-center">
+                          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gray-900 border-2 border-purple-500/80 shadow-lg shadow-purple-500/30 flex items-center justify-center">
+                            <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
                           </div>
+                          <div className="absolute inset-0 rounded-full bg-purple-500 animate-ping opacity-25" />
+                        </div>
+                      </div>
 
-                          <div className="relative p-4 sm:p-6 md:p-8">
-                            {/* Card Header */}
-                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 mb-4 sm:mb-6">
-                              {/* Enhanced Logo Container */}
-                              <div className="flex-shrink-0 relative self-start sm:self-auto">
-                                <div className="relative w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/10 bg-gradient-to-br from-gray-800 to-gray-900 p-1.5 sm:p-2 flex items-center justify-center">
-                                  {experience.img ? (
-                                    <img
-                                      src={experience.img}
-                                      alt={experience.company || 'Company logo'}
-                                      className="w-full h-full object-contain rounded-lg"
-                                    />
-                                  ) : (
-                                    <Briefcase className="w-7 h-7 sm:w-9 sm:h-9 text-purple-400 opacity-80" />
-                                  )}
-                                  {/* Logo Glow */}
-                                  <div className="absolute inset-0 bg-gradient-to-br from-[#8245ec]/10 to-transparent rounded-lg"></div>
-                                </div>
-                                
-                                {/* Role Indicator Badge */}
-                                <div className={`absolute -top-2 -right-2 px-2 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold ${
-                                  index === 0 ? "bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-400 border border-green-500/30" :
-                                  index === 1 ? "bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-400 border border-blue-500/30" :
-                                  index === 2 ? "bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-400 border border-purple-500/30" :
-                                  "bg-gradient-to-r from-orange-500/20 to-yellow-500/20 text-orange-400 border border-orange-500/30"
-                                }`}>
-                                  {index === 0 ? "Current" : "Previous"}
-                                </div>
-                              </div>
+                      {/* Card Content - Responsive Alternating on Desktop */}
+                      <div
+                        className={`ml-14 sm:ml-16 md:ml-0 md:w-[calc(50%-2rem)] ${
+                          isEven
+                            ? "md:pr-4 md:mr-auto"
+                            : "md:pl-4 md:ml-auto"
+                        }`}
+                      >
+                        <SpotlightCard
+                          spotlightColor="rgba(168, 85, 247, 0.15)"
+                          className="p-5 sm:p-7 group"
+                        >
+                          {/* Card Header */}
+                          <div className="flex flex-col sm:flex-row sm:items-start gap-4 mb-4">
+                            <SquircleLogo
+                              src={exp.img}
+                              alt={exp.company || "Company Logo"}
+                              fallbackIcon={Building2}
+                              size="lg"
+                            />
 
-                              {/* Title and Info */}
-                              <div className="flex-1">
-                                <div className="space-y-1 sm:space-y-2">
-                                  <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white leading-tight">
-                                    {experience.role}
-                                  </h3>
-                                  <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 flex-shrink-0" />
-                                    <span className="text-sm sm:text-lg text-gray-300 font-medium">{experience.company}</span>
-                                  </div>
-                                  
-                                  {/* Mobile Date Tag */}
-                                  <div className="flex items-center gap-1.5 md:hidden pt-0.5">
-                                    <Calendar className="w-3.5 h-3.5 text-[#8245ec] flex-shrink-0" />
-                                    <span className="text-xs sm:text-sm text-purple-300">{experience.date}</span>
-                                  </div>
-                                </div>
+                            <div className="min-w-0 flex-1 space-y-1.5">
+                              <h3 className="text-base sm:text-lg md:text-xl font-bold font-display text-white leading-snug">
+                                {exp.role}
+                              </h3>
+
+                              <div className="flex flex-wrap items-center gap-2">
+                                <GlassBadge variant="purple">
+                                  <Building2 className="w-3 h-3 mr-1 inline" />
+                                  {exp.company}
+                                </GlassBadge>
+
+                                {exp.date && (
+                                  <span className="inline-flex items-center gap-1 text-[11px] font-mono text-gray-400">
+                                    <Calendar className="w-3 h-3 text-purple-400" />
+                                    <span>{exp.date}</span>
+                                  </span>
+                                )}
                               </div>
                             </div>
-
-                            {/* Description */}
-                            {experience.desc && (
-                              <div className="mb-4 sm:mb-6 relative">
-                                <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#8245ec] to-transparent"></div>
-                                <p className="text-gray-400 pl-3 sm:pl-4 text-xs sm:text-sm md:text-base leading-relaxed">
-                                  {experience.desc}
-                                </p>
-                              </div>
-                            )}
-
-                            {/* Skills Section */}
-                            {Array.isArray(experience.skills) && experience.skills.length > 0 && (
-                              <div className="space-y-3 sm:space-y-4">
-                                <div className="flex items-center gap-2 sm:gap-3">
-                                  <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
-                                    <Zap className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#8245ec]" />
-                                  </div>
-                                  <span className="font-semibold text-white text-xs sm:text-sm md:text-base">Technologies & Skills</span>
-                                </div>
-                                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                                  {experience.skills.map((skill, skillIndex) => (
-                                    <motion.span
-                                      key={skillIndex}
-                                      initial={{ scale: 0 }}
-                                      whileInView={{ scale: 1 }}
-                                      transition={{ duration: 0.3, delay: skillIndex * 0.04 }}
-                                      className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-[11px] sm:text-xs md:text-sm font-medium bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 hover:text-white hover:from-[#8245ec]/20 hover:to-purple-500/20 transition-all duration-300 border border-white/10 hover:border-[#8245ec]/30 cursor-pointer group"
-                                    >
-                                      <span className="flex items-center gap-1">
-                                        {skill}
-                                        <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-1 transition-all duration-300 hidden sm:inline" />
-                                      </span>
-                                    </motion.span>
-                                  ))}
-                                </div>
-                              </div>
-                            )}
-
-                            {/* Achievement Badge */}
-                            {index === 0 && (
-                              <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-white/10">
-                                <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
-                                  <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-400" />
-                                  <span className="text-xs sm:text-sm text-green-300 font-medium">Latest Experience</span>
-                                </div>
-                              </div>
-                            )}
                           </div>
-                        </div>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                ))}
+
+                          {/* Impact & Responsibilities Narrative */}
+                          {exp.desc && (
+                            <p className="text-xs sm:text-sm text-gray-300/90 leading-relaxed font-sans mb-4 bg-white/[0.02] p-3.5 rounded-xl border border-white/5">
+                              {exp.desc}
+                            </p>
+                          )}
+
+                          {/* Tech Stacks / Skills Chips */}
+                          {exp.skills && exp.skills.length > 0 && (
+                            <div className="space-y-2 pt-2 border-t border-white/5">
+                              <span className="text-[10px] font-mono uppercase font-semibold text-gray-400 tracking-wider flex items-center gap-1">
+                                <Layers className="w-3 h-3 text-purple-400" />
+                                Technologies &amp; Architecture:
+                              </span>
+                              <div className="flex flex-wrap gap-1.5">
+                                {exp.skills.map((skill, sIdx) => (
+                                  <GlassBadge key={sIdx} variant="default">
+                                    {skill}
+                                  </GlassBadge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </SpotlightCard>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </>
           )}
         </div>
-
-        {/* Journey Progress */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-12 sm:mt-16 md:mt-20 text-center"
-        >
-          <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 px-4 py-3 sm:px-6 sm:py-4 rounded-2xl bg-gradient-to-r from-gray-900/50 to-gray-800/30 backdrop-blur-xl border border-white/10">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="relative">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-gradient-to-r from-[#8245ec] to-blue-500 animate-pulse"></div>
-                <div className="absolute inset-0 rounded-full bg-[#8245ec] animate-ping opacity-30"></div>
-              </div>
-              <span className="text-xs sm:text-sm md:text-base text-gray-300">Always expanding my expertise</span>
-            </div>
-            <div className="h-4 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent hidden sm:block"></div>
-            <span className="text-xs sm:text-sm text-gray-400">
-              Currently exploring: <span className="text-[#8245ec] font-medium">Next.js, TypeScript, AWS</span>
-            </span>
-          </div>
-        </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes gradient {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
     </section>
   );
 };
