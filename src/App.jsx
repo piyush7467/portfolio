@@ -23,7 +23,7 @@ function AppContent() {
   });
 
   return (
-    <div className="bg-[#050414] min-h-screen text-white selection:bg-[#8245ec] selection:text-white overflow-x-hidden w-full max-w-[100vw]">
+    <div className="bg-[#050414] min-h-screen text-white selection:bg-[#8245ec] selection:text-white overflow-x-clip w-full max-w-[100vw]">
       {/* Interactive WebGL Fluid Splash Cursor Effect */}
       <SplashCursor />
 
