@@ -83,13 +83,13 @@ export function PortfolioProvider({ children }) {
           if (Array.isArray(data.education)) {
             const mappedEdu = data.education.map((edu, idx) => ({
               id: edu.id || idx,
-              img: edu.logoUrl || null,
+              img: edu.logoUrl || edu.img || null,
               school: edu.school || '',
               degree: edu.degree || '',
-              date: edu.duration || '',
+              date: edu.duration || edu.date || '',
               grade: edu.grade || '',
-              desc: edu.description || '',
-              keyFocus: Array.isArray(edu.keyFocus) ? edu.keyFocus : [],
+              desc: edu.description || edu.desc || '',
+              keyFocus: Array.isArray(edu.keyFocus) ? edu.keyFocus : (Array.isArray(edu.keyFocusAreas) ? edu.keyFocusAreas : []),
             }));
             setEducation(mappedEdu);
           } else {
