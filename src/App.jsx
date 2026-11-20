@@ -11,6 +11,8 @@ import Skills from './components/Skills/Skills'
 import Work from './components/Work/Work'
 import Certificates from './components/Certificates/Certificates'
 import TerminalModal from './components/Terminal/TerminalModal'
+import CustomCursor from './components/ui/CustomCursor'
+import SplashCursor from './components/ui/SplashCursor'
 
 function AppContent() {
   const { scrollYProgress } = useScroll();
@@ -22,6 +24,12 @@ function AppContent() {
 
   return (
     <div className="bg-[#050414] min-h-screen text-white selection:bg-[#8245ec] selection:text-white overflow-x-hidden w-full max-w-[100vw]">
+      {/* Interactive WebGL Fluid Splash Cursor Effect */}
+      <SplashCursor />
+
+      {/* Interactive Spring Follower Cursor Ring */}
+      <CustomCursor />
+
       {/* Top Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#8245ec] via-purple-400 to-blue-500 origin-left z-50 shadow-md shadow-[#8245ec]/50"
@@ -36,7 +44,7 @@ function AppContent() {
         <Education />
         <Skills /> 
         <Work />
-        <Certificates/>
+        <Certificates />
         <Experience />
         <Contact />
         <Footer />
@@ -57,4 +65,3 @@ function App() {
 }
 
 export default App
-
