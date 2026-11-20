@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { certificates } from "../../constants";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Award, 
@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 const Certificates = () => {
+  const { certificates } = usePortfolio();
   const [selectedCertificate, setSelectedCertificate] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [imageLoaded, setImageLoaded] = useState({});

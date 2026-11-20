@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion, useScroll, useSpring } from 'framer-motion'
+import { PortfolioProvider } from './context/PortfolioContext'
 import About from './components/About/About'
 import Contact from './components/Contact/Contact'
 import Education from './components/Education/Education'
@@ -11,7 +12,7 @@ import Work from './components/Work/Work'
 import Certificates from './components/Certificates/Certificates'
 import TerminalModal from './components/Terminal/TerminalModal'
 
-function App() {
+function AppContent() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -44,7 +45,16 @@ function App() {
       {/* Interactive Developer Terminal Modal */}
       <TerminalModal />
     </div>
-  )
+  );
+}
+
+function App() {
+  return (
+    <PortfolioProvider>
+      <AppContent />
+    </PortfolioProvider>
+  );
 }
 
 export default App
+

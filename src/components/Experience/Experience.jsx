@@ -1,9 +1,10 @@
 import React from "react";
-import { experiences } from "../../constants";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { motion } from "framer-motion";
 import { Calendar, Briefcase, ChevronRight, Award, Sparkles, Zap } from "lucide-react";
 
 const Experience = () => {
+  const { experiences } = usePortfolio();
   return (
     <section
       id="experience"

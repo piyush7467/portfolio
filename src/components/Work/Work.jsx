@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { projects } from "../../constants";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ExternalLink, 
@@ -114,6 +114,7 @@ const PROJECT_DETAILS = {
 };
 
 const Work = () => {
+  const { projects } = usePortfolio();
   const [selectedProject, setSelectedProject] = useState(null);
   const [hoveredProject, setHoveredProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -543,7 +544,7 @@ const Work = () => {
 
                 {/* Action Buttons Footer */}
                 <div className="flex flex-col sm:flex-row gap-2.5 pt-4 border-t border-gray-800">
-                  {selectedProject.github ? (
+                  {selectedProject.github && (
                     <a
                       href={selectedProject.github}
                       target="_blank"
@@ -553,10 +554,6 @@ const Work = () => {
                       <Github className="w-4 h-4 text-gray-300 group-hover:text-white" />
                       <span>View Source Code ↗</span>
                     </a>
-                  ) : (
-                    <div className="flex-1 px-3 py-2.5 rounded-xl bg-gray-900/50 border border-gray-800 text-gray-500 text-xs text-center font-medium">
-                      Source Repository Private
-                    </div>
                   )}
 
                   {selectedProject.webapp && (
@@ -568,6 +565,18 @@ const Work = () => {
                     >
                       <ExternalLink className="w-4 h-4" />
                       <span>Visit Live Application ↗</span>
+                    </a>
+                  )}
+
+                  {selectedProject.studioShowcaseUrl && (
+                    <a
+                      href={selectedProject.studioShowcaseUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-purple-950/40 hover:bg-purple-900/60 text-purple-200 font-semibold text-xs sm:text-sm border border-purple-500/30 transition-all cursor-pointer"
+                    >
+                      <Sparkles className="w-4 h-4 text-purple-400" />
+                      <span>PiyushStudio 3D Showcase ↗</span>
                     </a>
                   )}
                 </div>

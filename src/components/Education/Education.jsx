@@ -1,9 +1,10 @@
 import React from "react";
-import { education } from "../../constants";
+import { usePortfolio } from "../../context/PortfolioContext";
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, Award, BookOpen, ChevronRight, Sparkles } from "lucide-react";
 
 const Education = () => {
+  const { education } = usePortfolio();
   return (
     <section
       id="education"
@@ -297,6 +298,7 @@ export default Education;
 // import { education } from "../../constants"; // Import the education data
 
 // const Education = () => {
+  const { education } = usePortfolio();
 //   return (
 //     <section
 //       id="education"
