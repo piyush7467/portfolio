@@ -16,11 +16,16 @@ const defaultPortfolioContextValue = {
     resumeUrl: '',
     openToWork: true,
   },
-  projects: defaultProjects,
-  experiences: defaultExperiences,
-  education: defaultEducation,
-  certificates: defaultCertificates,
-  skills: defaultSkills,
+  // projects: defaultProjects,
+  // experiences: defaultExperiences,
+  // education: defaultEducation,
+  // certificates: defaultCertificates,
+  // skills: defaultSkills,
+   projects: [],        // <--- was defaultProjects
+  experiences: [],     // <--- was defaultExperiences
+  education: [],       // <--- was defaultEducation
+  certificates: [],    // <--- was defaultCertificates
+  skills: [],
   isLive: false,
 };
 
