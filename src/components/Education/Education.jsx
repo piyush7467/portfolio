@@ -188,7 +188,7 @@ const Education = () => {
                           <span className="text-sm sm:text-base font-medium text-white">Key Focus</span>
                         </div>
                         <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                          {getFocusAreas(edu.degree).slice(0, window.innerWidth < 640 ? 2 : 3).map((area, idx) => (
+                          {(edu.keyFocus && edu.keyFocus.length > 0 ? edu.keyFocus : keyFocusAreas(edu.degree)).map((area, idx) => (
                             <span
                               key={idx}
                               className="px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs font-medium bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 border border-white/10"

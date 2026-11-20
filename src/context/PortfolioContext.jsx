@@ -112,6 +112,7 @@ export function PortfolioProvider({ children }) {
             date: edu.duration,
             grade: edu.grade,
             desc: edu.description,
+            keyFocus: edu.keyFocus || [],
           }));
           setEducation(mappedEdu);
         } else {
