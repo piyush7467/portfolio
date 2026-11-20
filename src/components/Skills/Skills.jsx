@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
-import { SkillsInfo } from "../../constants";
+import { SkillsInfo } from "../../data/skillsData";
 import { 
   Cpu, 
   Code2, 
@@ -582,7 +582,7 @@ export default Skills;
 
 // // src/components/Skills/Skills.jsx
 // import React from "react";
-// import { SkillsInfo } from "../../constants";
+// import { SkillsInfo } from "../../data/skillsData";
 // import Tilt from "react-parallax-tilt";
 
 // const Skills = () => (

@@ -1,7 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Terminal as TerminalIcon, X, Maximize2, Minimize2, CornerDownLeft, ExternalLink, Github, Mail, Phone, Linkedin, Award, Briefcase, Cpu, Palette, Activity } from "lucide-react";
-import { projects, SkillsInfo, experiences, certificates } from "../../constants";
+import { usePortfolio } from "../../context/PortfolioContext";
+
+const SKILLS_OVERVIEW = [
+  { title: "Frontend", skills: [{ name: "HTML" }, { name: "CSS" }, { name: "JavaScript" }, { name: "React JS" }, { name: "Redux" }, { name: "Tailwind CSS" }, { name: "Bootstrap" }] },
+  { title: "Backend", skills: [{ name: "Spring Boot" }, { name: "Node JS" }, { name: "Express JS" }, { name: "MySQL" }, { name: "MongoDB" }, { name: "PostgreSQL" }, { name: "REST APIs" }] },
+  { title: "Languages", skills: [{ name: "Java" }, { name: "Kotlin" }, { name: "C" }, { name: "C++" }, { name: "JavaScript" }, { name: "SQL" }] },
+  { title: "Tools & Cloud", skills: [{ name: "Git" }, { name: "GitHub" }, { name: "Docker" }, { name: "Postman" }, { name: "Vercel" }, { name: "Render" }, { name: "Android Studio" }] }
+];
 
 const THEMES = {
   dark: {
@@ -53,6 +60,7 @@ const COMMAND_LIST = [
 ];
 
 const TerminalModal = () => {
+  const { projects = [], experiences = [], certificates = [] } = usePortfolio();
   const [isOpen, setIsOpen] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [inputVal, setInputVal] = useState("");
@@ -266,7 +274,7 @@ const TerminalModal = () => {
                 <span>SKILLSET SUMMARY:</span>
                 <span className="text-xs text-gray-400">25+ Core Technologies</span>
               </div>
-              {SkillsInfo.map((cat, i) => (
+              {SKILLS_OVERVIEW.map((cat, i) => (
                 <div key={i} className="bg-gray-900/50 p-2.5 sm:p-3 rounded-lg border border-gray-800">
                   <div className="text-cyan-400 font-bold mb-1.5 flex items-center gap-1.5 text-xs sm:text-sm">
                     <Cpu className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-purple-400" />

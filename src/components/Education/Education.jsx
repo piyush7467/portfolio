@@ -57,171 +57,185 @@ const Education = () => {
 
         {/* Education Timeline - Fully Responsive */}
         <div className="relative">
-          {/* Timeline Line - Responsive */}
-          <div className="absolute left-6 sm:left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#8245ec]/30 to-transparent"></div>
+          {(!education || education.length === 0) ? (
+            <div className="text-center py-16 px-4 rounded-3xl bg-white/[0.02] border border-white/5 max-w-md mx-auto space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto text-purple-400">
+                <GraduationCap className="w-6 h-6" />
+              </div>
+              <h3 className="text-base font-semibold text-white">No Academic Records Yet</h3>
+              <p className="text-xs text-gray-400">
+                Academic degrees and coursework will appear here once added in the admin console.
+              </p>
+            </div>
+          ) : (
+            <>
+              {/* Timeline Line - Responsive */}
+              <div className="absolute left-6 sm:left-8 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-transparent via-[#8245ec]/30 to-transparent"></div>
 
-          {/* Education Cards */}
-          <div className="space-y-8 sm:space-y-12">
-            {education.map((edu, index) => (
-              <motion.div
-                key={edu.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="relative"
-              >
-                {/* Timeline Indicator - Responsive */}
-                <div className="absolute left-0 sm:left-2 md:left-1/2 md:-translate-x-1/2 z-10">
-                  <div className="relative">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-[#8245ec] flex items-center justify-center">
-                      <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
-                    </div>
-                    <div className="absolute inset-0 rounded-full bg-[#8245ec] animate-ping opacity-20"></div>
-
-                    {/* Year Badge - Desktop Only */}
-                    {/* <div className={`absolute top-1/2 -translate-y-1/2 hidden md:flex items-center gap-2 ${
-                      index % 2 === 0 ? "left-14 lg:left-16" : "right-14 lg:right-16"
-                    }`}>
-                      <div className="flex items-center gap-2 px-2 py-1 lg:px-3 lg:py-1.5 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 border border-white/10">
-                        <Calendar className="w-3 h-3 text-[#8245ec]" />
-                        <span className="text-xs text-gray-300">{edu.date}</span>
-                      </div>
-                      <ChevronRight className="w-3 h-3 lg:w-4 lg:h-4 text-[#8245ec]" />
-                    </div> */}
-
-                    <div
-                      className={`hidden md:flex absolute top-6 items-center ${index % 2 === 0
-                          ? "left-[calc(50%+2rem)]"
-                          : "right-[calc(50%+2rem)] flex-row-reverse"
-                        }`}
-                    >
-                      <div className="flex items-center gap-3">
-
-                        {/* Line */}
-                        <div className="h-[2px] w-24 lg:w-32 bg-gradient-to-r from-[#8245ec] via-purple-400 to-transparent"></div>
-
-                        {/* Year Box */}
-                        <div className="px-4 py-1.5 rounded-md bg-white/5 backdrop-blur-md border border-white/10 text-sm text-gray-300">
-                          {edu.date}
+              {/* Education Cards */}
+              <div className="space-y-8 sm:space-y-12">
+                {education.map((edu, index) => (
+                  <motion.div
+                    key={edu.id || index}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.15 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    className="relative"
+                  >
+                    {/* Timeline Indicator - Responsive */}
+                    <div className="absolute left-0 sm:left-2 md:left-1/2 md:-translate-x-1/2 z-10">
+                      <div className="relative">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-gray-900 to-gray-800 border-2 border-[#8245ec] flex items-center justify-center">
+                          <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5 text-[#8245ec]" />
                         </div>
+                        <div className="absolute inset-0 rounded-full bg-[#8245ec] animate-ping opacity-20"></div>
 
-                        {/* Arrow */}
-                        <ChevronRight className={`w-4 h-4 text-[#8245ec] ${index % 2 === 0 ? "" : "rotate-180"
-                          }`} />
-                      </div>
-                    </div>
+                        <div
+                          className={`hidden md:flex absolute top-6 items-center ${index % 2 === 0
+                              ? "left-[calc(50%+2rem)]"
+                              : "right-[calc(50%+2rem)] flex-row-reverse"
+                            }`}
+                        >
+                          <div className="flex items-center gap-3">
+                            {/* Line */}
+                            <div className="h-[2px] w-24 lg:w-32 bg-gradient-to-r from-[#8245ec] via-purple-400 to-transparent"></div>
 
-                  </div>
-                </div>
-
-                {/* Education Card - Mobile First Design */}
-                <div className={`ml-14 sm:ml-16 md:ml-0 md:w-[calc(50%-1.5rem)] lg:w-[calc(50%-2rem)] ${index % 2 === 0
-                  ? "md:pr-4 lg:pr-8 xl:pr-12"
-                  : "md:pl-4 lg:pl-8 xl:pl-12 md:ml-auto"
-                  }`}>
-                  <div className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm md:backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 hover:border-[#8245ec]/30 transition-all duration-300 overflow-hidden">
-                    <div className="relative p-4 sm:p-5 md:p-6 lg:p-8">
-                      {/* Card Header - Stacked on Mobile */}
-                      <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
-                        {/* School Logo - Responsive */}
-                        <div className="flex-shrink-0">
-                          <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-lg md:rounded-xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-800 to-gray-900">
-                            <img
-                              src={edu.img}
-                              alt={edu.school}
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-br from-[#8245ec]/10 to-transparent"></div>
-                          </div>
-                        </div>
-
-                        {/* School Info - Responsive */}
-                        <div className="flex-1 min-w-0">
-                          <div className="space-y-1 sm:space-y-2">
-                            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight">
-                              {edu.degree}
-                            </h3>
-                            <div className="flex items-center gap-2">
-                              <div className="p-1 rounded bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
-                                <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
-                              </div>
-                              <span className="text-sm sm:text-base text-gray-300 truncate">{edu.school}</span>
+                            {/* Year Box */}
+                            <div className="px-4 py-1.5 rounded-md bg-white/5 backdrop-blur-md border border-white/10 text-sm text-gray-300">
+                              {edu.date}
                             </div>
 
-                            {/* Mobile Date & Grade */}
-                            <div className="flex flex-wrap items-center gap-3 md:hidden">
-                              <div className="flex items-center gap-1">
-                                <Calendar className="w-3 h-3 text-[#8245ec]" />
-                                <span className="text-xs text-gray-400">{edu.date}</span>
-                              </div>
-                              <div className="h-3 w-px bg-gray-700"></div>
-                              <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
-                                <Award className="w-3 h-3 text-green-400" />
-                                <span className="text-xs font-semibold text-green-300">{edu.grade}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Grade Badge - Desktop Only */}
-                        <div className="hidden md:block self-start">
-                          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
-                            <Award className="w-4 h-4 text-green-400" />
-                            <span className="text-sm font-semibold text-green-300">{edu.grade}</span>
+                            {/* Arrow */}
+                            <ChevronRight className={`w-4 h-4 text-[#8245ec] ${index % 2 === 0 ? "" : "rotate-180"}`} />
                           </div>
                         </div>
                       </div>
-
-                      {/* Description - Responsive */}
-                      <div className="mb-4 sm:mb-5 md:mb-6">
-                        <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#8245ec] to-transparent"></div>
-                        <p className="text-xs sm:text-sm md:text-base text-gray-400 pl-3 sm:pl-4 leading-relaxed">
-                          {edu.desc}
-                        </p>
-                      </div>
-
-                      {/* Key Learnings - Responsive */}
-                      <div className="space-y-2 sm:space-y-3">
-                        <div className="flex items-center gap-2">
-                          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
-                          <span className="text-sm sm:text-base font-medium text-white">Key Focus</span>
-                        </div>
-                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                          {(edu.keyFocus && edu.keyFocus.length > 0 ? edu.keyFocus : keyFocusAreas(edu.degree)).map((area, idx) => (
-                            <span
-                              key={idx}
-                              className="px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs font-medium bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 border border-white/10"
-                            >
-                              {area}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Progress Indicator - Desktop Only */}
-                      {index === 0 && (
-                        <div className="hidden md:block mt-4 lg:mt-6 pt-4 lg:pt-6 border-t border-white/10">
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="text-gray-400">Currently Pursuing</span>
-                            <div className="flex items-center gap-2">
-                              <div className="w-16 lg:w-24 h-1 bg-gray-800 rounded-full overflow-hidden">
-                                <div
-                                  className="h-full bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-full"
-                                  style={{ width: '85%' }}
-                                />
-                              </div>
-                              <span className="text-[#8245ec] font-medium">85%</span>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                     </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+
+                    {/* Education Card - Mobile First Design */}
+                    <div className={`ml-14 sm:ml-16 md:ml-0 md:w-[calc(50%-1.5rem)] lg:w-[calc(50%-2rem)] ${index % 2 === 0
+                      ? "md:pr-4 lg:pr-8 xl:pr-12"
+                      : "md:pl-4 lg:pl-8 xl:pl-12 md:ml-auto"
+                      }`}>
+                      <div className="group relative bg-gradient-to-br from-gray-900/80 to-gray-800/50 backdrop-blur-sm md:backdrop-blur-xl rounded-xl md:rounded-2xl border border-white/10 hover:border-[#8245ec]/30 transition-all duration-300 overflow-hidden">
+                        <div className="relative p-4 sm:p-5 md:p-6 lg:p-8">
+                          {/* Card Header - Stacked on Mobile */}
+                          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
+                            {/* School Logo - Responsive */}
+                            <div className="flex-shrink-0">
+                              <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-lg md:rounded-xl overflow-hidden border border-white/10 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                                {edu.img ? (
+                                  <img
+                                    src={edu.img}
+                                    alt={edu.school || "School"}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <GraduationCap className="w-6 h-6 md:w-8 md:h-8 text-[#8245ec]" />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-br from-[#8245ec]/10 to-transparent"></div>
+                              </div>
+                            </div>
+
+                            {/* School Info - Responsive */}
+                            <div className="flex-1 min-w-0">
+                              <div className="space-y-1 sm:space-y-2">
+                                <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white leading-tight">
+                                  {edu.degree}
+                                </h3>
+                                <div className="flex items-center gap-2">
+                                  <div className="p-1 rounded bg-gradient-to-r from-[#8245ec]/20 to-purple-500/20">
+                                    <BookOpen className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
+                                  </div>
+                                  <span className="text-sm sm:text-base text-gray-300 truncate">{edu.school}</span>
+                                </div>
+
+                                {/* Mobile Date & Grade */}
+                                <div className="flex flex-wrap items-center gap-3 md:hidden">
+                                  <div className="flex items-center gap-1">
+                                    <Calendar className="w-3 h-3 text-[#8245ec]" />
+                                    <span className="text-xs text-gray-400">{edu.date}</span>
+                                  </div>
+                                  {edu.grade && (
+                                    <>
+                                      <div className="h-3 w-px bg-gray-700"></div>
+                                      <div className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
+                                        <Award className="w-3 h-3 text-green-400" />
+                                        <span className="text-xs font-semibold text-green-300">{edu.grade}</span>
+                                      </div>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Grade Badge - Desktop Only */}
+                            {edu.grade && (
+                              <div className="hidden md:block self-start">
+                                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
+                                  <Award className="w-4 h-4 text-green-400" />
+                                  <span className="text-sm font-semibold text-green-300">{edu.grade}</span>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Description - Responsive */}
+                          {edu.desc && (
+                            <div className="mb-4 sm:mb-5 md:mb-6">
+                              <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#8245ec] to-transparent"></div>
+                              <p className="text-xs sm:text-sm md:text-base text-gray-400 pl-3 sm:pl-4 leading-relaxed">
+                                {edu.desc}
+                              </p>
+                            </div>
+                          )}
+
+                          {/* Key Learnings / Key Focus */}
+                          {edu.keyFocus && edu.keyFocus.length > 0 && (
+                            <div className="space-y-2 sm:space-y-3">
+                              <div className="flex items-center gap-2">
+                                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-[#8245ec]" />
+                                <span className="text-sm sm:text-base font-medium text-white">Key Focus</span>
+                              </div>
+                              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                                {edu.keyFocus.map((area, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="px-2 py-1 sm:px-3 sm:py-1.5 rounded text-xs font-medium bg-gradient-to-r from-gray-800 to-gray-900 text-gray-300 border border-white/10"
+                                  >
+                                    {area}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Progress Indicator - Desktop Only */}
+                          {index === 0 && (
+                            <div className="hidden md:block mt-4 lg:mt-6 pt-4 lg:pt-6 border-t border-white/10">
+                              <div className="flex items-center justify-between text-sm">
+                                <span className="text-gray-400">Currently Pursuing</span>
+                                <div className="flex items-center gap-2">
+                                  <div className="w-16 lg:w-24 h-1 bg-gray-800 rounded-full overflow-hidden">
+                                    <div
+                                      className="h-full bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-full"
+                                      style={{ width: '85%' }}
+                                    />
+                                  </div>
+                                  <span className="text-[#8245ec] font-medium">85%</span>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
 
         {/* Education Summary - Responsive */}

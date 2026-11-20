@@ -265,79 +265,94 @@ const Work = () => {
           layout
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8"
         >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => {
-              const category = getProjectCategory(project);
-              return (
-                <motion.div
-                  key={project.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ y: -6 }}
-                  onMouseEnter={() => setHoveredProject(project.id)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                  onClick={() => handleOpenModal(project)}
-                  className="group relative cursor-pointer"
-                >
-                  {/* Card Glow Effect */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
-                  
-                  {/* Main Card */}
-                  <div className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/60 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden h-full flex flex-col justify-between">
-                    <div>
-                      {/* Image Container */}
-                      <div className="relative h-44 sm:h-52 overflow-hidden">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-90"></div>
-                        
-                        {/* Category Badge */}
-                        <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-gray-950/85 backdrop-blur-md border border-white/10">
-                          <span className="text-[11px] sm:text-xs font-semibold text-purple-300">
-                            {category}
-                          </span>
-                        </div>
+          {(!filteredProjects || filteredProjects.length === 0) ? (
+            <div className="col-span-full text-center py-16 px-4 rounded-3xl bg-white/[0.02] border border-white/5 max-w-md mx-auto space-y-3">
+              <div className="w-12 h-12 rounded-2xl bg-purple-500/10 flex items-center justify-center mx-auto text-purple-400">
+                <Code2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-base font-semibold text-white">No Projects Available</h3>
+              <p className="text-xs text-gray-400">
+                Curated projects will appear here once added or enabled in your studio admin panel.
+              </p>
+            </div>
+          ) : (
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project) => {
+                const category = getProjectCategory(project);
+                return (
+                  <motion.div
+                    key={project.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    whileHover={{ y: -6 }}
+                    onMouseEnter={() => setHoveredProject(project.id)}
+                    onMouseLeave={() => setHoveredProject(null)}
+                    onClick={() => handleOpenModal(project)}
+                    className="group relative cursor-pointer"
+                  >
+                    {/* Card Glow Effect */}
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-[#8245ec] to-blue-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
+                    
+                    {/* Main Card */}
+                    <div className="relative bg-gradient-to-br from-gray-900/90 to-gray-800/60 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden h-full flex flex-col justify-between">
+                      <div>
+                        {/* Image Container */}
+                        <div className="relative h-44 sm:h-52 overflow-hidden bg-gray-900 flex items-center justify-center">
+                          {project.image ? (
+                            <img
+                              src={project.image}
+                              alt={project.title || 'Project'}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                          ) : (
+                            <Globe className="w-12 h-12 text-purple-400/40" />
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-90"></div>
+                          
+                          {/* Category Badge */}
+                          <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-gray-950/85 backdrop-blur-md border border-white/10">
+                            <span className="text-[11px] sm:text-xs font-semibold text-purple-300">
+                              {category}
+                            </span>
+                          </div>
 
-                        {/* Hover Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#8245ec]/85 to-blue-600/85 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
-                          <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-gray-900 font-semibold text-xs sm:text-sm shadow-xl">
-                            <Eye className="w-4 h-4 text-[#8245ec]" />
-                            <span>View Details & System Architecture</span>
+                          {/* Hover Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#8245ec]/85 to-blue-600/85 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
+                            <div className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white text-gray-900 font-semibold text-xs sm:text-sm shadow-xl">
+                              <Eye className="w-4 h-4 text-[#8245ec]" />
+                              <span>View Details & System Architecture</span>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Content */}
-                      <div className="p-4 sm:p-5">
-                        <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 group-hover:text-purple-300 transition-colors line-clamp-1">
-                          {project.title}
-                        </h3>
-                        <p className="text-gray-400 text-xs sm:text-sm mb-3.5 line-clamp-2 leading-relaxed">
-                          {project.description}
-                        </p>
+                        {/* Content */}
+                        <div className="p-4 sm:p-5">
+                          <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 group-hover:text-purple-300 transition-colors line-clamp-1">
+                            {project.title}
+                          </h3>
+                          <p className="text-gray-400 text-xs sm:text-sm mb-3.5 line-clamp-2 leading-relaxed">
+                            {project.description}
+                          </p>
 
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1.5 mb-2">
-                          {project.tags.slice(0, 4).map((tag, index) => (
-                            <span
-                              key={index}
-                              className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[11px] sm:text-xs font-medium bg-white/5 text-gray-300 border border-white/5"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                          {project.tags.length > 4 && (
-                            <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[11px] sm:text-xs font-medium bg-purple-950/50 text-purple-300 border border-purple-800/40">
-                              +{project.tags.length - 4} more
-                            </span>
-                          )}
-                        </div>
+                          {/* Tags */}
+                          <div className="flex flex-wrap gap-1.5 mb-2">
+                            {(project.tags || []).slice(0, 4).map((tag, index) => (
+                              <span
+                                key={index}
+                                className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[11px] sm:text-xs font-medium bg-white/5 text-gray-300 border border-white/5"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                            {(project.tags || []).length > 4 && (
+                              <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md text-[11px] sm:text-xs font-medium bg-purple-950/50 text-purple-300 border border-purple-800/40">
+                                +{(project.tags || []).length - 4} more
+                              </span>
+                            )}
+                          </div>
                       </div>
                     </div>
 
@@ -356,6 +371,7 @@ const Work = () => {
               );
             })}
           </AnimatePresence>
+        )}
         </motion.div>
       </div>
 
@@ -528,7 +544,7 @@ const Work = () => {
                         <span>Technologies & Libraries Stack</span>
                       </h4>
                       <div className="flex flex-wrap gap-2 pt-1">
-                        {selectedProject.tags.map((tag, index) => (
+                        {(selectedProject.tags || []).map((tag, index) => (
                           <span
                             key={index}
                             className="px-3.5 py-2 rounded-xl text-xs font-semibold bg-gray-900 text-purple-300 border border-purple-500/30 flex items-center gap-2"
