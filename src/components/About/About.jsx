@@ -13,18 +13,6 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const controls = useAnimation();
 
-  const nameParts = (profile?.fullName || "Piyush Shakya").trim().split(" ");
-  const firstName = nameParts[0] || "Piyush";
-  const lastName = nameParts.slice(1).join(" ") || "";
-  
-  const typewriterWords = profile?.headline
-    ? [profile.headline, "Full Stack Engineer", "System Architect", "Software Developer"]
-    : ["Full Stack Developer", "MERN Stack Developer", "JavaScript Developer", "Software Engineer"];
-  
-  const bioText = profile?.bio || "I am a full-stack developer with over 1 year of experience in building scalable web applications. Skilled in both front-end and back-end development, I specialize in the MERN stack and other modern technologies to create seamless user experiences and efficient solutions.";
-  
-  const resumeLink = profile?.resumeUrl || "https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link";
-
   useEffect(() => {
     if (isInView) {
       controls.start("visible");
@@ -195,16 +183,12 @@ const About = () => {
           <motion.div variants={itemVariants} className="text-center w-full">
             <h2 className="text-5xl sm:text-5xl md:text-6xl font-bold text-white mb-2 sm:mb-3 md:mb-4 md:mt-0 mt-5 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white">
-                {firstName}
+                Piyush
               </span>
-              {lastName && (
-                <>
-                  <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400">
-                    {lastName}
-                  </span>
-                </>
-              )}
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400">
+                Shakya
+              </span>
             </h2>
           </motion.div>
 
@@ -214,7 +198,12 @@ const About = () => {
               <div className="h-px w-8 sm:w-12 md:w-16 bg-gradient-to-r from-purple-500/30 to-transparent"></div>
               <span className="text-xl sm:text-2xl md:text-3xl font-medium text-white text-center">
                 <Typewriter
-                  words={typewriterWords}
+                  words={[
+                    "Full Stack Developer",
+                    "MERN Stack Developer",
+                    "JavaScript Developer",
+                    "Software Engineer"
+                  ]}
                   loop={0}
                   cursor
                   cursorStyle='▌'
@@ -231,14 +220,18 @@ const About = () => {
           {/* 5. Description - Mobile Fifth */}
           <motion.div variants={itemVariants} className="space-y-4 sm:space-y-6 w-full">
             <p className="text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed font-light text-center px-2 sm:px-0">
-              {bioText}
+              I am a full-stack developer with over 1 year of experience in
+              building scalable web applications. Skilled in both front-end and
+              back-end development, I specialize in the MERN stack and other
+              modern technologies to create seamless user experiences and
+              efficient solutions.
             </p>
           </motion.div>
 
           {/* 6. CTA Buttons - Mobile Sixth */}
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full md:mb-0 mb-16">
             <a
-              href={resumeLink}
+              href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
               target="_blank"
               rel="noopener noreferrer"
               className=" group relative inline-flex items-center justify-center gap-2 sm:gap-3 px-5 py-3 sm:px-6 sm:py-4 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300 w-full sm:w-auto"
@@ -279,16 +272,12 @@ const About = () => {
             <motion.div variants={itemVariants}>
               <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 leading-tight text-white">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">
-                  {firstName}
+                  Piyush
                 </span>
-                {lastName && (
-                  <>
-                    <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400">
-                      {lastName}
-                    </span>
-                  </>
-                )}
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-purple-400 to-blue-400">
+                  Shakya
+                </span>
               </h1>
             </motion.div>
 
@@ -305,7 +294,13 @@ const About = () => {
                 <div className="h-px flex-1 bg-gradient-to-r from-purple-500/50 to-transparent"></div>
                 <span className="text-3xl md:text-4xl font-medium text-white">
                   <Typewriter
-                    words={typewriterWords}
+                    words={[
+                      "Full Stack Engineer",
+                      "System Architect",
+                      "Technical Lead",
+                      "Software Developer",
+                      "Solutions Architect"
+                    ]}
                     loop={0}
                     cursor
                     cursorStyle='▌'
@@ -322,14 +317,20 @@ const About = () => {
             {/* Description */}
             <motion.div variants={itemVariants} className="space-y-6">
               <p className="text-lg text-gray-300 leading-relaxed font-light">
-                {bioText}
+                With over a year of professional experience, I specialize in architecting and implementing 
+                high-performance web applications using modern technologies. My approach combines technical 
+                excellence with strategic thinking to deliver scalable solutions.
+              </p>
+              <p className="text-lg text-gray-300 leading-relaxed font-light">
+                Passionate about clean code, system design, and performance optimization. I thrive in 
+                challenging environments where I can contribute to complex projects and mentor team members.
               </p>
             </motion.div>
 
             {/* CTA Buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-4 pt-8">
               <motion.a
-                href={resumeLink}
+                href="https://drive.google.com/file/d/1mf0JDbuaqyRqfu5-spnWs4cr2GW1OLRw/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-gradient-to-r from-gray-900 to-gray-800 border border-gray-700 hover:border-purple-500 transition-all duration-300"
