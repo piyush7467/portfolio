@@ -175,14 +175,14 @@ export default function Work() {
             </p>
           </div>
         ) : (
-          <div className="relative space-y-8 sm:space-y-12 pb-24">
+          <div className="relative pb-24">
             {filteredProjects.map((project, index) => {
               const category = getProjectCategory(project);
               const isAndroid = category === "Android App" || project.type === "ANDROID";
               const extraDetails = PROJECT_DETAILS[project.id] || PROJECT_DETAILS[1];
 
               // Stacking offsets: each card locks slightly lower in view creating a layered physical deck
-              const topOffset = `calc(5rem + ${index * 26}px)`;
+              const topOffset = `calc(5.5rem + ${index * 24}px)`;
               const zIndex = 20 + index;
               const formattedNumber = String(index + 1).padStart(2, "0");
 
@@ -190,13 +190,13 @@ export default function Work() {
                 <div
                   key={project.id}
                   style={{ top: topOffset, zIndex }}
-                  className="sticky transition-all duration-300"
+                  className="sticky mb-12 sm:mb-16 last:mb-0 transform-gpu will-change-transform"
                 >
                   {/* StarBorder Flash Shell with Rotating Conic Glow */}
                   <StarBorder
-                    className="w-full shadow-[0_-25px_50px_rgba(0,0,0,0.95),0_30px_60px_rgba(0,0,0,0.9)]"
-                    borderRadius="34px"
-                    speed={index % 2 === 0 ? "6s" : "8s"}
+                    className="w-full shadow-[0_-20px_40px_rgba(0,0,0,0.9),0_25px_50px_rgba(0,0,0,0.95)]"
+                    borderRadius="32px"
+                    speed={index % 2 === 0 ? "8s" : "10s"}
                     color={
                       index % 2 === 0
                         ? "#8245ec, #38bdf8, #a855f7"
@@ -205,13 +205,13 @@ export default function Work() {
                   >
                     <div
                       data-cursor="project"
-                      className="relative p-6 sm:p-8 md:p-10 rounded-[32px] bg-gradient-to-br from-[#0e0f17] via-[#090a10] to-[#050508] overflow-hidden group"
+                      className="relative p-6 sm:p-8 md:p-10 rounded-[30px] bg-[#0c0d14] overflow-hidden group border border-white/10"
                     >
-                      {/* CARD FLASH EFFECT: Light Sheen Sweep Gliding across Card */}
-                      <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/[0.08] to-transparent z-10" />
+                      {/* CARD FLASH EFFECT: Light Sheen Sweep Gliding across Card on Hover */}
+                      <div className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/[0.06] to-transparent z-10" />
 
                       {/* Ambient Radial Spotlight inside Card */}
-                      <div className="pointer-events-none absolute -top-32 -right-32 w-80 h-80 bg-purple-600/15 rounded-full blur-3xl group-hover:bg-purple-600/25 transition-all duration-700" />
+                      <div className="pointer-events-none absolute -top-32 -right-32 w-72 h-72 bg-purple-600/15 rounded-full blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
 
                       {/* Card Content Grid */}
                       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20">

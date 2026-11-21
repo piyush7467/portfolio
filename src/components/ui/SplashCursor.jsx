@@ -2,29 +2,16 @@ import React, { useEffect, useRef, useState } from "react";
 
 /**
  * SplashCursor
- * High-performance WebGL fluid simulation trail that reacts to mouse/pointer motion.
- * Renders subtle colorful fluid swirls across the background canvas.
- * Gated to pointer: fine devices and automatically falls back if WebGL is unavailable.
+ * High-performance fluid particle trail for desktop pointer devices.
+ * Automatically sleeps when idle to prevent GPU overhead and freezes particle generation during fast scroll.
  */
-export default function SplashCursor({
-  SIM_RESOLUTION = 64,
-  DYE_RESOLUTION = 512,
-  DENSITY_DISSIPATION = 3.5,
-  VELOCITY_DISSIPATION = 2,
-  PRESSURE = 0.2,
-  PRESSURE_ITERATIONS = 15,
-  CURL = 4,
-  SPLAT_RADIUS = 0.15,
-  SPLAT_FORCE = 4000,
-  COLOR_UPDATE_SPEED = 10,
-}) {
+export default function SplashCursor() {
   const canvasRef = useRef(null);
   const [supported, setSupported] = useState(true);
 
   useEffect(() => {
-    // Only run on desktop / fine pointer devices
     if (typeof window === "undefined") return;
-    const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+    const isFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!isFinePointer) {
       setSupported(false);
       return;
@@ -33,81 +20,47 @@ export default function SplashCursor({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    let gl = null;
-    try {
-      gl =
-        canvas.getContext("webgl2", { alpha: true, depth: false, antialias: false }) ||
-        canvas.getContext("webgl", { alpha: true, depth: false, antialias: false });
-    } catch {
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) {
       setSupported(false);
       return;
     }
 
-    if (!gl) {
-      setSupported(false);
-      return;
-    }
-
-    let animationId;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let animationId = null;
+    let isRunning = false;
+    let isScrolling = false;
+    let scrollTimeout = null;
 
     const onResize = () => {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", onResize, { passive: true });
 
-    // Particle trail effect
+    // Throttle particles while scrolling to guarantee 60-120fps scroll performance
+    const onScroll = () => {
+      isScrolling = true;
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 150);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     const particles = [];
-    const maxParticles = 40;
+    const maxParticles = 24;
     const colors = [
-      { r: 130, g: 69, b: 236 },  // Purple #8245ec
-      { r: 59, g: 130, b: 246 },  // Blue
-      { r: 168, g: 85, b: 247 },  // Violet
-      { r: 236, g: 72, b: 153 },  // Pink
+      { r: 130, g: 69, b: 236 }, // Purple #8245ec
+      { r: 56, g: 189, b: 248 }, // Sky blue
+      { r: 168, g: 85, b: 247 }, // Violet
     ];
 
-    let lastMouseX = width / 2;
-    let lastMouseY = height / 2;
-    let colorIndex = 0;
-
-    const onMouseMove = (e) => {
-      const dx = e.clientX - lastMouseX;
-      const dy = e.clientY - lastMouseY;
-      const speed = Math.sqrt(dx * dx + dy * dy);
-
-      if (speed > 2) {
-        colorIndex = (colorIndex + 1) % colors.length;
-        const color = colors[colorIndex];
-
-        particles.push({
-          x: e.clientX,
-          y: e.clientY,
-          vx: dx * 0.15 + (Math.random() - 0.5) * 2,
-          vy: dy * 0.15 + (Math.random() - 0.5) * 2,
-          size: Math.min(speed * 1.5, 30) + 10,
-          alpha: 0.35,
-          color,
-          life: 1.0,
-          decay: 0.02 + Math.random() * 0.015,
-        });
-
-        if (particles.length > maxParticles) {
-          particles.shift();
-        }
-      }
-
-      lastMouseX = e.clientX;
-      lastMouseY = e.clientY;
-    };
-
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-
-    // 2D Canvas context for high-efficiency radiant fluid aura
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    let lastX = width / 2;
+    let lastY = height / 2;
+    let colorIdx = 0;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
@@ -117,43 +70,79 @@ export default function SplashCursor({
         p.x += p.vx;
         p.y += p.vy;
         p.life -= p.decay;
-        p.size *= 0.97;
+        p.size *= 0.96;
 
         if (p.life <= 0 || p.size < 1) {
           particles.splice(i, 1);
           continue;
         }
 
-        const gradient = ctx.createRadialGradient(
-          p.x,
-          p.y,
-          0,
-          p.x,
-          p.y,
-          p.size
-        );
         const { r, g, b } = p.color;
-        const a = p.life * p.alpha;
+        const a = Math.max(0, p.life * p.alpha);
 
-        gradient.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${a})`);
-        gradient.addColorStop(0.5, `rgba(${r}, ${g}, ${b}, ${a * 0.4})`);
-        gradient.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
-
-        ctx.fillStyle = gradient;
         ctx.beginPath();
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      animationId = requestAnimationFrame(render);
+      if (particles.length > 0) {
+        animationId = requestAnimationFrame(render);
+      } else {
+        isRunning = false;
+        ctx.clearRect(0, 0, width, height);
+      }
     };
 
-    render();
+    const startLoop = () => {
+      if (!isRunning) {
+        isRunning = true;
+        animationId = requestAnimationFrame(render);
+      }
+    };
+
+    const onMouseMove = (e) => {
+      if (isScrolling) return;
+
+      const dx = e.clientX - lastX;
+      const dy = e.clientY - lastY;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+
+      if (speed > 4) {
+        colorIdx = (colorIdx + 1) % colors.length;
+        const color = colors[colorIdx];
+
+        particles.push({
+          x: e.clientX,
+          y: e.clientY,
+          vx: dx * 0.12,
+          vy: dy * 0.12,
+          size: Math.min(speed * 0.8, 18) + 4,
+          alpha: 0.25,
+          color,
+          life: 1.0,
+          decay: 0.035,
+        });
+
+        if (particles.length > maxParticles) {
+          particles.shift();
+        }
+
+        startLoop();
+      }
+
+      lastX = e.clientX;
+      lastY = e.clientY;
+    };
+
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
 
     return () => {
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMouseMove);
       if (animationId) cancelAnimationFrame(animationId);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
     };
   }, []);
 
@@ -162,9 +151,7 @@ export default function SplashCursor({
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-[1] w-full h-full opacity-60"
-      style={{ mixBlendMode: "screen" }}
+      className="pointer-events-none fixed inset-0 z-[1] w-full h-full transform-gpu will-change-transform"
     />
   );
 }
-

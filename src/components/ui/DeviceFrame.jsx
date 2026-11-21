@@ -50,7 +50,7 @@ export default function DeviceFrame({
                 src={src}
                 alt={alt}
                 onError={() => setHasError(true)}
-                className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105 transform-gpu will-change-transform"
                 loading="lazy"
               />
             ) : (
@@ -117,7 +117,7 @@ export default function DeviceFrame({
             src={src}
             alt={alt}
             onError={() => setHasError(true)}
-            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-500 ease-out group-hover:scale-105 transform-gpu will-change-transform"
             loading="lazy"
           />
         ) : (
